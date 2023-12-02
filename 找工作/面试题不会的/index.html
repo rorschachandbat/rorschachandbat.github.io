@@ -1,0 +1,923 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cute.jpg">
+  <link rel="icon" href="/img/cute.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="R">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="椭球公式 x2 &#x2F; a2+y2 &#x2F; b2+z2 &#x2F; c2&#x3D;1。 当x^2&#x2F;a^2+y^2&#x2F;b^2+z^2&#x2F;c^2&lt;1时　则点(x,y,z)在内部 反转链表 删除导数第N个数 总体很简单，有两个特殊的需要注意，第一是只有一个数或者零个数，第二个是需要删除的是第一个数 12345if(!head || !head -&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题总结">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%8D%E4%BC%9A%E7%9A%84/index.html">
+<meta property="og:site_name" content="R">
+<meta property="og:description" content="椭球公式 x2 &#x2F; a2+y2 &#x2F; b2+z2 &#x2F; c2&#x3D;1。 当x^2&#x2F;a^2+y^2&#x2F;b^2+z^2&#x2F;c^2&lt;1时　则点(x,y,z)在内部 反转链表 删除导数第N个数 总体很简单，有两个特殊的需要注意，第一是只有一个数或者零个数，第二个是需要删除的是第一个数 12345if(!head || !head -&gt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220304124225209.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-2a54823bd63e16674874aa46a67c6c72_r.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-c7d4b5aca66560365593f57385ce9fa9_r.jpg">
+<meta property="article:published_time" content="2022-03-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-15T14:20:52.159Z">
+<meta property="article:author" content="R">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220304124225209.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>面试题总结 - R</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rorschachandbat.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+ <meta name="referrer" content="no-referrer" />
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>R君的秘密基地</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/elder%20ring.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面试题总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-05 00:00" pubdate>
+          2022年3月5日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          53 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面试题总结</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年1月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>椭球公式</strong></p>
+<p>x2 &#x2F; a2+y2 &#x2F; b2+z2 &#x2F; c2&#x3D;1。</p>
+<p>当x^2&#x2F;a^2+y^2&#x2F;b^2+z^2&#x2F;c^2&lt;1时　则点(x,y,z)在内部</p>
+<p><strong>反转链表</strong></p>
+<p><strong>删除导数第N个数</strong></p>
+<p>总体很简单，有两个特殊的需要注意，第一是只有一个数或者零个数，第二个是需要删除的是第一个数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span>(!head || !head -&gt; next) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<span class="hljs-comment">//判断是否只有一个数或者零个数</span><br>ListNode* first = head;<br>ListNode* second = head;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i&lt;n;i++) second = second-&gt;next;<br><span class="hljs-keyword">if</span>(!second) <span class="hljs-keyword">return</span> head-&gt;next; <span class="hljs-comment">//判断是否要删的是第一个数，因为你要是走完发现走到了尽头就说明倒数第N个数是开头，那么久直接返回head-&gt;next就行，用源代码会有bug</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>高精度加法</strong></p>
+<p>一个很妙的不用判断进位并且前面0的处理方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(n1&gt;=<span class="hljs-number">0</span> || n2&gt;=<span class="hljs-number">0</span> || jw)&#123;<br>    <span class="hljs-type">int</span> x = n1 &gt;= <span class="hljs-number">0</span> ? num1[n1] - <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> y = n2 &gt;= <span class="hljs-number">0</span> ? num2[n2] - <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>n变成1</strong></p>
+<p>n如果是奇数就变成n-1或者n+1，如果是偶数就变成n&#x2F;2</p>
+<p>用动态规划</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">vector&lt;<span class="hljs-type">int</span>&gt; dp;<br>dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>dp[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>;i&lt;n;i++)&#123;<br>    <span class="hljs-keyword">if</span>(i%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>) dp[i] = dp[i/<span class="hljs-number">2</span>] +<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> dp[i] = <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>],dp[i+<span class="hljs-number">1</span>]) + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">return</span> dp[n];<br></code></pre></td></tr></table></figure>
+
+
+
+<p>static</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37439983">https://zhuanlan.zhihu.com/p/37439983</a></p>
+<p>为什么需要虚继承</p>
+<p><strong>1</strong>、为了解决多继承时的命名冲突和冗余数据问题</p>
+<p>C++ 提出了虚继承，使得在派⽣类中只保留⼀份间接基类的成员。其中多继承（Multiple Inheritance）是指从多个直接基类中产⽣派⽣类的能⼒，多继承的派⽣类继承了所有⽗类的成员。 </p>
+<p><strong>2</strong>、虚继承的⽬的是让某个类做出声明，承诺愿意共享它的基类</p>
+<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220304124225209.png" srcset="/img/loading.gif" lazyload alt="image-20220304124225209"></p>
+<h1 id="多益笔试"><a href="#多益笔试" class="headerlink" title="多益笔试"></a>多益笔试</h1><p>数据库保护四种</p>
+<p>安全性控制，完整性控制，并发性控制和数据恢复</p>
+<h1 id="中望龙腾面试"><a href="#中望龙腾面试" class="headerlink" title="中望龙腾面试"></a>中望龙腾面试</h1><p><strong>stl底层实现</strong></p>
+<p>vector：数组</p>
+<p>Dequeue（双端队列）：二维数组</p>
+<p>List：环状双向链表</p>
+<p>set（集合）：平衡的红黑树</p>
+<p>multiset：红黑树</p>
+<p>map：平衡二叉树</p>
+<p><strong>哈希表相关</strong></p>
+<p>哈希函数</p>
+<p>避免冲突</p>
+<p>一个是开放寻址法，一个是拉链法</p>
+<p><strong>指针常量和常量指针</strong></p>
+<p>指针常量就是指针本身是常量，换句话说，就是指针里面所存储的内容（内存地址）是常量，不能改变。但是，内存地址所对应的内容是可以通过指针改变的。</p>
+<p>常量指针就是指向常量的指针，换句话说，就是指针指向的是常量，它指向的内容不能发生改变，不能通过指针来修改它指向的内容。但是，指针自身不是常量，它自身的值可以改变，从而指向另一个常量。</p>
+<p><strong>线程和进程</strong></p>
+<p>cpu分配时间片的最小单位是什么？</p>
+<p>答：线程，进程是资源分配的最小单位，线程是运行调度的最小单位。</p>
+<p>cpu分配时间片的算法</p>
+<p><strong>技术栈</strong></p>
+<p><strong>c++与c的区别，面向对象体现在哪里</strong></p>
+<h1 id="字节一面"><a href="#字节一面" class="headerlink" title="字节一面"></a>字节一面</h1><ol>
+<li><p>指针和引用区别</p>
+<p>在C和C++中，指针一般指的是某块内存的<strong>地址</strong>，通过这个地址，我们可以寻址到这块内存；而引用是一个变量的<strong>别名</strong>，例如我们给小明起了个外号：明明，那我们说明明的时候，就是说小明。</p>
+<p><strong>指针可以为空，引用不能为空</strong></p>
+</li>
+<li><p>如何解释函数指针</p>
+<p>让函数数据化的东西，比如说可以优化很多的if-else语句，</p>
+</li>
+<li><p>多态底层实现</p>
+</li>
+<li><p>编译过程，是否生成dll，替换库行不行</p>
+</li>
+<li><p>如何捕捉未定义的内存错误</p>
+</li>
+<li><p>有哪些内存泄露，如何解决</p>
+<p>常见错误：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Joker_N/article/details/102688822">https://blog.csdn.net/Joker_N/article/details/102688822</a></p>
+<p>如何解决：<a target="_blank" rel="noopener" href="https://blog.csdn.net/daaikuaichuan/article/details/80874436">https://blog.csdn.net/daaikuaichuan/article/details/80874436</a></p>
+<p><strong>申请和释放不一致</strong></p>
+<p>由于 C++ 兼容 C，而 C 与 C++ 的内存申请和释放函数是不同的，因此在 C++ 程序中，就有两套<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%87%BD%E6%95%B0&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22110313333%22%7D">动态内存管理函数</a>。一条不变的规则就是采用 C 方式申请的内存就用 C 方式释放；用 C++ 方式申请的内存，用 C++ 方式释放。也就是用 malloc&#x2F;alloc&#x2F;realloc 方式申请的内存，用 free 释放；用 new 方式申请的内存用 delete 释放。在上述程序中，用 malloc 方式申请了内存却用 delete 来释放，虽然这在很多情况下不会有问题，但这绝对是潜在的问题。</p>
+<p><strong>申请和释放不匹配</strong></p>
+<p>申请了多少内存，在使用完成后就要释放多少。如果没有释放，或者少释放了就是内存泄露；多释放了也会产生问题。上述程序中，指针p和pt指向的是同一块内存，却被先后释放两次。</p>
+<p><strong>释放后仍然读写</strong></p>
+<p>本质上说，系统会在堆上维护一个<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E9%93%BE%E8%A1%A8&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22110313333%22%7D">动态内存链表</a>，如果被释放，就意味着该块内存可以继续被分配给其他部分，如果内存被释放后再访问，就可能覆盖其他部分的信息，这是一种严重的错误，上述程序第16行中就在释放后仍然写这块内存。</p>
+</li>
+</ol>
+<p>对策</p>
+<p>1.避免在堆上分配内存</p>
+<p>既然只有堆上会发生内存泄露，那第一原则肯定是避免在堆上面进行内存分配，尽可能的使用栈上的内存，由编译器进行分配和回收，这样当然就不会有内存泄露了。</p>
+<ol start="7">
+<li>生产者消费者模型，怎么优化</li>
+<li>进程之间的通信</li>
+</ol>
+<p>1、管道</p>
+<p>2、消息队列</p>
+<p>3、共享内存</p>
+<p>4、信号量</p>
+<p>5、Socket</p>
+<ol start="9">
+<li><p>进程内存划分</p>
+<p>如上图，<strong>从低地址到高地址，一个程序由代码段、数据段、BSS段、堆、共享区、栈等</strong>组成。</p>
+<ol>
+<li><p><strong>数据段：</strong>存放程序中已初始化的全局变量和静态变量的一块内存区域。</p>
+</li>
+<li><p><strong>代码段：</strong>存放程序执行代码的一块内存区域。只读，代码段的头部还会包含一些只读的常数变量。</p>
+</li>
+<li><p><strong>BSS</strong> 段：存放程序中未初始化的全局变量和静态变量的一块内存区域。</p>
+</li>
+<li><p>可执行程序在运行时又会多出两个区域：堆区和栈区。</p>
+<p><strong>堆区：</strong>动态申请内存用。堆从低地址向高地址增长。</p>
+<p><strong>栈区：</strong>存储局部变量、函数参数值。栈从高地址向低地址增长。是一块连续的空间。</p>
+</li>
+<li><p>最后还有一个<strong>共享区</strong>，位于堆和栈之间。</p>
+</li>
+</ol>
+</li>
+<li><p>三次握手四次握手过程，timewait作用</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86426969">https://zhuanlan.zhihu.com/p/86426969</a></p>
+<p>为什么握手要三次</p>
+<p><img src="https://pic3.zhimg.com/v2-2a54823bd63e16674874aa46a67c6c72_r.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>弄清这个问题，我们需要先弄明白三次握手的目的是什么，能不能只用两次握手来达到同样的目的。</p>
+<p>第一次握手：客户端发送网络包，服务端收到了。</p>
+<p>这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</p>
+<p>第二次握手：服务端发包，客户端收到了。</p>
+<p>这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时服务器并不能确认客户端的接收能力是否正常。</p>
+<p>第三次握手：客户端发包，服务端收到了。</p>
+<p>这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常。</p>
+<p>因此，需要三次握手才能确认双方的接收与发送能力是否正常</p>
+<p>为什么挥手要四次</p>
+<p><img src="https://pic2.zhimg.com/v2-c7d4b5aca66560365593f57385ce9fa9_r.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>因为当服务端收到客户端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当服务端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉客户端，“你发的FIN报文我收到了”。只有等到我服务端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四次挥手。</p>
+</li>
+<li><p>一个用户上网的过程</p>
+<p>1.在浏览器的地址栏中输入<strong>URL</strong>。</p>
+<p>2.浏览器检查缓存中的<strong>DNS记录</strong>，以找到<strong>URL对应的IP地址</strong>。</p>
+<ul>
+<li><ul>
+<li>DNS：域名系统。DNS是互联网的一项服务，他作为将<strong>域名和IP地址相互映射的一个分布式数据库</strong>。互联网上的每个URL都有一个分配给它的唯一IP地址，DNS是URL及其IP地址的列表，就像是电话簿是名称及其对应电话号码的列表一样。为了查找DNS记录，浏览器会检查四个缓存。</li>
+<li>第一，检查<strong>浏览器缓存</strong>。浏览器缓存会为您之前访问过的网站维护一个固定期限的DNS记录存储库，因此，它是运行DNS查询的第一个位置。</li>
+<li>第二，浏览器检查<strong>操作系统缓存</strong>。如果它不在浏览器缓存中，浏览器将对您的底层计算机操作系统进行系统调用以获取记录，因为操作系统也会维护DNS记录的缓存。</li>
+<li>第三，检查<strong>路由器缓存</strong>。如果它不在你的计算机上，浏览器将与维护其自己的DNS记录缓存的路由器进行通信。</li>
+<li>第四，检查<strong>ISP缓存</strong>。如果所有步骤都找不到DNS记录，浏览器将转到ISP，ISP维护着自己的DNS服务器，其中包括一个DNS记录缓存，浏览器将检查这些缓存，以确保找到你请求的URL。</li>
+</ul>
+</li>
+</ul>
+<p>3.如果请求的URL不在缓存中，ISP的DNS服务器将发起<strong>DNS查询</strong>以查找托管URL的服务器的IP地址。</p>
+<ul>
+<li><ul>
+<li>DNS查询的目的是在Internet上搜索多个DNS服务器，直到找到网站正确的IP地址。这种类型的搜索称为递归搜索，因为搜索将重复从DNS服务器到DNS服务器继续进行，知道找到我们需要的IP地址会返回错误响应表示无法找到它。</li>
+<li>我们将<strong>ISP的DNS服务器</strong>称为<strong>DNS递归器</strong>，其职责是通过向Internet上的其他DNS服务器咨询答案来找到预期域名的正确IP地址，其他DNS服务器被称为名称服务器，因为它们根据网站域名的域架构执行<strong>DNS搜索</strong>。</li>
+</ul>
+</li>
+<li><p>中间还有一段</p>
+</li>
+<li><p><strong>第五步</strong>，回应报文经过封装，在网络中进行转发（利用各种<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22371620790%22%7D">路由协议</a>如OSPF在网络中进行路由转发，利用ARP协议在二层设备上进行数据转发），最后发送到请求域名解析的主机。</p>
+</li>
+<li><p>主机分析数据包，知道IP地址后，写入DNS缓存表，浏览器接着给这个IP的服务器发送HTTP请求。</p>
+</li>
+<li><p><strong>第六步</strong>，已经知道目标IP地址了，但是为了将消息传到服务器上要经过OSPF<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22371620790%22%7D">动态路由算法</a>去进行路由转发，然后IP地址使用的是IP协议，整个发送过程中只涉及出发地和目的地2个IP地址，而<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=ARP%E5%8D%8F%E8%AE%AE&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22371620790%22%7D">ARP协议</a>使用的是MAC地址，整个发送过程中涉及到每一个节点的MAC地址 。<br>4.浏览器发起与服务器的<strong>TCP连接</strong>。</p>
+</li>
+<li><ul>
+<li>一旦浏览器接收到正确的IP地址，他就会与匹配IP地址的服务器建立连接以传输信息，浏览器使用互联网协议来建立这样的连接。可以使用多种不同的Internet协议，但<strong>TCP</strong>是用于多种HTTP请求最常用协议。</li>
+<li>在客户端和服务器之间传输数据报，建立TCP连接很重要，此连接时使用<strong>TCP&#x2F;IP三次握手</strong>来完成，其中客户端和服务器交换SYN(同步)和ACK(确认)消息以建立连接。</li>
+<li>三次握手</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>客户端通过Internet向服务器发送SYN<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%95%B0%E6%8D%AE%E5%8C%85&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22404766497%22%7D">数据包</a>，询问它是否已打开新连接。</li>
+<li>如果服务器有可以接收和启动新连接的开发端口，它将使用SYN&#x2F;ACK数据包的ACKnowledgment进行响应。</li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%AE%A2%E6%88%B7%E7%AB%AF&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22404766497%22%7D">客户端</a>将收到来自服务器的SYN&#x2F;ACK数据包，并通过发送ACK数据包进行确认。然后建立TCP连接进行数据传输！</li>
+</ol>
+</li>
+</ol>
+<p>5.<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%B5%8F%E8%A7%88%E5%99%A8&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22404766497%22%7D">浏览器</a>向网络服务器发送<strong>HTTP请求</strong>。</p>
+<ul>
+<li><ul>
+<li>一旦建立了TCP连接，就可以开始传输数据了，浏览器将发送一个GET请求，请求获取URL网页，如果您正在输入或提交表单，则可能是POST请求。</li>
+</ul>
+</li>
+</ul>
+<p>​    </p>
+<p>6.服务器<strong>处理请求</strong>并<strong>发回响应</strong>。</p>
+<ul>
+<li><ul>
+<li>服务器包含一个web服务器（Apache、IIS），它接收来自浏览器请求并将其传递给请求处理程序以读取和生成响应。请求处理程序是一个程序，它读取请求、请求头和cookie，以检查请求的内容并在需要的时候更新服务器上的信息，然后它将以特定格式（JSON、XML、HTML）组装响应。</li>
+</ul>
+</li>
+</ul>
+<p>​    </p>
+<p>7.服务器发出<strong>HTTP响应</strong>。</p>
+<ul>
+<li><ul>
+<li><p>服务器响应包含你<strong>请求的网页</strong>以及<strong>状态码</strong>、<strong>压缩类型（Content-Encoding）</strong>、<strong>如何缓存页面（Cache-Control）</strong>、要<strong>设置的任何cookie</strong>。<strong>隐私信息</strong>等。</p>
+<ul>
+<li>状态码：</li>
+</ul>
+<ol>
+<li><strong>1xx</strong>仅表示信息性消息。</li>
+<li><strong>2xx</strong>表示某种成功。</li>
+<li><strong>3xx</strong>将客户端重定向到另一个URL。</li>
+<li><strong>4xx</strong>表示客户端错误。</li>
+<li><strong>5xx</strong>表示服务器端出错</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>​    </p>
+<p>8.浏览器显示<strong>HTML内容</strong>（对应HTML响应，这是最常见的）。</p>
+<ul>
+<li><ul>
+<li>浏览器分阶段显示HTML内容，首先，它将呈现HTML骨架，然后它会检查HTML标签并发送GET请求来获取网页上的其他元素，例如图像、CSS样式表、JavaScript文件等。这些静态文件由浏览器缓存，因此不必获取它们在下次访问页面的时候</li>
+</ul>
+</li>
+</ul>
+<ol start="12">
+<li>单链表如何判断有没有环，数学依据</li>
+</ol>
+<p>快慢指针</p>
+<ol start="13">
+<li>两个栈实现一个队列</li>
+</ol>
+<p>将一个栈当作输入栈，用于压入 \texttt{push}push 传入的数据；另一个栈当作输出栈，用于 }pop 和 peek 操作。</p>
+<p>每次 pop 或 peek 时，若输出栈为空则将输入栈的全部数据依次弹出并压入输出栈，这样输出栈从栈顶往栈底的顺序就是队列从队首往队尾的顺序。</p>
+<ol start="14">
+<li>设计模式相关，读源码的时候有没有注意他的设计模式</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/431714886">https://zhuanlan.zhihu.com/p/431714886</a></p>
+<h1 id="乐易公司面试记录"><a href="#乐易公司面试记录" class="headerlink" title="乐易公司面试记录"></a>乐易公司面试记录</h1><ol>
+<li><p>vector容量上限，扩容策略</p>
+<p>动态扩容，每次都增加到当前的2倍，然后如果超过max</p>
+</li>
+<li><p>map一一对应可以是类吗，类的话怎么实现一一对应</p>
+<p>可以，因为map的底层实现是红黑树，只要保证你定义的类有比较符号即可</p>
+</li>
+<li><p>多态</p>
+</li>
+<li><p>双端队列</p>
+<p>元素可以从队头出队和入队，也可以从队尾出队和入队</p>
+</li>
+<li><p>手写二分查找</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Binary</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; ary, <span class="hljs-type">int</span> target)</span></span>&#123;<br>    <span class="hljs-type">int</span> n = ary.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> mid;<br>    <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>        mid = (left + right) / <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> m = ary[mid];<br>        <span class="hljs-keyword">if</span>(m==target) <span class="hljs-keyword">return</span> mid;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(m&lt;target) left = mid + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> right = mid - <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>手写快排</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,a[<span class="hljs-number">1000001</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">qsort</span><span class="hljs-params">(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span><span class="hljs-comment">//应用二分思想</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> mid=a[(l+r)/<span class="hljs-number">2</span>];<span class="hljs-comment">//中间数</span><br>    <span class="hljs-type">int</span> i=l,j=r;<br>    <span class="hljs-keyword">do</span>&#123;<br>        <span class="hljs-keyword">while</span>(a[i]&lt;mid) i++;<span class="hljs-comment">//查找左半部分比中间数大的数</span><br>        <span class="hljs-keyword">while</span>(a[j]&gt;mid) j--;<span class="hljs-comment">//查找右半部分比中间数小的数</span><br>        <span class="hljs-keyword">if</span>(i&lt;=j)<span class="hljs-comment">//如果有一组不满足排序条件（左小右大）的数</span><br>        &#123;<br>            <span class="hljs-built_in">swap</span>(a[i],a[j]);<span class="hljs-comment">//交换</span><br>            i++;<br>            j--;<br>        &#125;<br>    &#125;<span class="hljs-keyword">while</span>(i&lt;=j);<span class="hljs-comment">//这里注意要有=</span><br>    <span class="hljs-keyword">if</span>(l&lt;j) <span class="hljs-built_in">qsort</span>(l,j);<span class="hljs-comment">//递归搜索左半部分</span><br>    <span class="hljs-keyword">if</span>(i&lt;r) <span class="hljs-built_in">qsort</span>(i,r);<span class="hljs-comment">//递归搜索右半部分</span><br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];<br>    <span class="hljs-built_in">qsort</span>(<span class="hljs-number">1</span>,n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) cout&lt;&lt;a[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>引用和指针（才知道引用直接传名字就可以，然后不用传指针）</p>
+</li>
+<li><p>进程间通信，（注意和进程中通信区别，并且问你有没有实践过）</p>
+</li>
+<li><p>网络编程</p>
+</li>
+<li><p>三次握手</p>
+</li>
+<li><p>数据库，非关系型和关系型，MongoDB和MySQL有啥区别，为啥选MongoDB</p>
+</li>
+</ol>
+<h1 id="小米"><a href="#小米" class="headerlink" title="小米"></a>小米</h1><p>一面</p>
+<p>寻找第k大</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/" class="category-chain-item">找工作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面试题总结</div>
+      <div>https://rorschachandbat.github.io/找工作/面试题不会的/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>R</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/" title="面经总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面经总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E8%80%83%E7%A0%94/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&amp;os%E4%BB%A3%E7%A0%81/" title="计算机组成原理考研笔记">
+                        <span class="hidden-mobile">计算机组成原理考研笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,758 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cute.jpg">
+  <link rel="icon" href="/img/cute.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="R">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="IEEE754 注意这个m是原码！！举例m为00100000（后面都是0） 则尾数是(1.0010)（二进制），化成十进制就是1.125 刷新DRAM是电容存储所以需要刷新，刷新方式有集中刷新，分散刷新和异步刷新 Cache写回策略写直达法：是指每次写操作数既写入内存也写入Cache 写回法：写Cache时不写入主存，而当Cache数据被替换出去时才写回主存。为了识别cache数据是否与主存一致，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理考研笔记">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E8%80%83%E7%A0%94/%E8%AE%A1%E7%BB%84/index.html">
+<meta property="og:site_name" content="R">
+<meta property="og:description" content="IEEE754 注意这个m是原码！！举例m为00100000（后面都是0） 则尾数是(1.0010)（二进制），化成十进制就是1.125 刷新DRAM是电容存储所以需要刷新，刷新方式有集中刷新，分散刷新和异步刷新 Cache写回策略写直达法：是指每次写操作数既写入内存也写入Cache 写回法：写Cache时不写入主存，而当Cache数据被替换出去时才写回主存。为了识别cache数据是否与主存一致，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211108131525537.png">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211117183110305.png">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211117183117323.png">
+<meta property="article:published_time" content="2021-11-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-15T14:20:53.340Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211108131525537.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>计算机组成原理考研笔记 - R</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rorschachandbat.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+ <meta name="referrer" content="no-referrer" />
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>R君的秘密基地</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/elder%20ring.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机组成原理考研笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-11-28 00:00" pubdate>
+          2021年11月28日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机组成原理考研笔记</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年1月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="IEEE754"><a href="#IEEE754" class="headerlink" title="IEEE754"></a>IEEE754</h1><p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211108131525537.png" srcset="/img/loading.gif" lazyload alt="image-20211108131525537"></p>
+<p>注意这个m是原码！！举例m为00100000（后面都是0）</p>
+<p>则尾数是(1.0010)（二进制），化成十进制就是1.125</p>
+<h1 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h1><p>DRAM是电容存储所以需要刷新，刷新方式有集中刷新，分散刷新和异步刷新</p>
+<h1 id="Cache写回策略"><a href="#Cache写回策略" class="headerlink" title="Cache写回策略"></a>Cache写回策略</h1><p>写直达法：是指每次写操作数既写入内存也写入Cache</p>
+<p>写回法：写Cache时不写入主存，而当Cache数据被替换出去时才写回主存。为了识别cache数据是否与主存一致，要加一个记录信息状态位，写Cache时设置，Cache数据写回主存时清除。</p>
+<h1 id="微指令相关"><a href="#微指令相关" class="headerlink" title="微指令相关"></a>微指令相关</h1><ol>
+<li>在微程序控制器中，执行指令微程序的首条微指令地址是通过指令操作码映射得到的。</li>
+<li>直接控制：有几位最多就能控制几位；字段直接编码控制：12位想控制3段，必须要不相容，然后分成3段，每段4位，去除一个不用最多有45种状态。</li>
+<li>断定方式确定下一条微指令地址：由微指令的下地址字段直接指出后续微指令地址</li>
+</ol>
+<h1 id="磁盘相关"><a href="#磁盘相关" class="headerlink" title="磁盘相关"></a>磁盘相关</h1><p>非格式化容量是指一个盘片上可以记录的二进制位的总数量，而格式化容量（完成划分磁道和扇区，设置文件目录区等操作后的磁盘）通常是指用户可用空间的二进制位的总数量，前者比后者要大。</p>
+<p>将长度超过一个磁道容量的文件记录在同一柱面是合理的，因为不需要重新寻找磁道，省去了极慢的寻道操作，这样数据读&#x2F;写速度快。</p>
+<p>地址格式：磁盘号&#x2F;柱面号&#x2F;盘面号&#x2F;扇区号，直接寻址的最小单位是扇区</p>
+<p>读出一个扇区的数据所用的时间为：平均寻道+平均寻扇区时间+磁头扫过一个扇区的时间</p>
+<h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><p>内中断</p>
+<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211117183110305.png" srcset="/img/loading.gif" lazyload alt="image-20211117183110305"></p>
+<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211117183117323.png" srcset="/img/loading.gif" lazyload alt="image-20211117183117323"></p>
+<p>注意这个中断图的画法，先是按照设定的来，再按照真正的来。</p>
+<h1 id="计算相关"><a href="#计算相关" class="headerlink" title="计算相关"></a>计算相关</h1><p><strong>浮点数</strong></p>
+<ol>
+<li>short转int要在前面加1</li>
+</ol>
+<p><strong>总线带宽</strong></p>
+<p>时钟周期&#x3D;1&#x2F;时钟频率（1MHZ即0.1us时钟周期），一个总线周期传输的信号量&#x2F;总线周期时间</p>
+<p><strong>RAM最高地址</strong></p>
+<p>32KB的RAM最高地址怎么算？32KB为2^15B所以需要15根地址线，15个1就是7FFFH，如果首地址变了记得要加！</p>
+<p><strong>Cache组相联映射的组号计算</strong></p>
+<p>比如Cache有16块，采用2路相连映射，即分为8组，那么n号单元所在主存块就按照模8来分配</p>
+<p><strong>流水线相关</strong></p>
+<p>加速比：原本时间 &#x2F; 加速后时间</p>
+<p>实际吞吐率：一个流水周期中一条的指令书 &#x2F; 一个流水周期的时间</p>
+<p><strong>Cache块号格式和计算</strong></p>
+<p>主存地址包含3个部分：标记（Tag），组号（Index），块内地址（Offset）</p>
+<p>先将主存地址由十六进制变为二进制，最后4位为块内地址，中间10位为组号，剩下的是标记</p>
+<p><strong>指令流水线</strong></p>
+<p>包含瓶颈段的流水线，设共有k段，且需要执行n调指令，则总的执行时间为<br>$$<br>t_1+……t_k+(n-1)*max(t_1,……,t_k)<br>$$</p>
+<h1 id="单个的要背的错题知识点"><a href="#单个的要背的错题知识点" class="headerlink" title="单个的要背的错题知识点"></a>单个的要背的错题知识点</h1><ol>
+<li><p>间址周期</p>
+</li>
+<li><p>CPI为每条指令所需要的时钟周期数，根具体时钟周期的长短无关（然后时钟频率和时钟周期互为倒数，所以也无关） 	</p>
+</li>
+<li><p>总线宽度又称为总线位宽，它是总线上能够同时传输的数据位数，同时是指数据总线的根数；总线的传输速率等于中心宽度 * 工作频率</p>
+</li>
+<li><p>指令总是从根据PC从主存中读出</p>
+</li>
+<li><p>中断优先级最高的就是全1，然后依次往下面加0</p>
+</li>
+</ol>
+<p><strong>还没搞懂的内容</strong></p>
+<p><strong>数据冒险</strong></p>
+<h1 id="新考点"><a href="#新考点" class="headerlink" title="新考点"></a>新考点</h1><h2 id="补码加减运算器"><a href="#补码加减运算器" class="headerlink" title="补码加减运算器"></a>补码加减运算器</h2><p>补码加：按位加就可以了</p>
+<p>补码减：先把减数取反，然后末尾加1，得到-Y，然后再加（最高位的结果丢弃）</p>
+<p>无符号和有符号判断溢出的方法不一样，要用标志位</p>
+<h2 id="标志位"><a href="#标志位" class="headerlink" title="标志位"></a>标志位</h2><p>PSW里面会用这些标志位</p>
+<p>OF（Overflow Flag）</p>
+<p>溢出就是1，否则就是0，只有在有符号数加减才有意义，无符号数就算OF是1也不代表溢出了</p>
+<p>计算方法：最高位产生的进位与次高位产生的进位异或</p>
+<p>SF （Sign Flag）</p>
+<p>符号位，取最高位本位，1代表负数，0代表正数，同样也只对无符号数</p>
+<p>ZF（Zero Flag）</p>
+<p>运算结果为0时ZF为1，否则为0</p>
+<p>CF（Carry Flag）</p>
+<p> 进位为1，否则为0，最高位产生的进位和sub异或（sub即那个是加还是减的信号，加法sub为0，减法sub为1），对有符号数没意义</p>
+<h2 id="乘法电路基本结构"><a href="#乘法电路基本结构" class="headerlink" title="乘法电路基本结构"></a>乘法电路基本结构</h2><p>用一个例子理解结构并且记忆溢出之类的</p>
+<p>有符号数会多一个辅助位</p>
+<h2 id="除法电路基本结构"><a href="#除法电路基本结构" class="headerlink" title="除法电路基本结构"></a>除法电路基本结构</h2><h2 id="多处理器基本概念"><a href="#多处理器基本概念" class="headerlink" title="多处理器基本概念"></a>多处理器基本概念</h2><p>选择题概率很高</p>
+<p><strong>SISD</strong></p>
+<p>计组中学的都是这个，不能数据级并行，可以指令流水线</p>
+<p><strong>SIMD</strong></p>
+<p>把数据块分割然后分开到不同的局部存储器，很适合循环操作，因为每一块都是一样的，某些显卡就是这样干的（感觉matlab也是这样呀）这样一条命令就可以控制多个局部存储器，不同执行单元执行同一指令，但是不同数据</p>
+<p>向量处理机：也是数量级并行，SIMD思想的进阶应用</p>
+<p><strong>MISD</strong></p>
+<p>同一数据不同指令，逆天，现实中不存在</p>
+<p><strong>MIMD</strong></p>
+<p>现实很多都是这样</p>
+<p>线程级并行，甚至是进程级并行</p>
+<p>多计算机系统不同用load store直接访问内存，必须用消息传递，所以也成为消息传递系统</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%80%83%E7%A0%94%E7%AC%94%E8%AE%B0/" class="category-chain-item">考研笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计算机组成原理考研笔记</div>
+      <div>https://rorschachandbat.github.io/考研/计组/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>R</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年11月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E8%80%83%E7%A0%94/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构考研笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构考研笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E8%80%83%E7%A0%94/%E8%AE%A1%E7%BD%91/" title="计算机网络考研笔记">
+                        <span class="hidden-mobile">计算机网络考研笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

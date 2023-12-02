@@ -1,0 +1,948 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cute.jpg">
+  <link rel="icon" href="/img/cute.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="R">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="R">
+<meta property="og:url" content="https://rorschachandbat.github.io/page/2/index.html">
+<meta property="og:site_name" content="R">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="R">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>R</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rorschachandbat.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+ <meta name="referrer" content="no-referrer" />
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>R君的秘密基地</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/elder%20ring.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="embrace your life"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E8%94%9A%E8%93%9D%E7%82%B9%E8%AF%84/" target="_blank">
+          <img src="/img/weilan2.jpg" srcset="/img/loading.gif" lazyload alt="迷人的蔚蓝">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E8%94%9A%E8%93%9D%E7%82%B9%E8%AF%84/" target="_blank">
+          迷人的蔚蓝
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E8%94%9A%E8%93%9D%E7%82%B9%E8%AF%84/" target="_blank">
+        <div>
+          作为一款横版游戏，主角的操纵感良好非常重要，蔚蓝手感紧凑、精确且灵敏，能准确控制落点，流畅精准地穿梭平台之间。Madeline的加速曲线和跳跃曲线都调得非常棒，让人感觉快的行云流水，又慢得让人感觉掌控一切。 游戏中还有意设计了许多有益于玩家的机制，比如土狼时间、抓跳、蹬墙跳，对比jump king、掘地求升这类从操作层面恶心玩家的游戏，在蔚蓝的每次死亡只会让我觉得是自己失误了而不是游戏有问题，它更
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-12-02 00:00" pubdate>
+              2022-12-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/" class="category-chain-item">游戏锐评</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%94%9A%E8%93%9D/">#蔚蓝</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E9%9A%8F%E7%AC%94/%E4%B8%A4%E7%A7%8D%E7%84%A6%E8%99%91/" target="_blank">
+          两种焦虑
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E9%9A%8F%E7%AC%94/%E4%B8%A4%E7%A7%8D%E7%84%A6%E8%99%91/" target="_blank">
+        <div>
+          最近陷入了两种焦虑，其一是鼹鼠囤积癖，因为之前豆瓣建政被封了半年，写的标记的好多东西都有一种会丢掉的感觉，有过自己建博客的想法，但是上班摸鱼的时候看的好多十几年前的博客，也都随风飘散了，真是如红豆唱的那般：“没有什么是永垂不朽。“于是乎买了好多游戏卡带，实体书，看着steam里面的那么多游戏，也非常担心某一天消失。 再者就是生活好像在一天天的循规蹈矩中找不到意义了，本人刚毕业，在做游戏开发，工作强
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-13 00:00" pubdate>
+              2022-11-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/Florence/" target="_blank">
+          <img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20230102205814787.png" srcset="/img/loading.gif" lazyload alt="Florence">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/Florence/" target="_blank">
+          Florence
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/Florence/" target="_blank">
+        <div>
+          Florence，一个流程很短（40min就能玩完的游戏）的故事，讲述了一个简单的恋爱故事。或许这才是交互性叙事游戏该有的样子，全程没有一句台词，通过画面、音乐和各种有代入感的点击和拖拽来让你自己脑补出剧情，画面和音乐真的太棒了。 很有印象的几个点，拼图聊天通过拼凑次数表示出彼此的聊天越来越接近，又用尖锐程度看出吵架的激烈；吵架过后，两个人虽然回去睡觉，但怎么也拼不到一起去了；快要离别的时候，放
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-01 00:00" pubdate>
+              2022-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/" class="category-chain-item">游戏锐评</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/florence/">#florence</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%8F%91%E8%A1%8C%E6%B8%B8%E6%88%8F%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E8%AF%AF%E5%8C%BA/" target="_blank">
+          <img src="/img/1.jpg" srcset="/img/loading.gif" lazyload alt="发行游戏要避免的误区">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%8F%91%E8%A1%8C%E6%B8%B8%E6%88%8F%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E8%AF%AF%E5%8C%BA/" target="_blank">
+          发行游戏要避免的误区
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%8F%91%E8%A1%8C%E6%B8%B8%E6%88%8F%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E8%AF%AF%E5%8C%BA/" target="_blank">
+        <div>
+          这里写关于页的正文，支持 Markdown, HTML 最重要的两个问题 1.这个游戏值得做吗？2.这个游戏能被做出来吗？ 误区： 1.背景不重要别花大篇幅介绍背景，大篇幅介绍世界观没有任何意义。 2.别介绍背包系统了同理适用于别介绍了那些平平误区的游戏元素 3.别让别人帮你设计游戏 不要用问题开头，比如什么你觉得什么是3A游戏，用问题做开场白很不好。 4.游戏主题和亮点不是一个东西。 5.至少要
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-29 00:00" pubdate>
+              2022-10-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/" class="category-chain-item">游戏设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A5%BD%E7%8E%A9%E7%9A%84%E5%A5%BD%E8%AE%BE%E8%AE%A1/" target="_blank">
+          好玩的好设计
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A5%BD%E7%8E%A9%E7%9A%84%E5%A5%BD%E8%AE%BE%E8%AE%A1/" target="_blank">
+        <div>
+          桌游无非是一个玩法，不应受困于道具或者表现方式，当你有了一个好玩的想法，抓住这个灵感，去将它实现吧！ 读这本书是很开心的，书中的桌游美术都十分优秀，赏心悦目，不过机制方面就比较简单了，许多根本称不上是一个游戏，只是一个简单的原型，可玩性很差。快速翻阅的过程中的第一感觉：“啊，机制都很简单啊，以后自己也要多记录一下想法，来尝试做做桌游。“ 一、先考虑故事背景先想好故事背景，更偏向于艺术性的表达而不是
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-29 00:00" pubdate>
+              2022-10-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">#读书笔记</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/" target="_blank">
+          <img src="/img/3.png" srcset="/img/loading.gif" lazyload alt="关卡设计讲座">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/" target="_blank">
+          关卡设计讲座
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/" target="_blank">
+        <div>
+          一、优秀的关设计拥有有趣的指引 观察性： 战略性 指引性 建立一致性的视觉语言很重要(镜之边缘) 有时候制造混乱也很重要  二、优秀的关卡设计不依赖文字来讲述故事 让玩家自行添补缺口，缺口的大小（难度）  叙事类型：明示型、暗示型和涌现型 后两种是构建缺口的重要方法 涌现型是玩家自己构思的剧情 暗示型：环境叙事 涌现型：通过玩家选择来做到，但是太多的选择会让玩家困惑 三、告诉玩家要做什么，但是不会
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-26 00:00" pubdate>
+              2022-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/" class="category-chain-item">游戏设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E6%A8%B1%E4%BA%95%E6%94%BF%E5%8D%9A%E6%95%99%E7%A8%8B/" target="_blank">
+          <img src="/img/4.png" srcset="/img/loading.gif" lazyload alt="樱井政博教程">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E6%A8%B1%E4%BA%95%E6%94%BF%E5%8D%9A%E6%95%99%E7%A8%8B/" target="_blank">
+          樱井政博教程
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/%E6%A8%B1%E4%BA%95%E6%94%BF%E5%8D%9A%E6%95%99%E7%A8%8B/" target="_blank">
+        <div>
+          RPG的游戏性 游戏开发绝非游戏 樱井的这套观点和岩田聪当年表达的基本一致：“比起喜欢游戏，我更擅长于做游戏，所以我选择了这个行业。”两个人理念相合，在七年多之后遥相呼应，也是一种高山流水了。 演讲就要多快好省 速度，切除冗余，直入中心 游戏回报理论 冒风险获得收益  游戏性是指控制风险并获得回报的乐趣，攻略是指控制风险并获得回报的方法 能控制风险的机制是游戏平衡性的关键 游戏性的来源：压力的施加
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-26 00:00" pubdate>
+              2022-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/" class="category-chain-item">游戏设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E5%8F%AA%E9%9C%80%E4%B8%80%E5%A5%97%E8%AF%8D%E5%8D%A1&amp;%E5%8F%AA%E9%9C%80%E4%B8%80%E5%89%AF%E6%89%91%E5%85%8B%E5%B0%B1%E8%83%BD%E7%8E%A9%E7%9A%84%E6%A1%8C%E6%B8%B8/" target="_blank">
+          只需一套词卡&amp;只需一副扑克就能玩的桌游
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E5%8F%AA%E9%9C%80%E4%B8%80%E5%A5%97%E8%AF%8D%E5%8D%A1&amp;%E5%8F%AA%E9%9C%80%E4%B8%80%E5%89%AF%E6%89%91%E5%85%8B%E5%B0%B1%E8%83%BD%E7%8E%A9%E7%9A%84%E6%A1%8C%E6%B8%B8/" target="_blank">
+        <div>
+          今天痛快地玩了一天桌游，全都是只需要用一套词卡或者一副扑克就能玩的游戏，所以就在给各位友邻这里记录推荐一下一些我知道的可以这样低成本的桌游，当然某些游戏可能需要一些筹码或者指示物的帮助，这些会额外说明。 首先来说说猜词桌游，你只需要花一百多，去买一个叫行动代号的桌游，你就能买到几百张词卡，有了这套词卡，你可以至少玩五个机制不同的猜词游戏。 首先是行动代号本身，一款很经典的猜词游戏，双方分为两队，两
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-03 00:00" pubdate>
+              2022-10-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/" class="category-chain-item">游戏锐评</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A1%8C%E6%B8%B8/">#桌游</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E6%96%87%E7%AB%A0/" target="_blank">
+          祝我生日快乐
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E6%96%87%E7%AB%A0/" target="_blank">
+        <div>
+          今天是22岁生日，正好工作也一个月多了，借着这个机会写点东西吧。 首先说说上班的感受吧，完美世界的工作强度还是很让人开心的，有一种回到大学的感觉，每天三顿吃食堂，早十晚七，两小时午休，双休。没有什么pua、加班的情况，组里的人都极度友善，大家的口癖是牛逼，做了啥事都是这个评价，开会的时候也都是笑嘻嘻的，可以说是一点压力都没有感受到。唯一不同的是回到租的房子是一个人，不过也好，有自己的一片小天地，自
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-08-16 00:00" pubdate>
+              2022-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/%E9%9A%8F%E7%AC%94/%E4%B8%80%E4%BA%9B%E6%B2%89%E8%BF%B7%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%B6%E5%85%89/" target="_blank">
+          一些沉迷学习的时光
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E9%9A%8F%E7%AC%94/%E4%B8%80%E4%BA%9B%E6%B2%89%E8%BF%B7%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%B6%E5%85%89/" target="_blank">
+        <div>
+          最近在学计算机图形学，为了完成一个小任务，刷games101以及看各种directx教程博客，手写笔记做了大半本，从一开始的一头雾水到逐渐能渲染出目标物体，一步一步创造自己世界的感觉实在是太棒了，这种刚刚学到的知识公式就能立马应用于代码中的感觉重燃了我对于学习的热情，并且在上课过程中，许多我本科学的感觉无用的知识，比如数字信号处理、数值分析、正逆运动学、欧拉方程……都能立马得到应用，这太令我开心了
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-08-01 00:00" pubdate>
+              2022-08-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
