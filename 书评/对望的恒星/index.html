@@ -16,27 +16,23 @@
   <meta name="author" content="R">
   <meta name="keywords" content="">
   
-    <meta name="description" content="计算计算文件占多少个簇号先找到起始号然后一直往下找，直到遇到值为FFT的表项号为止 缺页次数CLOCK页面淘汰算法 页式存储管理系统比如说一个块是4KB，那么也就是2^12次方，所以要用16位，这是块内地址尾数，然后块号要用4位来表示 比如说逻辑地址是[0,72]，但是第一位对应的是主存的第9块，那么实际内存地址就是1001 0000 0000 0100 1000 磁盘各种调度算法汇总FCFS（先">
+    <meta name="description" content="大刘的除了第一篇都看过，选的确实不错，前两篇大刘都是那种人类抗争外星人的戏码，一般般，中国太阳和山蛮有意思的，《山》真是点子文学的极致，中间这一篇都够写一篇小说了，主角前后的心态变化很有意思《中国太阳》少见的很有人文关怀；相较之下另外两位作家的软科幻占比更大，很多只是假借科幻来写一些其他东西。 先讲谢尔盖：《我的爸爸是抗生素》是反战，《如果您现在就下单》是讽刺那些盲目相信技术。我特别喜欢《买只猫吧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统考研笔记">
-<meta property="og:url" content="https://rorschachandbat.github.io/%E8%80%83%E7%A0%94/os/index.html">
+<meta property="og:title" content="对望的恒星">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E4%B9%A6%E8%AF%84/%E5%AF%B9%E6%9C%9B%E7%9A%84%E6%81%92%E6%98%9F/index.html">
 <meta property="og:site_name" content="R">
-<meta property="og:description" content="计算计算文件占多少个簇号先找到起始号然后一直往下找，直到遇到值为FFT的表项号为止 缺页次数CLOCK页面淘汰算法 页式存储管理系统比如说一个块是4KB，那么也就是2^12次方，所以要用16位，这是块内地址尾数，然后块号要用4位来表示 比如说逻辑地址是[0,72]，但是第一位对应的是主存的第9块，那么实际内存地址就是1001 0000 0000 0100 1000 磁盘各种调度算法汇总FCFS（先">
+<meta property="og:description" content="大刘的除了第一篇都看过，选的确实不错，前两篇大刘都是那种人类抗争外星人的戏码，一般般，中国太阳和山蛮有意思的，《山》真是点子文学的极致，中间这一篇都够写一篇小说了，主角前后的心态变化很有意思《中国太阳》少见的很有人文关怀；相较之下另外两位作家的软科幻占比更大，很多只是假借科幻来写一些其他东西。 先讲谢尔盖：《我的爸爸是抗生素》是反战，《如果您现在就下单》是讽刺那些盲目相信技术。我特别喜欢《买只猫吧">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211125154544479.png">
-<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211125154820578.png">
-<meta property="article:published_time" content="2021-11-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-10T14:29:19.481Z">
+<meta property="article:published_time" content="2023-11-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-10T14:29:19.432Z">
 <meta property="article:author" content="R">
-<meta property="article:tag" content="os">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211125154544479.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>操作系统考研笔记 - R</title>
+  <title>对望的恒星 - R</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="操作系统考研笔记"></span>
+            <span id="subtitle" data-typed-text="对望的恒星"></span>
           
         </div>
 
@@ -214,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-11-30 00:00" pubdate>
-          2021年11月30日 凌晨
+        <time datetime="2023-11-28 00:00" pubdate>
+          2023年11月28日 凌晨
         </time>
       </span>
     
@@ -226,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          388 字
         
       </span>
     
@@ -237,7 +233,7 @@
         
         
         
-          23 分钟
+          4 分钟
         
       </span>
     
@@ -283,7 +279,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">操作系统考研笔记</h1>
+            <h1 style="display: none">对望的恒星</h1>
             
               <p class="note note-info">
                 
@@ -296,106 +292,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h1><h2 id="计算文件占多少个簇号"><a href="#计算文件占多少个簇号" class="headerlink" title="计算文件占多少个簇号"></a>计算文件占多少个簇号</h2><p>先找到起始号然后一直往下找，直到遇到值为FFT的表项号为止</p>
-<h2 id="缺页次数"><a href="#缺页次数" class="headerlink" title="缺页次数"></a>缺页次数</h2><p>CLOCK页面淘汰算法</p>
-<h2 id="页式存储管理系统"><a href="#页式存储管理系统" class="headerlink" title="页式存储管理系统"></a>页式存储管理系统</h2><p>比如说一个块是4KB，那么也就是2^12次方，所以要用16位，这是块内地址尾数，然后块号要用4位来表示</p>
-<p>比如说逻辑地址是[0,72]，但是第一位对应的是主存的第9块，那么实际内存地址就是1001 0000 0000 0100 1000</p>
-<h2 id="磁盘各种调度算法汇总"><a href="#磁盘各种调度算法汇总" class="headerlink" title="磁盘各种调度算法汇总"></a>磁盘各种调度算法汇总</h2><p>FCFS（先来先服务 First Come First Serve）（只有这个是不偏心的）</p>
-<p>SSTF（最短寻找时间优先 Shortest Seek Time First）</p>
-<p>SCAN（扫描）</p>
-<p>先找最近的，然后直接移动到那一端</p>
-<p>C-SCAN（循环扫描）</p>
-<p>单向服务，走完一端快速到另一端啥也不服务，然后再走过去</p>
-<p>LOOK</p>
-<p>改进了SCAN和C-SCAN，不用非得到另一端，只用到最远的那个即可</p>
-<h2 id="磁盘存取时间"><a href="#磁盘存取时间" class="headerlink" title="磁盘存取时间"></a>磁盘存取时间</h2><p>存取时间 &#x3D; 寻到时间 + 延迟时间 + 传输时间</p>
-<p>平均延迟时间为旋转半周的的时间</p>
-<h2 id="文件系统最大文件可以达到多少"><a href="#文件系统最大文件可以达到多少" class="headerlink" title="文件系统最大文件可以达到多少"></a>文件系统最大文件可以达到多少</h2><p>会有各种什么直接索引，二次间接索引什么的。</p>
-<p>例：物理块大小是2KB，每个索引项占用4个字节（即4B），有8个直接索引项，1个一次间接索引项，1个二次间接索引项，最大怎么算？<br>$$<br>8*2KB + (2KB&#x2F;4B)<em>2KB + (2KB&#x2F;4B)</em>(2KB&#x2F;4B)*2KB\<br>2KB&#x2F;4B代表一个物理块能有多少个索引<br>$$</p>
-<h2 id="段页式存储系统访问内存次数"><a href="#段页式存储系统访问内存次数" class="headerlink" title="段页式存储系统访问内存次数"></a>段页式存储系统访问内存次数</h2><p>段页式如果想成功拿出数据要访问三次内存，第一次访问段表，得到页表地址；第二次访问页表，取得该页所在的物理地址；第三次访问物理地址拿到数据；但是，如果发生了越界就会次数变少，比如段越界，比如段只有0-7你想访问8，那就访问0次；如果页越界，就只访问1次。</p>
-<h2 id="n体交叉编址模块序号"><a href="#n体交叉编址模块序号" class="headerlink" title="n体交叉编址模块序号"></a>n体交叉编址模块序号</h2><p>模块序号 &#x3D; 访存地址 % 存储器交叉模块数</p>
-<h1 id="背"><a href="#背" class="headerlink" title="背"></a>背</h1><h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><ol>
-<li>当操作系统完成用户请求的“系统调用”后，应使CPU从内核态转到用户态工作</li>
-<li>用户程序设计，使用系统调用命令，经过编译后，形成若干参数和陷入（trap）指令，现有参数再执行trap指令。</li>
-<li>用户程序创建一个新进程，需使用操作系统提供的系统调用接口</li>
-</ol>
-<h2 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h2><ol>
-<li>当前比较流行的能支持多处理机运行的OS，几乎全都采用微内核结构</li>
-<li>模块化OS结构的原则是：分解和模块化</li>
-<li>微内核结构能有效支持多处理机运行，故非常适合于分布式系统环境</li>
-<li>微内核设计并不会让系统更高效</li>
-</ol>
-<h2 id="SPOOLing"><a href="#SPOOLing" class="headerlink" title="SPOOLing"></a>SPOOLing</h2><ol>
-<li>SPOOLing技术是将独占设备改成共享设备，所以肯定要独占设备</li>
-<li>SPOOLing技术通过在磁盘上开辟存储空间模拟脱机输出，可以减少作业输出等待时间，加快作业完成速度</li>
-<li>目的是在输入设备忙时，进程不必等待IO操作的完成</li>
-<li>用户的输出数据先送入输出井，即磁盘固定区域。</li>
-</ol>
-<h2 id="需要用到缓冲技术的场景"><a href="#需要用到缓冲技术的场景" class="headerlink" title="需要用到缓冲技术的场景"></a>需要用到缓冲技术的场景</h2><ol>
-<li>图形用户界面下使用鼠标（如果有高优先级的操作产生就要记录）</li>
-<li>在多任务操作系统下的磁带驱动器</li>
-<li>包含用户文件的磁盘驱动器</li>
-<li>使用存储器映射I&#x2F;O，直接和总线相连的图形卡</li>
-</ol>
-<h2 id="I-x2F-O控制方式"><a href="#I-x2F-O控制方式" class="headerlink" title="I&#x2F;O控制方式"></a>I&#x2F;O控制方式</h2><p><strong>程序查询方式</strong></p>
-<p>优点：实现简单。缺点：需要消耗大量CPU时间来查询，无法发现程序错误，且CPU和设备，设备和设备之间无法并行工作</p>
-<p><strong>中断方式</strong></p>
-<p>优点：可以并行工作，能检测错误。缺点：CPU仍要花费大量时间来处理中断，且并行程度受中断处理时间的限制</p>
-<p><strong>DMA方式</strong></p>
-<p>优点：采用了外设和内存直接交换数据的方式，因此CPU对于IO的时间开销少。缺点：传输结束后仍需要用中断，增加了硬件开销。</p>
-<p><strong>通道方式</strong></p>
-<p>优点：CPU对于IO的时间开销更少。缺点：硬件开销大，通道程序复杂，增加了实现难度</p>
-<h2 id="一些单句的做题点"><a href="#一些单句的做题点" class="headerlink" title="一些单句的做题点"></a>一些单句的做题点</h2><ol>
-<li>只要是固定的分配就会产生内部碎片，其余的都会产生外部碎片。（分页虚拟、固定分区、段页式分区是固定的，分段虚拟是不固定的）</li>
-<li>虚拟页式管理的系统，在其地址变化过程中，进程可能发生被撤销（超越进程的地址空间）和变为阻塞（缺页）</li>
-<li>Linux主机允许root和guest同时登录，因为Linux支持多用户；允许多个客户端通过root账号登录</li>
-<li>互斥信号量的初值一般为1；同步信号量初值不确定（因为互斥是只有一个资源，而同步要看消息是否已经存在，如果尚未存在应该设为0，已经存在应该设为非0的正整数）</li>
-<li>文件控制块就是文件目录项</li>
-<li>操作系统必须提供的功能是处理中断</li>
-<li>忙等待即执行IO操作室进行不能继续执行</li>
-<li>共享资源可以是进程代码和进程所拥有的已打开文件</li>
-</ol>
-<h1 id="新考点"><a href="#新考点" class="headerlink" title="新考点"></a>新考点</h1><h2 id="第二章进程"><a href="#第二章进程" class="headerlink" title="第二章进程"></a>第二章进程</h2><h3 id="线程的状态与转换"><a href="#线程的状态与转换" class="headerlink" title="线程的状态与转换"></a>线程的状态与转换</h3><p>与进程类似：就绪、运行、阻塞</p>
-<h3 id="线程组织和控制"><a href="#线程组织和控制" class="headerlink" title="线程组织和控制"></a>线程组织和控制</h3><p>线程是TCB</p>
-<p>线程切换时要保存和恢复：PC、其他寄存器和堆栈指针</p>
-<h3 id="调度器和调度程序"><a href="#调度器和调度程序" class="headerlink" title="调度器和调度程序"></a>调度器和调度程序</h3><p>进程和线程要了解的都是这样，支持内核级线程就会最小线程是线程</p>
-<p>让谁去运行（先来先服务，短作业优先）</p>
-<p>什么事件会触发：创建新进程、进程退出、运行进程阻塞、IO中断</p>
-<p>非抢占：运行阻塞或退出才触发</p>
-<p>抢占：每个时钟中断或k个时钟中断会触发调度程序工作 </p>
-<h3 id="闲逛进程"><a href="#闲逛进程" class="headerlink" title="闲逛进程"></a>闲逛进程</h3><p>调度程序永远的备胎，没有其他就绪进程时就会运行闲逛进程</p>
-<p>特点：优先级最低、可以是0地址指令，末尾也会执行检查中断、能耗低</p>
-<h3 id="上下文及其切换机制"><a href="#上下文及其切换机制" class="headerlink" title="上下文及其切换机制"></a>上下文及其切换机制</h3><p>context：其实就是内存环境的切换</p>
-<p>地址切换代价巨大：</p>
-<ol>
-<li>保存恢复页表寄存器</li>
-<li>TLB全部失效</li>
-<li>Cache全部失效</li>
-<li>新进程运行初期缺页率高</li>
-</ol>
-<h3 id="多级队列调度算法"><a href="#多级队列调度算法" class="headerlink" title="多级队列调度算法"></a>多级队列调度算法</h3><p>每种类型的进程就是一个队列</p>
-<p>系统</p>
-<p>交互式大于批处理，因为交互性比如说打游戏肯定需要更高的即时率</p>
-<p>每种队列的调度算法可以不同</p>
-<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>互斥锁的主要缺点是忙等待，自旋锁：TSL指令、swap指令、单标志法</p>
-<p>优点：不会一直占用处理机，会有中断让他下处理机，并且等待的期间不用切换上下文（切换的代价很高）。</p>
-<p>常用于多处理器系统，一个核忙等，其他照常工作，并快速释放临界区</p>
-<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="内存共享"><a href="#内存共享" class="headerlink" title="内存共享"></a>内存共享</h3><p> 通过内存映射实现的</p>
-<h3 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h3><p> 如果用传统的open read来读文件，往回读的时候必须要用seek，缺点：写代码不方便、open read必须启动磁盘非常慢。</p>
-<p>mmap：memory map</p>
-<h3 id="虚拟存储器的影响因素及改进方式"><a href="#虚拟存储器的影响因素及改进方式" class="headerlink" title="虚拟存储器的影响因素及改进方式"></a>虚拟存储器的影响因素及改进方式</h3><p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211125154544479.png" srcset="/img/loading.gif" lazyload alt="image-20211125154544479"></p>
-<p>页面大就说明页面数量会少，想一个极端的情况，只有一个当然不会缺页</p>
-<h2 id="固态硬盘（OS和计组都加了，很可能出现选择题）"><a href="#固态硬盘（OS和计组都加了，很可能出现选择题）" class="headerlink" title="固态硬盘（OS和计组都加了，很可能出现选择题）"></a>固态硬盘（OS和计组都加了，很可能出现选择题）</h2><p>SSD</p>
-<p><strong>读写性能特性</strong></p>
-<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20211125154820578.png" srcset="/img/loading.gif" lazyload alt="image-20211125154820578"></p>
-<p>读写以页为单位</p>
-<p>因为写之前必须要先擦除，所有必须先把同一块的其他东西复制到其他块，再往里面写；所以读很快， 但是写很慢。然后挪了之后怎么保持翻译正确，闪存翻译层会保证正确！</p>
-<p>支持随机访问，磁盘不行，磁盘需要什么移动磁臂什么的，所以很慢</p>
-<p><strong>磨损均衡技术</strong></p>
-<p>不要总磨一个地方，平均分布，以提升使用寿命，</p>
-<p>动态：优先选择累积次数少的新闪存块</p>
-<p>静态：读多写少的东西迁移到老块，因为读不用擦，这个是后台悄悄监视的</p>
-<p>理想情况下固态硬盘的寿命</p>
+                <p>大刘的除了第一篇都看过，选的确实不错，前两篇大刘都是那种人类抗争外星人的戏码，一般般，中国太阳和山蛮有意思的，《山》真是点子文学的极致，中间这一篇都够写一篇小说了，主角前后的心态变化很有意思《中国太阳》少见的很有人文关怀；相较之下另外两位作家的软科幻占比更大，很多只是假借科幻来写一些其他东西。</p>
+<p>先讲谢尔盖：《我的爸爸是抗生素》是反战，《如果您现在就下单》是讽刺那些盲目相信技术。我特别喜欢《买只猫吧》，讲了一个宅男在空间站和猫探讨爱情的故事，我特别喜欢这种末日或者孤独生存的戏码。</p>
+<p>罗伯特的作品我特别喜欢《蜕去的外壳》这一篇，很有黑镜的感觉，探讨人和机器人的定义；《鹰舱已着陆》也很有意思，旁观者的角度冷静评判可笑的地球人；《手牌》这一篇点子很不错，但是很遗憾太短了，理论上来说基因决定命运这种事情可以写很多的，有一种赛博朋克的味道，但是很遗憾结束的太快了，而且结尾有些太仓促。</p>
 
                 
               </div>
@@ -414,7 +313,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%80%83%E7%A0%94%E7%AC%94%E8%AE%B0/" class="category-chain-item">考研笔记</a>
+  <a href="/categories/%E4%B9%A6%E8%AF%84/" class="category-chain-item">书评</a>
   
   
 
@@ -426,13 +325,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/os/">#os</a>
-      
-    </div>
-  
 </div>
 
 
@@ -441,8 +333,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>操作系统考研笔记</div>
-      <div>https://rorschachandbat.github.io/考研/os/</div>
+      <div>对望的恒星</div>
+      <div>https://rorschachandbat.github.io/书评/对望的恒星/</div>
     </div>
     <div class="license-meta">
       
@@ -454,7 +346,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年11月30日</div>
+          <div>2023年11月28日</div>
         </div>
       
       
@@ -486,18 +378,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E8%80%83%E7%A0%94/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&amp;os%E4%BB%A3%E7%A0%81/" title="计算机组成原理考研笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">计算机组成原理考研笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/%E8%80%83%E7%A0%94/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构考研笔记">
-                        <span class="hidden-mobile">数据结构考研笔记</span>
+                      <a href="/%E4%B9%A6%E8%AF%84/%E5%9B%BD%E7%8E%8B%E7%9A%84%E6%B8%B8%E6%88%8F/" title="国王的游戏">
+                        <span class="hidden-mobile">国王的游戏</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
