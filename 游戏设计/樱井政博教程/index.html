@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://rorschachandbat.github.io/img/4.png">
 <meta property="article:published_time" content="2022-10-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-03T16:59:46.067Z">
+<meta property="article:modified_time" content="2024-01-03T17:02:37.813Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://rorschachandbat.github.io/img/4.png">
@@ -426,21 +426,20 @@
   
     <article id="comments" lazyload>
       
-  <div id="waline"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#waline', function() {
-      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
-      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"serverURL":"https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {"appId":"6D3BABpAookyFqPgIi5nl4OD-MdYXbMMI","appKey":"uVbUuXcJPrd82R4GNjzSBwRB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://6d3babpa.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#waline',
+            el: "#valine",
             path: window.location.pathname
           }
         )
-        Waline.init(options);
-        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
-          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
           Fluid.plugins.imageCaption(imgSelector);
           Fluid.plugins.fancyBox(imgSelector);
         })
@@ -449,7 +448,7 @@
   </script>
   <noscript>Please enable JavaScript to view the comments</noscript>
 
- 
+
     </article>
   
 
