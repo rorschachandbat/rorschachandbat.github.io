@@ -24,7 +24,7 @@
 <meta property="og:description" content="最近在学计算机图形学，为了完成一个小任务，刷games101以及看各种directx教程博客，手写笔记做了大半本，从一开始的一头雾水到逐渐能渲染出目标物体，一步一步创造自己世界的感觉实在是太棒了，这种刚刚学到的知识公式就能立马应用于代码中的感觉重燃了我对于学习的热情，并且在上课过程中，许多我本科学的感觉无用的知识，比如数字信号处理、数值分析、正逆运动学、欧拉方程……都能立马得到应用，这太令我开心了">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-03T14:29:41.404Z">
+<meta property="article:modified_time" content="2024-01-03T14:37:00.014Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -420,6 +420,28 @@
   
     <article id="comments" lazyload>
       
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"6D3BABpAookyFqPgIi5nl4OD-MdYXbMMI","appKey":"uVbUuXcJPrd82R4GNjzSBwRB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
 
     </article>
   
