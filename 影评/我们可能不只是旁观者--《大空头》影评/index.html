@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2283531871.webp">
 <meta property="article:published_time" content="2023-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-03T15:18:24.638Z">
+<meta property="article:modified_time" content="2024-01-03T16:27:21.757Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2283531871.webp">
@@ -299,7 +299,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年1月3日 晚上
+                    本文最后更新于：2024年1月4日 凌晨
                   
                 
               </p>
@@ -423,21 +423,24 @@
   
   
     <article id="comments" lazyload>
-      
-  <div id="valine"></div>
+      <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
         var options = Object.assign(
-          {"appId":"6D3BABpAookyFqPgIi5nl4OD-MdYXbMMI","appKey":"uVbUuXcJPrd82R4GNjzSBwRB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://6d3babpa.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {"serverURL":"https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
           {
-            el: "#valine",
-            path: window.location.pathname
+            el: '#waline',
+            path: window.location.pathname, 
+            serverURL: 'https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/'
           }
         )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
           Fluid.plugins.imageCaption(imgSelector);
           Fluid.plugins.fancyBox(imgSelector);
         })

@@ -24,7 +24,7 @@
 <meta property="og:description" content="晓宁最喜欢的是郭敬明和村上春树。这两者的共同点是提供一种幻想。读书让我俩产生一种匮乏感：生活恐怕不应当是眼前这样，至少土豆应当是削皮的。 我产生过一些疑虑。第一次集体大会，在辉煌的礼堂，全体起立喊口号。群情激昂之时，台上的老师问：你们的人生理想是什么？大声说出来！我没料到有这一环节，理想是多私密的东西啊。可是周围的人全都喊了起来：“清华！”“北大！”那一瞬间我感到疏离：为什么人生理想会是某一所大学">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-03T15:18:24.655Z">
+<meta property="article:modified_time" content="2024-01-03T16:27:21.773Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -297,7 +297,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年1月3日 晚上
+                    本文最后更新于：2024年1月4日 凌晨
                   
                 
               </p>
@@ -420,21 +420,24 @@
   
   
     <article id="comments" lazyload>
-      
-  <div id="valine"></div>
+      <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
         var options = Object.assign(
-          {"appId":"6D3BABpAookyFqPgIi5nl4OD-MdYXbMMI","appKey":"uVbUuXcJPrd82R4GNjzSBwRB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://6d3babpa.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {"serverURL":"https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
           {
-            el: "#valine",
-            path: window.location.pathname
+            el: '#waline',
+            path: window.location.pathname, 
+            serverURL: 'https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/'
           }
         )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
           Fluid.plugins.imageCaption(imgSelector);
           Fluid.plugins.fancyBox(imgSelector);
         })
