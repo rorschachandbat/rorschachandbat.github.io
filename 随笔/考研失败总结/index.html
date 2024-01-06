@@ -24,7 +24,7 @@
 <meta property="og:description" content="考研成功的人总是相似的，考研失败的人各有各的失败 直面一下自己的失败，也为大家的选择提供一个参考，首先分析一下自己失败的原因，直接原因就是数学考差了，数学考的分还没英语高。。。（英语85），政治和专业课也都挺不错的，自我感觉数学已经刷了很多题了，对比一起复习的同学进度也很快，他一轮还没看完的时候我就开始刷真题了，然后二十多年的真题都刷了， 模拟题也刷了二十多套，感觉还是刷的太快了，没有好好总结，也">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-06T10:44:10.263Z">
+<meta property="article:modified_time" content="2024-01-06T10:45:12.535Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -431,9 +431,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E9%9A%8F%E7%AC%94/%E6%B1%95%E5%A4%B4%E6%97%85%E8%A1%8C/" title="汕头旅行">
+                      <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E6%A1%8C%E6%B8%B8%E8%AE%B0%E5%BD%95/" title="桌游记录">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">汕头旅行</span>
+                        <span class="hidden-mobile">桌游记录</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -441,8 +441,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E6%A1%8C%E6%B8%B8%E8%AE%B0%E5%BD%95/" title="桌游记录">
-                        <span class="hidden-mobile">桌游记录</span>
+                      <a href="/%E6%B8%B8%E6%88%8F%E9%94%90%E8%AF%84/%E4%BA%BA%E7%8B%BC%E6%9D%91%E4%B9%8B%E8%B0%9C/" title="人狼村之谜">
+                        <span class="hidden-mobile">人狼村之谜</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -457,20 +457,21 @@
   
     <article id="comments" lazyload>
       
-  <div id="valine"></div>
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
         var options = Object.assign(
-          {"appId":"6D3BABpAookyFqPgIi5nl4OD-MdYXbMMI","appKey":"uVbUuXcJPrd82R4GNjzSBwRB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://6d3babpa.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {"serverURL":"https://walineblog-nb8jfnchj-rorschach2s-projects.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
           {
-            el: "#valine",
+            el: '#waline',
             path: window.location.pathname
           }
         )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
           Fluid.plugins.imageCaption(imgSelector);
           Fluid.plugins.fancyBox(imgSelector);
         })
@@ -479,7 +480,7 @@
   </script>
   <noscript>Please enable JavaScript to view the comments</noscript>
 
-
+ 
     </article>
   
 
