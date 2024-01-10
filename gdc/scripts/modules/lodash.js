@@ -14754,8 +14754,8 @@
      * // }
      *
      * // Use custom template delimiters.
-     * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-     * var compiled = _.template('hello {{ user }}!');
+     * _.templateSettings.interpolate = /undefined/g;
+     * var compiled = _.template('hello !');
      * compiled({ 'user': 'mustache' });
      * // => 'hello mustache!'
      *
