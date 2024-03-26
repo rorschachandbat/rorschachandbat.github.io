@@ -18,13 +18,13 @@
   
     <meta name="description" content="C++智能指针 C++中的智能指针有哪些，各自有什么作用?  智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)： （1）shared_ptr ，多个共享指针可以指向相同的对象，采用了引用计数的机制，当">
 <meta property="og:type" content="article">
-<meta property="og:title" content="R">
+<meta property="og:title" content="面经-计算机基础">
 <meta property="og:url" content="https://rorschachandbat.github.io/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="R">
 <meta property="og:description" content="C++智能指针 C++中的智能指针有哪些，各自有什么作用?  智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)： （1）shared_ptr ，多个共享指针可以指向相同的对象，采用了引用计数的机制，当">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-25T10:41:57.182Z">
-<meta property="article:modified_time" content="2024-03-25T10:41:57.182Z">
+<meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-26T02:59:25.260Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>R</title>
+  <title>面经-计算机基础 - R</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -264,7 +264,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="面经-计算机基础"></span>
           
         </div>
 
@@ -275,8 +275,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-25 18:41" pubdate>
-          2024年3月25日 晚上
+        <time datetime="2024-03-26 00:00" pubdate>
+          2024年3月26日 凌晨
         </time>
       </span>
     
@@ -287,7 +287,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          2.4k 字
         
       </span>
     
@@ -298,7 +298,7 @@
         
         
         
-          9 分钟
+          20 分钟
         
       </span>
     
@@ -344,12 +344,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">面经-计算机基础</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年3月26日 上午
+                  
+                
+              </p>
             
             
               <div class="markdown-body">
                 
-                <h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><ul>
+                <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><ul>
 <li><h3 id="C-中的智能指针有哪些，各自有什么作用"><a href="#C-中的智能指针有哪些，各自有什么作用" class="headerlink" title="C++中的智能指针有哪些，各自有什么作用?"></a><strong>C++中的智能指针有哪些，各自有什么作用?</strong></h3></li>
 </ul>
 <p>智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)：</p>
@@ -365,6 +373,11 @@
 <p>2）拷贝构造函数：将指针指向该对象，引用计数++；</p>
 <p>3）赋值运算符：&#x3D;号左边的shared_ptr的引用计数-1，右边的shared_ptr的引用计数+1，如果左边的引用技术降为0，还要销毁shared_ptr指向对象，释放内存空间。</p>
 <p>（3）shared_ptr的引用计数本身是安全且无锁的，但是它指向的对象的读写则不是，因此可以说shared_ptr不是线程安全的。[](ht</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="多态的原理"><a href="#多态的原理" class="headerlink" title="多态的原理"></a>多态的原理</h3><h3 id="静态多态和动态多态的区别？"><a href="#静态多态和动态多态的区别？" class="headerlink" title="静态多态和动态多态的区别？"></a>静态多态和动态多态的区别？</h3><h4 id="1-何为静态多态？"><a href="#1-何为静态多态？" class="headerlink" title="1. 何为静态多态？"></a>1. 何为静态多态？</h4><p>又称编译期多态，即在系统编译期间就可以确定程序将要执行哪个函数。例如：函数重载，通过类成员运算符指定的运算。</p>
+<ol>
+<li>何为动态多态？<br>动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。<br>动态多态是在虚函数的基础上实现的，而实现的条件有：<br>(1) 在类中声明为虚函数<br>(2) 函数的函数名，返回值，函数参数个数，参数类型，全都与基类的所声明的虚函数相同（否则是函数重载的条件）<br>(3) 将子类对象的指针（或以引用形式）赋值给父类对象的指针（或引用），再用该指向父类对象的指针（或引用）调用虚函数<br>如此，便可以实现动态多态，程序会按照实际对象类型来选择要实行的函数具体时哪一个。</li>
+</ol>
+<h2 id="虚析构"><a href="#虚析构" class="headerlink" title="虚析构"></a>虚析构</h2><h3 id="虚析构作用"><a href="#虚析构作用" class="headerlink" title="虚析构作用"></a>虚析构作用</h3><p>总的来说虚析构函数是为了避免内存泄露，而且是当子类中会有指针成员变量时才会使用得到的。也就说<strong>虚析构函数使得在删除指向子类对象的基类指针时可以调用子类的析构函数达到释放子类中堆内存的目的，而防止内存泄露的</strong>。<br> （1）<strong>如果父类的析构函数不加virtual关键字</strong><br> 当父类的析构函数不声明成虚析构函数的时候，当子类继承父类，父类的指针指向子类时，delete掉父类的指针，只调动父类的析构函数，而不调动子类的析构函数。<br> （2）<strong>如果父类的析构函数加virtual关键字</strong><br> 当父类的析构函数声明成虚析构函数的时候，当子类继承父类，父类的指针指向子类时，delete掉父类的指针，先调动子类的析构函数，再调动父类的析构函数。</p>
 <h1 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul>
 <li><h3 id="tcp和udp的区别"><a href="#tcp和udp的区别" class="headerlink" title="tcp和udp的区别"></a>tcp和udp的区别</h3></li>
 </ul>
@@ -376,13 +389,56 @@
 <ul>
 <li><h3 id="tcp三次握手的过程"><a href="#tcp三次握手的过程" class="headerlink" title="tcp三次握手的过程"></a>tcp三次握手的过程</h3></li>
 </ul>
-
+<p>三次握手的本质是确认通信双方收发数据的能力</p>
+<p>首先，我让信使运输一份信件给对方，<strong>对方收到了，那么他就知道了我的发件能力和他的收件能力是可以的。</strong></p>
+<p>于是他给我回信，<strong>我若收到了，我便知我的发件能力和他的收件能力是可以的，并且他的发件能力和我的收件能力是可以。</strong></p>
+<p>然而此时他还不知道他的发件能力和我的收件能力到底可不可以，于是我最后回馈一次<strong>，他若收到了，他便清楚了他的发件能力和我的收件能力是可以的。</strong></p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h2><h3 id="描述一下A-算法"><a href="#描述一下A-算法" class="headerlink" title="描述一下A*算法"></a>描述一下A*算法</h3><ol>
+<li>把起点加入 open list 。</li>
+<li>重复如下过程：</li>
+</ol>
+<p>a.         遍历 open list ，查找 F 值最小的节点，把它作为当前要处理的节点。</p>
+<p>b.         把这个节点移到 close list 。</p>
+<p>c.         对当前方格的 8 个相邻方格的每一个方格？</p>
+<p>◆     如果它是不可抵达的或者它在 close list 中，忽略它。否则，做如下操作。</p>
+<p>◆     如果它不在 open list 中，把它加入 open list ，并且把当前方格设置为它的父亲，记录该方格的 F ， G 和 H 值。</p>
+<p>◆     如果它已经在 open list 中，检查这条路径 ( 即经由当前方格到达它那里 ) 是否更好，用 G 值作参考。更小的 G 值表示这是更好的路径。如果是这样，把它的父亲设置为当前方格，并重新计算它的 G 和 F 值。如果你的 open list 是按 F 值排序的话，改变后你可能需要重新排序。</p>
+<p>d.    停止，当你</p>
+<p>◆     把终点加入到了 open list 中，此时路径已经找到了，或者</p>
+<p>◆     查找终点失败，并且 open list 是空的，此时没有路径。</p>
+<ol start="3">
+<li>保存路径。从终点开始，每个方格沿着父节点移动直至起点，这就是你的路径。</li>
+</ol>
+<h3 id="openlist和closelist的作用？"><a href="#openlist和closelist的作用？" class="headerlink" title="openlist和closelist的作用？"></a>openlist和closelist的作用？</h3><p>openlist就是还要搜索的列表，相比于dfs的盲目搜索更加有效率，</p>
+<p>closelist就是已经搜过的或者不可搜的节点，加速过程。</p>
+<h2 id="事件的实现过程"><a href="#事件的实现过程" class="headerlink" title="事件的实现过程"></a>事件的实现过程</h2>
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/" class="category-chain-item">找工作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -393,7 +449,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>面经-计算机基础</div>
       <div>https://rorschachandbat.github.io/找工作/面经-计算机基础/</div>
     </div>
     <div class="license-meta">
@@ -406,7 +462,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月25日</div>
+          <div>2024年3月26日</div>
         </div>
       
       
