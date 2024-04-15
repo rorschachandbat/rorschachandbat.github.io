@@ -25,9 +25,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-c42f9c518932b4fa5e1507562fcdfbdb_r.jpg">
-<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220305190803022.png">
 <meta property="article:published_time" content="2022-03-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-15T05:54:39.593Z">
+<meta property="article:modified_time" content="2024-04-15T16:24:10.677Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
@@ -291,7 +290,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k 字
+          4.9k 字
         
       </span>
     
@@ -302,7 +301,7 @@
         
         
         
-          48 分钟
+          41 分钟
         
       </span>
     
@@ -353,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月15日 下午
+                    本文最后更新于：2024年4月16日 凌晨
                   
                 
               </p>
@@ -445,21 +444,6 @@
 <p>类的实例化是在内存中分配⼀块地址，每个实例在内存中都有独⼀⽆⼆的地址。 </p>
 <p>同样，空类也会实例化，所以编译器会给空类隐含的添加⼀个字节，这样空类实例化后就有独⼀⽆⼆的地址了。 </p>
 <p>所以，空类的sizeof为1，⽽不是0。 </p>
-<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/410.html">http://c.biancheng.net/view/410.html</a></p>
-<h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><h3 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h3><h3 id="右值"><a href="#右值" class="headerlink" title="右值"></a>右值</h3><h3 id="constexpr-和-const"><a href="#constexpr-和-const" class="headerlink" title="constexpr 和 const"></a>constexpr 和 const</h3><p>constexpr：告诉编译器我可以是编译期间可知的，尽情的优化我吧。</p>
-<p>const：告诉程序员没人动得了我，放心的把我传出去；或者放心的把变量交给我，我啥也不动就瞅瞅。</p>
-<p>修饰对象的时候两者之间最基本的区别是：</p>
-<ul>
-<li>const修饰一个对象表示它是常量。这暗示对象一经初始化就不会再变动了，并且允许编译器使用这个特点优化程序。这也防止程序员修改了本不应该修改的对象。</li>
-<li>constexpr是修饰一个常量表达式。但请注意constexpr不是修饰常量表达式的唯一途径。</li>
-</ul>
-<p>修饰函数的时候两者之间最基本的区别是：</p>
-<ul>
-<li>const只能用于非静态成员的函数而不是所有函数。它保证成员函数不修改任何非静态数据。</li>
-<li>constexpr可以用于含参和无参函数。constexpr函数适用于常量表达式，只有在下面的情况下编译器才会接受constexpr函数：                                                        </li>
-<li>1.函数体必须足够简单，除了typedef和静态元素，只允许有return语句。如构造函数只能有初始化列表，typedef和静态元素      (实际上在C++14标准中已经允许定义语句存在于constexpr函数体内了)                                                                       2.参数和返回值必须是字面值类</li>
-</ul>
-<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><p>map用的是红黑树，unordered_map用的是hash表。</p>
 <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="基础-1"><a href="#基础-1" class="headerlink" title="基础"></a>基础</h2><p>列表推导式</p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-c42f9c518932b4fa5e1507562fcdfbdb_r.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
 <h3 id="内存管理-1"><a href="#内存管理-1" class="headerlink" title="内存管理"></a>内存管理</h3><h3 id="深拷贝浅拷贝"><a href="#深拷贝浅拷贝" class="headerlink" title="深拷贝浅拷贝"></a>深拷贝浅拷贝</h3><p>浅拷贝仅仅复制了容器中元素的地址</p>
@@ -472,9 +456,6 @@
 </ul>
 <p>python中向函数传递参数只能是引用传递，表示把它的地址都传进去了，这才会带来上面的现象。</p>
 <p>有的编程语言允许值传递，即只是把值传进去，在里面另外找一个地址来放，这样就不会影响全局中的变量。</p>
-<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><h2 id="程序的内存模型"><a href="#程序的内存模型" class="headerlink" title="程序的内存模型"></a>程序的内存模型</h2><h2 id="多进程与多线程的区别以及使用场景"><a href="#多进程与多线程的区别以及使用场景" class="headerlink" title="多进程与多线程的区别以及使用场景?"></a>多进程与多线程的区别以及使用场景?</h2><h1 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h1><h2 id="三次握手四次挥手"><a href="#三次握手四次挥手" class="headerlink" title="三次握手四次挥手"></a>三次握手四次挥手</h2><h2 id="上网的全过程"><a href="#上网的全过程" class="headerlink" title="上网的全过程"></a>上网的全过程</h2><p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220305190803022.png" srcset="/img/loading.gif" lazyload alt="image-20220305190803022"></p>
-<h2 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a><strong>http</strong>和<strong>https</strong>的区别</h2><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p><strong>Mysql</strong>了解吗，讲⼀下事务，那<strong>mysql</strong>是如何保证<strong>ACID</strong>的呢（答了undo-log,redo-log,加锁,mvcc），那讲⼀下MVCC</p>
-<p>事务是逻辑上的⼀组操作，要么都执⾏，要么都不执⾏。事务的四⼤特性原⼦性（Atomicity）、⼀致性（Consistency）、隔离性（Isolation）、持久性（Durability）。 </p>
 
                 
               </div>
