@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="R">
 <meta property="og:description" content="痛定思痛决定好好重新整理一份八股文">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
+<meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-16T06:00:18.858Z">
+<meta property="article:modified_time" content="2024-04-17T14:16:47.012Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -287,7 +290,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.7k 字
+          7.5k 字
         
       </span>
     
@@ -298,7 +301,7 @@
         
         
         
-          56 分钟
+          63 分钟
         
       </span>
     
@@ -349,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月16日 下午
+                    本文最后更新于：2024年4月17日 晚上
                   
                 
               </p>
@@ -410,7 +413,15 @@
 <p>动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。<br>动态多态是在虚函数的基础上实现的，而实现的条件有：<br>(1) 在类中声明为虚函数</p>
 <p>(2) 函数的函数名，返回值，函数参数个数，参数类型，全都与基类的所声明的虚函数相同（否则是函数重载的条件）</p>
 <p>(3) 将子类对象的指针（或以引用形式）赋值给父类对象的指针（或引用），再用该指向父类对象的指针（或引用）调用虚函数<br>如此，便可以实现动态多态，程序会按照实际对象类型来选择要实行的函数具体时哪一个。</p>
-<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><h3 id="哪些函数不能声明成虚函数？"><a href="#哪些函数不能声明成虚函数？" class="headerlink" title="哪些函数不能声明成虚函数？"></a>哪些函数不能声明成虚函数？</h3><p><strong>非成员函数</strong></p>
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23971699/answer/2358595798">c++虚函数的作用是什么？ - 心试的回答 - 知乎</a></p>
+<p>每个子类会生成一个虚函数表，根据这个子类有无重写父类的虚函数，重写了会覆盖对应的内存空间</p>
+<p>一个继承一个比较好理解，一个继承了多个可以看下面的图</p>
+<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h3><p><strong>纯虚函数是指在基类中定义的没有实现的虚函数</strong>。使用纯虚函数可以使该函数只有<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22629281871%22%7D">函数原型</a>，而没有具体的实现。注：这里的“&#x3D;0”表示该函数为纯虚函数。</p>
+<p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
+<p><strong>抽象类是包含纯虚函数的类</strong>，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
+<h3 id="哪些函数不能声明成虚函数？"><a href="#哪些函数不能声明成虚函数？" class="headerlink" title="哪些函数不能声明成虚函数？"></a>哪些函数不能声明成虚函数？</h3><p><strong>非成员函数</strong></p>
 <p>非成员函数只能被重载(overload)，不能被继承(override)，而虚函数主要的作用是在继承中实现动态多态，非成员函数早在编译期间就已经绑定函数了，无法实现动态多态，那声明成虚函数还有什么意义呢？</p>
 <p><strong>构造函数</strong></p>
 <p>要想调用虚函数必须要通过“虚函数表”来进行的，但虚函数表是要在对象实例化之后才能够进行调用。而在构造函数运行期间，还没有为虚函数表分配空间，自然就没法调用虚函数了。</p>
@@ -429,7 +440,15 @@
 <p>（2）new返回类型指针，类型安全，malloc返回void*，再强制转换成所需要的类型；</p>
 <p>（3）new是从自由存储区获得内存，malloc从堆中获取            内存；</p>
 <p>（4）对于类对象，new会调用构造函数和析构函数，malloc不会（核心）。</p>
-<h1 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h1><h1 id="关键字-1"><a href="#关键字-1" class="headerlink" title="关键字"></a>关键字</h1><h2 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h2><p>在C#中，unsafe 关键字用于标识包含不安全代码块的上下文，允许直接使用指针和执行不安全的操作。</p>
+<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><h3 id="stl底层实现"><a href="#stl底层实现" class="headerlink" title="stl底层实现"></a><strong>stl底层实现</strong></h3><p>vector：数组</p>
+<p>Dequeue（双端队列）：二维数组</p>
+<p>List：环状双向链表</p>
+<p>set（集合）：平衡的红黑树</p>
+<p>multiset：红黑树</p>
+<p>map：平衡二叉树</p>
+<p>unordered_map：散列表（哈希表）</p>
+<p><strong>而C++ STL 标准库中，不仅是 unordered_map 容器，所有无序容器的底层实现都采用的是哈希表存储结构。更准确地说，是用“链地址法”（又称“开链法”）解决数据存储位置发生冲突的哈希表。</strong></p>
+<h1 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h1><h2 id="关键字-1"><a href="#关键字-1" class="headerlink" title="关键字"></a>关键字</h2><h3 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h3><p>在C#中，unsafe 关键字用于标识包含不安全代码块的上下文，允许直接使用指针和执行不安全的操作。</p>
 <p>优点：</p>
 <ol>
 <li><p>更高的性能： 使用指针直接操作内存可以提高性能，特别是在处理大量数据或需要高效访问内存的场景下。</p>
@@ -451,14 +470,19 @@
 <h2 id="反射和特性"><a href="#反射和特性" class="headerlink" title="反射和特性"></a>反射和特性</h2><p>要用到特性就必须要用反射，比如说你要序列化一个类，如果直接写接口来实现，你不知道这个类有哪些属性，而且还要写很多不同的接口，但是用反射可以很优雅地实现，如下。</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c#"><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Serialize</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> obj</span>)</span><br>&#123;<br>     <span class="hljs-keyword">var</span> res = obj<br>         .GetType()<br>         .GetProperties(BindingFlag.Public | BindingFlags.Instance)<br>         .Where(pi =&gt;<br>                &#123;<br>                    <span class="hljs-keyword">var</span> attr = pi.GetCustomAttribute&lt;BrowsableAtrribute&gt;();<br>                    <span class="hljs-keyword">if</span>(attr <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> attr.Browable;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                &#125;)<br>         .Select(pi =&gt; <span class="hljs-keyword">new</span>&#123;Key = pi.Name, Value = pi.GetValue(obj)&#125;)<br>         .Select(o =&gt; <span class="hljs-string">$&quot;<span class="hljs-subst">&#123;o.Key&#125;</span> : <span class="hljs-subst">&#123;o.Value&#125;</span>&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.Join(Environment.NewLine, res);<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span><br>&#123;<br>    [<span class="hljs-meta">Browsable(false)</span>]<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> Id&#123;<span class="hljs-keyword">get</span>;<span class="hljs-keyword">set</span>;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2><h3 id="线程和进程区别"><a href="#线程和进程区别" class="headerlink" title="线程和进程区别"></a>线程和进程区别</h3><p>（1）进程是运行时的程序，是系统进行资源分配和调度的基本单位，它实现了系统的并发；</p>
+<h2 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h2><p>C#中定义的值类型包括原类型（Sbyte、Byte、Short、Ushort、Int、Uint、Long、Ulong、Char、Float、Double、Bool、Decimal）、枚举(enum)、结构(struct)，引用类型包括：类、数组、接口、委托、字符串等，引用型是在堆中分配内存，初始化为null，引用型是需要GARBAGE COLLECTION来回收内存的，值型不用，超出了作用范围，系统就会自动释放！</p>
+<h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2><h3 id="线程和进程和协程"><a href="#线程和进程和协程" class="headerlink" title="线程和进程和协程"></a>线程和进程和协程</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/279383752">Unity协程的原理与应用 - 宇亓的文章 - 知乎</a></p>
+<p>（1）进程是运行时的程序，是系统进行资源分配和调度的基本单位，它实现了系统的并发；</p>
 <p>（2）线程是进程的子单位，也称为轻量级进程，它是CPU进行分配和调度的基本单位，也是独立运行的基本单位，它实现了进程内部的并发；</p>
 <p>（3）一个程序至少拥有一个进程，一个进程至少拥有一个线程，线程依赖于进程而存在；</p>
 <p>（4）进程拥有独立的内存空间，而线程是共享进程的内存空间的，自己不占用资源；</p>
 <p>（5）线程的优势：线程之间的信息共享和通讯比较方便，不需要资源的切换等.</p>
+<p>每一个进程都独立拥有自己的指令和数据，所以称为资源分配的基本单位。其中数据又分布在内存的不同区域，我们在C语言课程中学习过内存四区的概念，一个运行中的进程所占有的内存大体可以分为四个区域：栈区、堆区、数据区、代码区。其中代码区存储指令，另外三个区存储数据。</p>
+<p>线程是处理器调度和执行的基本单位，一个线程往往和一个函数调用栈绑定，一个进程有多个线程，每个线程拥有自己的函数调用栈，同时共用进程的堆区，数据区，代码区。操作系统会不停地在不同线程之间切换来营造出一个并行的效果，这个策略称为时间片轮转法。</p>
+<p>那么协程在其中又处于什么地位呢？ <strong>一切用户自己实现的，类似于线程的轮子，都可以称之为是协程。</strong></p>
 <h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>“线程安全”也不是指线程的安全，而是指内存的安全，在每个进程的内存空间中都会有一块特殊的公共区域，通常称为堆（内存）。进程内的所有线程都可以访问到该区域，这就是造成问题的潜在原因。所以线程安全指的是，在堆内存中的数据由于可以被任何线程访问到，在没有限制的情况下存在被意外修改的风险。</p>
-<p>如何避免？</p>
-<p><strong>私有化内存</strong></p>
+<p><strong>如何避免</strong>？</p>
+<p>私有化内存</p>
 <p>栈内存</p>
 <h1 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="tcp和udp的区别"><a href="#tcp和udp的区别" class="headerlink" title="tcp和udp的区别"></a>tcp和udp的区别</h3><p>（1）TCP是传输控制协议，UDP是用户数据报协议；</p>
 <p>（2）TCP是面向连接的，可靠的数据传输协议，它要通过三次握手来建立连接，UDP是无连接的，不可靠的数据传输协议，采取尽力而为的策略，不保证接收方一定能收到正确的数据；</p>
@@ -470,10 +494,7 @@
 <p>于是他给我回信，<strong>我若收到了，我便知我的发件能力和他的收件能力是可以的，并且他的发件能力和我的收件能力是可以。</strong></p>
 <p>然而此时他还不知道他的发件能力和我的收件能力到底可不可以，于是我最后回馈一次<strong>，他若收到了，他便清楚了他的发件能力和我的收件能力是可以的。</strong></p>
 <h2 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h2><h3 id="https为什么更加安全？"><a href="#https为什么更加安全？" class="headerlink" title="https为什么更加安全？"></a>https为什么更加安全？</h3><p>http是明文传输，对称加密虽然性能好但有密钥泄漏的风险，非对称加密（2组公钥+2私钥双向传输）安全但性能低下，因此考虑用非对称加密来传输对称加密所需的密钥，然后进行对称加密，但是为了防止非对称过程产生的中间人攻击，需要对服务器公钥和服务器身份进行配对的数字认证，然后引入了CA数字签名+数字证书验证的方式！</p>
-<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="一、常用GOF设计模式"><a href="#一、常用GOF设计模式" class="headerlink" title="一、常用GOF设计模式"></a>一、常用GOF设计模式</h2><h3 id="1-命令模式"><a href="#1-命令模式" class="headerlink" title="1.命令模式"></a>1.命令模式</h3><h3 id="2-享元模式"><a href="#2-享元模式" class="headerlink" title="2.享元模式"></a>2.享元模式</h3><h3 id="3-观察者模式"><a href="#3-观察者模式" class="headerlink" title="3.观察者模式"></a>3.观察者模式</h3><h3 id="4-原型模式"><a href="#4-原型模式" class="headerlink" title="4.原型模式"></a>4.原型模式</h3><h3 id="5-单例模式"><a href="#5-单例模式" class="headerlink" title="5.单例模式"></a>5.单例模式</h3><h3 id="6-状态模式"><a href="#6-状态模式" class="headerlink" title="6.状态模式"></a>6.状态模式</h3><h2 id="二、序列型模式"><a href="#二、序列型模式" class="headerlink" title="二、序列型模式"></a>二、序列型模式</h2><h3 id="7-双缓冲模式"><a href="#7-双缓冲模式" class="headerlink" title="7.双缓冲模式"></a>7.双缓冲模式</h3><h3 id="8-游戏循环"><a href="#8-游戏循环" class="headerlink" title="8.游戏循环"></a>8.游戏循环</h3><h3 id="9-更新方法"><a href="#9-更新方法" class="headerlink" title="9.更新方法"></a>9.更新方法</h3><h2 id="三、行为型模式"><a href="#三、行为型模式" class="headerlink" title="三、行为型模式"></a>三、行为型模式</h2><h3 id="10-字节码"><a href="#10-字节码" class="headerlink" title="10.字节码"></a>10.字节码</h3><h3 id="11-子类沙箱"><a href="#11-子类沙箱" class="headerlink" title="11.子类沙箱"></a>11.子类沙箱</h3><h3 id="12-类型对象"><a href="#12-类型对象" class="headerlink" title="12.类型对象"></a>12.类型对象</h3><h2 id="四、解耦型模式"><a href="#四、解耦型模式" class="headerlink" title="四、解耦型模式"></a>四、解耦型模式</h2><p>这个更加像是写代码的方法论。</p>
-<h3 id="13-组件模式"><a href="#13-组件模式" class="headerlink" title="13.组件模式"></a>13.组件模式</h3><h3 id="14-事件队列"><a href="#14-事件队列" class="headerlink" title="14.事件队列"></a>14.事件队列</h3><h3 id="15-服务定位器"><a href="#15-服务定位器" class="headerlink" title="15.服务定位器"></a>15.服务定位器</h3><h2 id="五、优化型模式"><a href="#五、优化型模式" class="headerlink" title="五、优化型模式"></a>五、优化型模式</h2><p>这个可能更偏向于应用。</p>
-<h3 id="16-数据局部性"><a href="#16-数据局部性" class="headerlink" title="16.数据局部性"></a>16.数据局部性</h3><h3 id="17-脏标识模式"><a href="#17-脏标识模式" class="headerlink" title="17.脏标识模式"></a>17.脏标识模式</h3><p>有一些更新很需要花时间的数据，每次循环的时候，加一个标志，如果没有改变就不tick这里。</p>
-<h3 id="18-对象池模式"><a href="#18-对象池模式" class="headerlink" title="18.对象池模式"></a>18.对象池模式</h3><h3 id="19-空间分区"><a href="#19-空间分区" class="headerlink" title="19.空间分区"></a>19.空间分区</h3><h1 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h1><p>（1）应用程序阶段，该阶段主要是在软件层面上执行的一些工作，包括空间加速算法、视锥剔除、碰撞检测、动画物理模拟等。大体逻辑是：执行视锥剔除，查询出可能需要绘制的图元并生成渲染数据，设置渲染状态和绑定各种Shader参数，调用DrawCall，进入到下一个阶段，GPU渲染管线。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h1><p>（1）应用程序阶段，该阶段主要是在软件层面上执行的一些工作，包括空间加速算法、视锥剔除、碰撞检测、动画物理模拟等。大体逻辑是：执行视锥剔除，查询出可能需要绘制的图元并生成渲染数据，设置渲染状态和绑定各种Shader参数，调用DrawCall，进入到下一个阶段，GPU渲染管线。</p>
 <p>（2）几何阶段，包含顶点着色、投影变换、裁剪和屏幕映射阶段。</p>
 <p>a. 顶点处理阶段：这个阶段会执行<strong>顶点变换</strong>和<strong>顶点着色</strong>的工作。通过模型矩阵、观察矩阵和投影矩阵(也就是MVP矩阵)计算出顶点在裁剪空间下的位置(clip space)，以便后续阶段转化为标准化设备坐标系(NDC)下的位置。也可能会计算出顶点的法线(需要有法线变换矩阵)和纹理坐标等。同时，在这个阶段也可能会进行顶点的着色计算，如平面着色 (Flat Shading)和高洛德着色 (Gouraud Shading)都是在顶点着色器中进行着色计算。因为这个阶段是完全可控制的，因此执行什么样的操作由程序员来决定。（此外，在顶点处理阶段的末尾，还有一些可选的阶段，包括曲面细分(tessellation)、几何着色(geometry shading)和流输出(stream output)，此处不详细描述）</p>
 <p>b. 裁剪阶段：简单来说就是两次裁剪的粒度不同，前者是在物体对象层面的，一般对对象的包围盒做剔除，剔除掉不在视锥体内的物体，NDC裁剪是在三角形层面做的，裁剪掉不在屏幕内的像素。</p>
