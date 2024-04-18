@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/798142-20170114161306385-735353264.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-c4b17080b7a4f12e765fc52edbfbdd4f_720w.webp">
 <meta property="article:published_time" content="2024-04-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-17T14:16:47.012Z">
+<meta property="article:modified_time" content="2024-04-18T13:29:37.339Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-cc979056c26b13f1e63233776fa9e8ad_720w.webp">
@@ -355,7 +355,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月17日 晚上
+                    本文最后更新于：2024年4月18日 晚上
                   
                 
               </p>
@@ -402,7 +402,7 @@
 <p>◆     如果它是不可抵达的或者它在 close list 中，忽略它。否则，做如下操作。</p>
 <p>◆     如果它不在 open list 中，把它加入 open list ，并且把当前方格设置为它的父亲，记录该方格的 F ， G 和 H 值。</p>
 <p>◆     如果它已经在 open list 中，检查这条路径 ( 即经由当前方格到达它那里 ) 是否更好，用 G 值作参考。更小的 G 值表示这是更好的路径。如果是这样，把它的父亲设置为当前方格，并重新计算它的 G 和 F 值。如果你的 open list 是按 F 值排序的话，改变后你可能需要重新排序。</p>
-<p>d.    停止，当你</p>
+<p>d.    停止条件</p>
 <p>◆     把终点加入到了 open list 中，此时路径已经找到了，或者</p>
 <p>◆     查找终点失败，并且 open list 是空的，此时没有路径。</p>
 <ol start="3">
