@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/luojing.gif">
 <meta property="article:published_time" content="2024-09-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-01T13:55:36.346Z">
+<meta property="article:modified_time" content="2024-09-01T14:18:37.415Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/luojing.gif">
@@ -289,7 +289,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.7k 字
         
       </span>
     
@@ -300,7 +300,7 @@
         
         
         
-          13 分钟
+          23 分钟
         
       </span>
     
@@ -359,13 +359,14 @@
             
               <div class="markdown-body">
                 
-                <h1 id="游戏玩法介绍"><a href="#游戏玩法介绍" class="headerlink" title="游戏玩法介绍"></a>游戏玩法介绍</h1><p>游戏的玩法大概就是白天拿资源，晚上接待客人，你可以选择杀人或者喂饱，有善良线和恶线的区分，然后也有</p>
+                <h1 id="游戏玩法介绍"><a href="#游戏玩法介绍" class="headerlink" title="游戏玩法介绍"></a>游戏玩法介绍</h1><p class="note note-primary">为了避免危险，你需要派遣伙伴们去合适的地方，它们会帮助你，□□食物，应对晚上的客人。 夜晚来临时，客人们会依次到来，你只需要提供它们需要的食物，它们就会满意的离开。</p>
+
+<p><a target="_blank" rel="noopener" href="https://wwex.lanzout.com/iZwCp28d24bg">放一个试玩连接</a></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214537289.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214546036.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214555977.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214658802.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214605556.png" srcset="/img/loading.gif" lazyload></p>
-<p><a target="_blank" rel="noopener" href="https://wwex.lanzout.com/iZwCp28d24bg">放一个试玩连接</a></p>
 <h1 id="Luban导表工具"><a href="#Luban导表工具" class="headerlink" title="Luban导表工具"></a>Luban导表工具</h1><p>这次的项目需要填数据的地方非常多，有了上次做肉鸽小游戏的教训，决定搜寻一下有无更加好用的导表工具，最终找到了luban工具，算是比较方便好用的实现方案。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/focus-creative-games/luban">官方链接</a></p>
 <p>作为一个需要大量配表的游戏，最理想的情况是，策划端只需要用excel就可以搞定，程序端也不需要编写处理db的代码，导表工具会自动生成相应的代码。</p>
@@ -388,12 +389,25 @@
 
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">func <span class="hljs-title">posDistance</span><span class="hljs-params">(pos1,pos2)</span>:</span><br><span class="hljs-function">    var cubePos1=</span><span class="hljs-built_in">getCubePosFromPos</span>(pos1)<br>    var cubePos2=<span class="hljs-built_in">getCubePosFromPos</span>(pos2)<br>    var distance=(<span class="hljs-built_in">abs</span>(cubePos1.x-cubePos2.x)+<span class="hljs-built_in">abs</span>(cubePos1.y-cubePos2.y)+<span class="hljs-built_in">abs</span>(cubePos1.z-cubePos2.z))/<span class="hljs-number">2</span><br>    <span class="hljs-keyword">return</span> distance<br></code></pre></td></tr></table></figure>
 
-<h1 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h1><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>这次项目作为一个ui游戏，简单的使用了MV框架，前期实现整体游戏循环的过程很快，到后面开始拼ui的时候其实有很大的沟通失误，缺少一个统筹规划工作量的人，来预估这个完成的时间。我自己心目中的完成时间点和实际的完全不一样，比如说地图，到了最后几天才分配给我做，我本以为是第二个周末就能完成的事情，我觉得09花了太多的时间来重构代码，并且重构之后也没经过测试，这个风险非常大，我个人认为应该先保证所有功能都完备了再进行重构的工作，不然卡在这里也无法进行下一步的推进。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>再来讲讲测试的问题，理想的情况是</p>
-<h2 id="玩法设计"><a href="#玩法设计" class="headerlink" title="玩法设计"></a>玩法设计</h2><h2 id="主题和音乐和美术"><a href="#主题和音乐和美术" class="headerlink" title="主题和音乐和美术"></a>主题和音乐和美术</h2><h1 id="获得的一些灵感"><a href="#获得的一些灵感" class="headerlink" title="获得的一些灵感"></a>获得的一些灵感</h1><p><strong>西西弗斯</strong><br>糯米团子，做一个自动放置小游戏，不过是翻山</p>
+<h1 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h1><p class="note note-danger">做事所花费的时间总是比你预期的要长，即使你的预期中考虑了侯世达定律。</p>
+
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>这次项目作为一个ui游戏，简单的使用了MV框架，前期实现整体游戏循环的过程很快，到后面开始拼ui的时候其实有很大的沟通失误，缺少一个统筹规划工作量的人，来预估这个完成的时间。我自己心目中的完成时间点和实际的完全不一样，比如说地图，到了最后几天才分配给我做，我本以为是第二个周末就能完成的事情，我觉得09花了太多的时间来重构代码，并且重构之后也没经过测试，这个风险非常大，我个人认为应该先保证所有功能都完备了再进行重构的工作，不然卡在这里也无法进行下一步的推进。</p>
+<p>其实这又是一个沟通问题，如果没有一个责任人站出来，那么我就会倾向于摆烂，并且祈祷或者默认其他人能完成，这就导致了我们最后ui和玩法上还有很多bug没修完，如果倒数第二个周末就有人站出来规划好预计的时间，或许最后交上去的结果会好很多。</p>
+<h2 id="测试以及策划功能优先级问题"><a href="#测试以及策划功能优先级问题" class="headerlink" title="测试以及策划功能优先级问题"></a>测试以及策划功能优先级问题</h2><p>再来讲讲测试的问题，理想的情况是做完一个功能就马上有人来验收，并且这个人是知道所有的功能细节，这样是效率最高的测试方法，所以要么是程序自测，要么是策划验收，如果再找一个测试来验收就还需要和他沟通具体的细节。</p>
+<p>但是中期出现的问题是，队伍策划需要干的事情实在<strong>太多了</strong>，既要设计玩法，还要调整数值，还要设计ui，还要验收功能。但是这些事情我认为应该是有优先级的，应该是要保证完成游戏完整性而服务，也就是设计ui和验收功能为更优先，因为这些都是会影响其他人的工作流的，一旦这个地方卡住了，其他人就要<strong>等待这里完成</strong>，会陷入到无事可干，并且必须要完成好最终确定的游戏，才能开始跑游戏测试数值。</p>
+<p>而关于数值设计，既然我们已经分离开了数据和玩法，大可之后再根据测试的反馈来更改数值，数值设计应该也是需要有一套<strong>方法论</strong>的，这个是需要</p>
+<h2 id="玩法设计"><a href="#玩法设计" class="headerlink" title="玩法设计"></a>玩法设计</h2><p>在前期的设计阶段，我总是觉得已有的玩法过于简单，能够一眼望穿，所以提出了很多想要增加策略性的建议，比如增加道具种类，地图增加走格子玩法，白天从三个动物变成牌组的形式，但其实最后做下来，看玩家的反馈已经足够复杂。我开始意识到我走入了一个非常大的误区，作为开发者，对于自己的游戏当然足够熟悉，所以总是会觉得过于简单，而失去了站在旁观者来审视游戏复杂度的能力，很容易把游戏玩法膨胀得很难。当然，这也和我前面提到的<strong>快速测试并且验证思路</strong>有关，总是因为我们没有快速验证的过程，所以会让我有这种恐慌。</p>
+<h2 id="主题和音乐和美术"><a href="#主题和音乐和美术" class="headerlink" title="主题和音乐和美术"></a>主题和音乐和美术</h2><p>这次游戏的另一个教训是有关于游戏的其他方面，我总是太过于在于游戏机制的设计，但是忽略了其他人看中的部分，比如主题、美术和音乐的统一性，ui设计的合理性，还是提到的一点，每个人对于jam最终作品的想象不一样，我所追求的是一个好玩的东西。但是可能其他人更愿意的是一个完整的作品，一个从机制到主题到美术音乐统一并且完整的作品，那就必然牺牲一部分有趣度的考量，而</p>
+<p>这点以后要改进的是，和别人一开始就要沟通清楚<strong>自己的愿景</strong></p>
+<h1 id="获得的一些灵感"><a href="#获得的一些灵感" class="headerlink" title="获得的一些灵感"></a>获得的一些灵感</h1><p><strong>西西弗斯</strong><br>糯米团子，做一个自动放置小游戏，不过是翻山</p>
 <p><strong>todolist直接改的模拟经营</strong><br>模拟经营，但是像babaisyou一样，目标是可以根据自己的东西来拖动的，比如需要10个肉直接变成需要10个草这种</p>
 <p><strong>放置挂机+自走棋</strong></p>
 <p>白天放置挂机拿资源，晚上自走棋战斗，更加纯粹简单的快乐</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本次作品的完整性还是相当高的，作为一个三周的作品美术音乐音效玩法都非常融洽，给自己朋友家人试玩也是相当开心，作为自己第一个完整度这么高的作品也是相当开心了。真的相当感谢队友们的付出，队友们都非常给力，性格也相当nice，沟通起来都非常舒服，感谢队友的配合，学到了很多，希望以后能再次合作。</p>
+<h1 id="还需要研究的问题"><a href="#还需要研究的问题" class="headerlink" title="还需要研究的问题"></a>还需要研究的问题</h1><p>1.六边形地图如何优雅实现</p>
+<p>2.导表的问题</p>
+<p>3.学习数值设计方法论</p>
+<p>4.如何导网页端游戏</p>
 
                 
               </div>
