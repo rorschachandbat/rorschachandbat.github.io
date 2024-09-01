@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/luojing.gif">
 <meta property="article:published_time" content="2024-09-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-01T13:50:23.273Z">
+<meta property="article:modified_time" content="2024-09-01T13:55:36.346Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/luojing.gif">
@@ -359,7 +359,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="游戏玩法介绍"><a href="#游戏玩法介绍" class="headerlink" title="游戏玩法介绍"></a>游戏玩法介绍</h1><p>游戏的玩法大概就是白天拿资源，晚上接待客人，你可以选择杀人或者喂饱，有善良线和恶线的区分，具体玩法比较复杂放一个做好的玩法教程把。</p>
+                <h1 id="游戏玩法介绍"><a href="#游戏玩法介绍" class="headerlink" title="游戏玩法介绍"></a>游戏玩法介绍</h1><p>游戏的玩法大概就是白天拿资源，晚上接待客人，你可以选择杀人或者喂饱，有善良线和恶线的区分，然后也有</p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214537289.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214546036.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214555977.png" srcset="/img/loading.gif" lazyload></p>
@@ -381,26 +381,19 @@
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20240901214835607.png" srcset="/img/loading.gif" lazyload alt="最后的成品"></p>
 <p><a target="_blank" rel="noopener" href="https://www.redblobgames.com/grids/hexagons/">六边形地图理论基础</a></p>
 <p><a target="_blank" rel="noopener" href="https://indienova.com/u/npc233/blogread/11298">六边形地图坐标距离计算（直接看结论版）</a></p>
-<p>结论如下</p>
-<p>计算距离</p>
-<p>像这样的坐标体系，有x,y,z三个维度，x,y,z的和始终是0，我们称之为cube坐标，距离计算公式是</p>
+<p>计算距离，像这样的坐标体系，有x,y,z三个维度，x,y,z的和始终是0，我们称之为cube坐标，距离计算公式是</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">distance=(<span class="hljs-title function_">abs</span>(cubePos1.<span class="hljs-property">x</span>-cubePos2.<span class="hljs-property">x</span>)+<span class="hljs-title function_">abs</span>(cubePos1.<span class="hljs-property">y</span>-cubePos2.<span class="hljs-property">y</span>)+<span class="hljs-title function_">abs</span>(cubePos1.<span class="hljs-property">z</span>-cubePos2.<span class="hljs-property">z</span>))/<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">diatance=<span class="hljs-title function_">max</span>(cubePos1.<span class="hljs-property">x</span>-cubePos2.<span class="hljs-property">x</span>)+<span class="hljs-title function_">abs</span>(cubePos1.<span class="hljs-property">y</span>-cubePos2.<span class="hljs-property">y</span>)+<span class="hljs-title function_">abs</span>(cubePos1.<span class="hljs-property">z</span>-cubePos2.<span class="hljs-property">z</span>))<br></code></pre></td></tr></table></figure>
 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">func <span class="hljs-title">posDistance</span><span class="hljs-params">(pos1,pos2)</span>:</span><br><span class="hljs-function">    var cubePos1=</span><span class="hljs-built_in">getCubePosFromPos</span>(pos1)<br>    var cubePos2=<span class="hljs-built_in">getCubePosFromPos</span>(pos2)<br>    var distance=(<span class="hljs-built_in">abs</span>(cubePos1.x-cubePos2.x)+<span class="hljs-built_in">abs</span>(cubePos1.y-cubePos2.y)+<span class="hljs-built_in">abs</span>(cubePos1.z-cubePos2.z))/<span class="hljs-number">2</span><br>    <span class="hljs-keyword">return</span> distance<br></code></pre></td></tr></table></figure>
 
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">func <span class="hljs-title">posDistance</span><span class="hljs-params">(pos1,pos2)</span>:</span><br><span class="hljs-function">    var cubePos1=</span><span class="hljs-built_in">getCubePosFromPos</span>(pos1)<br>    var cubePos2=<span class="hljs-built_in">getCubePosFromPos</span>(pos2)<br>    var distance=(<span class="hljs-built_in">abs</span>(cubePos1.x-cubePos2.x)+<span class="hljs-built_in">abs</span>(cubePos1.y-cubePos2.y)+<span class="hljs-built_in">abs</span>(cubePos1.z-cubePos2.z))/          <span class="hljs-number">2</span><br>    <span class="hljs-keyword">return</span> distance<br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h1><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>这次项目作为一个ui游戏，简单的使用了MV框架，前期实现整体游戏循环的过程很快，到后面开始拼ui的时候其实有很大的沟通失误，主要是缺少一个统筹规划工作量的人，来预估这个完成的时间。我自己心目中的完成时间点和实际的完全不一样，比如说地图，到了最后几天才分配给我做，我本以为是第二个周末就能完成的事情，我觉得09花了太多的时间来重构代码，并且重构之后也没经过测试，这让</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>再来讲到测试的问题，非常理想的情况是</p>
-<h2 id="完成度和复杂度的考量"><a href="#完成度和复杂度的考量" class="headerlink" title="完成度和复杂度的考量"></a>完成度和复杂度的考量</h2><h2 id="主题和音乐和美术"><a href="#主题和音乐和美术" class="headerlink" title="主题和音乐和美术"></a>主题和音乐和美术</h2><h1 id="获得的一些灵感"><a href="#获得的一些灵感" class="headerlink" title="获得的一些灵感"></a>获得的一些灵感</h1><p><strong>西西弗斯</strong><br>糯米团子，做一个自动放置小游戏，不过是翻山</p>
+<h1 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h1><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>这次项目作为一个ui游戏，简单的使用了MV框架，前期实现整体游戏循环的过程很快，到后面开始拼ui的时候其实有很大的沟通失误，缺少一个统筹规划工作量的人，来预估这个完成的时间。我自己心目中的完成时间点和实际的完全不一样，比如说地图，到了最后几天才分配给我做，我本以为是第二个周末就能完成的事情，我觉得09花了太多的时间来重构代码，并且重构之后也没经过测试，这个风险非常大，我个人认为应该先保证所有功能都完备了再进行重构的工作，不然卡在这里也无法进行下一步的推进。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>再来讲讲测试的问题，理想的情况是</p>
+<h2 id="玩法设计"><a href="#玩法设计" class="headerlink" title="玩法设计"></a>玩法设计</h2><h2 id="主题和音乐和美术"><a href="#主题和音乐和美术" class="headerlink" title="主题和音乐和美术"></a>主题和音乐和美术</h2><h1 id="获得的一些灵感"><a href="#获得的一些灵感" class="headerlink" title="获得的一些灵感"></a>获得的一些灵感</h1><p><strong>西西弗斯</strong><br>糯米团子，做一个自动放置小游戏，不过是翻山</p>
 <p><strong>todolist直接改的模拟经营</strong><br>模拟经营，但是像babaisyou一样，目标是可以根据自己的东西来拖动的，比如需要10个肉直接变成需要10个草这种</p>
 <p><strong>放置挂机+自走棋</strong></p>
 <p>白天放置挂机拿资源，晚上自走棋战斗，更加纯粹简单的快乐</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说这次的作品还是比较满意的，美术和音乐都非常完整，或许最后因为工期安排的原因没有达到最完美的版本，但是后面也修好了能玩，给朋友试玩也都反馈不错。</p>
 
                 
               </div>
