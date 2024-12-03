@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-19T01:59:25.255Z">
+<meta property="article:modified_time" content="2024-11-30T06:37:52.523Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
@@ -302,7 +302,7 @@
         
         
         
-          90 分钟
+          95 分钟
         
       </span>
     
@@ -353,7 +353,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月19日 上午
+                    本文最后更新于：2024年11月30日 下午
                   
                 
               </p>
@@ -400,7 +400,7 @@
 <li>1.函数体必须足够简单，除了typedef和静态元素，只允许有return语句。如构造函数只能有初始化列表，typedef和静态元素      (实际上在C++14标准中已经允许定义语句存在于constexpr函数体内了)                                                                       2.参数和返回值必须是字面值类</li>
 </ul>
 <h3 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h3><p>sizeof计算的是在栈中分配的内存大小。</p>
-<p>（1） sizeof不计算static变量占得内存；</p>
+<p>（1） sizeof不计算static变量占的内存；</p>
 <p>（2） 32位系统的指针的大小是4个字节，64位系统的指针是8字节，而不用管指针类型；</p>
 <p>（3） char型占1个字节，int占4个字节，short int占2个字节</p>
 <p>long int占4个字节，float占4字节，double占8字节，string占4字节</p>
@@ -421,7 +421,9 @@
 <p>类的实例化是在内存中分配⼀块地址，每个实例在内存中都有独⼀⽆⼆的地址。 </p>
 <p>同样，空类也会实例化，所以编译器会给空类隐含的添加⼀个字节，这样空类实例化后就有独⼀⽆⼆的地址了。 </p>
 <p>所以，空类的sizeof为1，⽽不是0。 </p>
-<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h3 id="C-中的智能指针有哪些，各自有什么作用"><a href="#C-中的智能指针有哪些，各自有什么作用" class="headerlink" title="C++中的智能指针有哪些，各自有什么作用?"></a>C++中的智能指针有哪些，各自有什么作用?</h3><p>智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)：</p>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="C-如何实现反射？"><a href="#C-如何实现反射？" class="headerlink" title="C++如何实现反射？"></a>C++如何实现反射？</h3><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用和指针的区别？从底层角度考虑"><a href="#引用和指针的区别？从底层角度考虑" class="headerlink" title="引用和指针的区别？从底层角度考虑"></a>引用和指针的区别？从底层角度考虑</h3><p>引用必须初始化，不能改变引用的指向，从汇编的角度来看，引用就是一个const指针</p>
+<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h3 id="C-中的智能指针有哪些，各自有什么作用"><a href="#C-中的智能指针有哪些，各自有什么作用" class="headerlink" title="C++中的智能指针有哪些，各自有什么作用?"></a>C++中的智能指针有哪些，各自有什么作用?</h3><p><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/SaXIX">C++智能指针weak_ptr详解</a></p>
+<p>智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)：</p>
 <p>（1）shared_ptr ，多个共享指针可以指向相同的对象，采用了引用计数的机制，当最后一个引用销毁时，释放内存空间；</p>
 <p>（2）unique_ptr，保证同一时间段内只有一个智能指针能指向该对象（可通过move操作来传递unique_ptr）；</p>
 <p>（3）weak_ptr，用来解决shared_ptr相互引用时的死锁问题，如果说两个shared_ptr相互引用,那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。它是对对象的一种弱引用，不会增加对象的引用计数，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。</p>
@@ -430,6 +432,7 @@
 <p>1）构造函数：将指针指向该对象，引用计数置为1；</p>
 <p>2）拷贝构造函数：将指针指向该对象，引用计数++；</p>
 <p>3）赋值运算符：&#x3D;号左边的shared_ptr的引用计数-1，右边的shared_ptr的引用计数+1，如果左边的引用技术降为0，还要销毁shared_ptr指向对象，释放内存空间。</p>
+<h3 id="shareptr引用计数数据类型"><a href="#shareptr引用计数数据类型" class="headerlink" title="shareptr引用计数数据类型"></a>shareptr引用计数数据类型</h3><p>long</p>
 <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="多态的原理"><a href="#多态的原理" class="headerlink" title="多态的原理"></a>多态的原理</h3><h3 id="静态多态和动态多态的区别？"><a href="#静态多态和动态多态的区别？" class="headerlink" title="静态多态和动态多态的区别？"></a>静态多态和动态多态的区别？</h3><p><strong>何为静态多态</strong>？</p>
 <p>又称编译期多态，即在系统编译期间就可以确定程序将要执行哪个函数。例如：函数重载，通过类成员运算符指定的运算。</p>
 <p><strong>何为动态多态？</strong></p>
@@ -441,7 +444,7 @@
 <p>一个继承一个比较好理解，一个继承了多个可以看下面的图</p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><img src="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>每一个类会有一个虚函数表，然后这个类的多个对象都会共享这一张虚函数表，</p>
+<p>每一个类会有一个虚函数表，然后这个类的多个对象都会共享这一张虚函数表，新创建的对象会保存虚函数指针。</p>
 <h3 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h3><p><strong>纯虚函数是指在基类中定义的没有实现的虚函数</strong>。使用纯虚函数可以使该函数只有<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22629281871%22%7D">函数原型</a>，而没有具体的实现。注：这里的“&#x3D;0”表示该函数为纯虚函数。</p>
 <p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
 <p><strong>抽象类是包含纯虚函数的类</strong>，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
@@ -476,7 +479,8 @@
 <li><p>移动构造函数（Move Constructor）：C++11引入的特性，用于实现对象的移动语义。移动构造函数通过接管另一个对象的资源而避免进行深拷贝，提高了性能。</p>
 </li>
 </ol>
-<h3 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h3><h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><h3 id="stl底层实现"><a href="#stl底层实现" class="headerlink" title="stl底层实现"></a><strong>stl底层实现</strong></h3><p>vector：数组</p>
+<h3 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h3><p>传入右值，直接浅拷贝，右值用std::move来生成</p>
+<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><h3 id="stl底层实现"><a href="#stl底层实现" class="headerlink" title="stl底层实现"></a><strong>stl底层实现</strong></h3><p>vector：数组</p>
 <p>Dequeue（双端队列）：二维数组</p>
 <p>List：环状双向链表</p>
 <p>set（集合）：平衡的红黑树</p>
@@ -501,8 +505,20 @@
 <p><strong>优点</strong></p>
 <ol>
 <li>代码装载速度快，执行速度比动态链接库略快</li>
-<li>只需要开发者有lib就行，</li>
+<li>只需要开发者有lib就行，不需要考虑用户电脑上有无lib。</li>
 </ol>
+<p><strong>缺点</strong></p>
+<p>生成的体积较大，包含相同的公共代码，造成浪费</p>
+<p><strong>动态库</strong></p>
+<p><strong>优点</strong></p>
+<ol>
+<li>节省内存</li>
+<li>dll和exe独立，更换dll就可以改变函数内容，提高可维护性和可拓展性</li>
+<li>不同编程语言只要按照函数调用约定可以用同一个dll</li>
+<li>耦合度小，开发过程独立</li>
+</ol>
+<p><strong>缺点</strong></p>
+<p>用户电脑里面需要有dll</p>
 <h1 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h1><h2 id="关键字-1"><a href="#关键字-1" class="headerlink" title="关键字"></a>关键字</h2><h3 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h3><p>在C#中，unsafe 关键字用于标识包含不安全代码块的上下文，允许直接使用指针和执行不安全的操作。</p>
 <p>优点：</p>
 <ol>
@@ -522,11 +538,12 @@
 <li><p>难以调试： 不安全的代码可能更难调试和定位错误，因为涉及到直接操作内存的技术细节。</p>
 </li>
 </ol>
+<h3 id="const和readonly有什么区别？"><a href="#const和readonly有什么区别？" class="headerlink" title="const和readonly有什么区别？"></a>const和readonly有什么区别？</h3><p>都可以标识一个常量。主要有以下区别：<br>1、初始化位置不同。const必须在声明的同时赋值；readonly即可以在声明处赋值;<br>2、修饰对象不同。const即可以修饰类的字段，也可以修饰局部变量；readonly只能修饰类的字段<br>3、const是编译时常量，在编译时确定该值；readonly是运行时常量，在运行时确定该值。<br>4、const默认是静态的；而readonly如果设置成静态需要显示声明<br>5、修饰引用类型时不同，const只能修饰string或值为null的其他引用类型；readonly可以是任何类型。</p>
 <h2 id="反射和特性"><a href="#反射和特性" class="headerlink" title="反射和特性"></a>反射和特性</h2><p>要用到特性就必须要用反射，比如说你要序列化一个类，如果直接写接口来实现，你不知道这个类有哪些属性，而且还要写很多不同的接口，但是用反射可以很优雅地实现，如下。</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c#"><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Serialize</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> obj</span>)</span><br>&#123;<br>     <span class="hljs-keyword">var</span> res = obj<br>         .GetType()<br>         .GetProperties(BindingFlag.Public | BindingFlags.Instance)<br>         .Where(pi =&gt;<br>                &#123;<br>                    <span class="hljs-keyword">var</span> attr = pi.GetCustomAttribute&lt;BrowsableAtrribute&gt;();<br>                    <span class="hljs-keyword">if</span>(attr <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> attr.Browable;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                &#125;)<br>         .Select(pi =&gt; <span class="hljs-keyword">new</span>&#123;Key = pi.Name, Value = pi.GetValue(obj)&#125;)<br>         .Select(o =&gt; <span class="hljs-string">$&quot;<span class="hljs-subst">&#123;o.Key&#125;</span> : <span class="hljs-subst">&#123;o.Value&#125;</span>&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.Join(Environment.NewLine, res);<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span><br>&#123;<br>    [<span class="hljs-meta">Browsable(false)</span>]<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> Id&#123;<span class="hljs-keyword">get</span>;<span class="hljs-keyword">set</span>;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h2><p>C#中定义的值类型包括原类型（Sbyte、Byte、Short、Ushort、Int、Uint、Long、Ulong、Char、Float、Double、Bool、Decimal）、枚举(enum)、结构(struct)，引用类型包括：类、数组、接口、委托、字符串等，引用型是在堆中分配内存，初始化为null，引用型是需要GARBAGE COLLECTION来回收内存的，值型不用，超出了作用范围，系统就会自动释放！</p>
-<h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2><h3 id="线程和进程和协程"><a href="#线程和进程和协程" class="headerlink" title="线程和进程和协程"></a>线程和进程和协程</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/279383752">Unity协程的原理与应用 - 宇亓的文章 - 知乎</a></p>
+<h2 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h2><h2 id="引用类型和值类型"><a href="#引用类型和值类型" class="headerlink" title="引用类型和值类型"></a>引用类型和值类型</h2><p>C#中定义的值类型包括原类型（Sbyte、Byte、Short、Ushort、Int、Uint、Long、Ulong、Char、Float、Double、Bool、Decimal）、枚举(enum)、结构(struct)，引用类型包括：类、数组、接口、委托、字符串等，引用型是在堆中分配内存，初始化为null，引用型是需要GARBAGE COLLECTION来回收内存的，值型不用，超出了作用范围，系统就会自动释放！</p>
+<h2 id="结构体和类区别"><a href="#结构体和类区别" class="headerlink" title="结构体和类区别"></a>结构体和类区别</h2><h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2><h3 id="线程和进程和协程"><a href="#线程和进程和协程" class="headerlink" title="线程和进程和协程"></a>线程和进程和协程</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/279383752">Unity协程的原理与应用 - 宇亓的文章 - 知乎</a></p>
 <p>（1）进程是运行时的程序，是系统进行资源分配和调度的基本单位，它实现了系统的并发；</p>
 <p>（2）线程是进程的子单位，也称为轻量级进程，它是CPU进行分配和调度的基本单位，也是独立运行的基本单位，它实现了进程内部的并发；</p>
 <p>（3）一个程序至少拥有一个进程，一个进程至少拥有一个线程，线程依赖于进程而存在；</p>
@@ -564,6 +581,12 @@
 <p>之后是内存保护，操作系统会给分配的进程页表有一些额外的标志，用于控制进程对内存的访问权限。</p>
 <p>之后是上下文切换，<strong>当操作系统切换到一个新的进程时，它会保存当前进程的页表以及其他的上下文信息，并加载下一个进程的页表</strong>。这样，每个进程在运行时拥有自己独立的虚拟地址空间，与其他进程的内存空间相隔离。</p>
 <p>通过虚拟内存机制，操作系统能够为每个进程提供独立的内存空间，<strong>无论是代码、数据还是堆栈，每个进程都认为自己独占系统的整个内存空间</strong>。这种内存隔离保证了每个进程的数据安全和保密性，并且允许操作系统有效地管理和保护进城间的内存使用</p>
+<h3 id="线程同步的方法"><a href="#线程同步的方法" class="headerlink" title="线程同步的方法"></a>线程同步的方法</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/461063930">线程同步的几种方式 - TOMOCAT的文章 - 知乎</a></p>
+<p>同步指的是按一定的顺序依次执行</p>
+<p><strong>互斥锁</strong></p>
+<p><strong>读写锁</strong></p>
+<p><strong>条件变量</strong></p>
+<p><strong>信号量</strong></p>
 <h1 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="tcp和udp的区别"><a href="#tcp和udp的区别" class="headerlink" title="tcp和udp的区别"></a>tcp和udp的区别</h3><p>（1）TCP是传输控制协议，UDP是用户数据报协议；</p>
 <p>（2）TCP是面向连接的，可靠的数据传输协议，它要通过三次握手来建立连接，UDP是无连接的，不可靠的数据传输协议，采取尽力而为的策略，不保证接收方一定能收到正确的数据；</p>
 <p>（3）TCP面向的是字节流，UDP面向的是数据报；</p>
@@ -689,9 +712,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-%E5%88%B7%E9%A2%98%E8%AF%AD%E6%B3%95%E5%92%8C%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%9D%E8%B7%AF/" title="C++刷题语法">
+                      <a href="/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-%E5%88%B7%E9%A2%98%E8%AF%AD%E6%B3%95%E5%92%8C%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%9D%E8%B7%AF/" title="面经-刷题语法和一些经典算法题思路">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++刷题语法</span>
+                        <span class="hidden-mobile">面经-刷题语法和一些经典算法题思路</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

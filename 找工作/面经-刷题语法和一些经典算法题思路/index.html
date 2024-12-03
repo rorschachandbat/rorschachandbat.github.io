@@ -16,15 +16,15 @@
   <meta name="author" content="R">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分割分号   stringstream ss(s);   while(getline(ss,t,’;’)) 正则 ​    string temp &#x3D; t.substr(1); ​    if(regex_match(temp, regex(“[0-9]*”))){ } cout输出格式   cout &lt;&lt; setiosflags(ios::fixed);   cout.pr">
+    <meta name="description" content="语法分割分号   stringstream ss(s);   while(getline(ss,t,’;’)) 正则 ​    string temp &#x3D; t.substr(1); ​    if(regex_match(temp, regex(“[0-9]*”))){ } cout输出格式   cout &lt;&lt; setiosflags(ios::fixed);   cout.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++刷题语法">
+<meta property="og:title" content="面经-刷题语法和一些经典算法题思路">
 <meta property="og:url" content="https://rorschachandbat.github.io/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-%E5%88%B7%E9%A2%98%E8%AF%AD%E6%B3%95%E5%92%8C%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%9D%E8%B7%AF/index.html">
 <meta property="og:site_name" content="R">
-<meta property="og:description" content="分割分号   stringstream ss(s);   while(getline(ss,t,’;’)) 正则 ​    string temp &#x3D; t.substr(1); ​    if(regex_match(temp, regex(“[0-9]*”))){ } cout输出格式   cout &lt;&lt; setiosflags(ios::fixed);   cout.pr">
+<meta property="og:description" content="语法分割分号   stringstream ss(s);   while(getline(ss,t,’;’)) 正则 ​    string temp &#x3D; t.substr(1); ​    if(regex_match(temp, regex(“[0-9]*”))){ } cout输出格式   cout &lt;&lt; setiosflags(ios::fixed);   cout.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-19T01:59:25.253Z">
+<meta property="article:modified_time" content="2024-11-30T06:37:52.491Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>C++刷题语法 - R</title>
+  <title>面经-刷题语法和一些经典算法题思路 - R</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -264,7 +264,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C++刷题语法"></span>
+            <span id="subtitle" data-typed-text="面经-刷题语法和一些经典算法题思路"></span>
           
         </div>
 
@@ -287,7 +287,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          179 字
+          2.2k 字
         
       </span>
     
@@ -298,7 +298,7 @@
         
         
         
-          2 分钟
+          19 分钟
         
       </span>
     
@@ -344,12 +344,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C++刷题语法</h1>
+            <h1 style="display: none">面经-刷题语法和一些经典算法题思路</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月19日 上午
+                    本文最后更新于：2024年11月30日 下午
                   
                 
               </p>
@@ -357,7 +357,7 @@
             
               <div class="markdown-body">
                 
-                <p><strong>分割分号</strong></p>
+                <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p><strong>分割分号</strong></p>
 <p>  stringstream ss(s);</p>
 <p>  while(getline(ss,t,’;’))</p>
 <p><strong>正则</strong></p>
@@ -367,6 +367,25 @@
 <p><strong>cout输出格式</strong></p>
 <p>  cout &lt;&lt; setiosflags(ios::fixed);</p>
 <p>  cout.precision(2);   </p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a><strong>二分查找</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Binary</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; ary, <span class="hljs-type">int</span> target)</span></span>&#123;<br>    <span class="hljs-type">int</span> n = ary.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> mid;<br>    <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>        mid = (left + right) / <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> m = ary[mid];<br>        <span class="hljs-keyword">if</span>(m==target) <span class="hljs-keyword">return</span> mid;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(m&lt;target) left = mid + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> right = mid - <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a><strong>快排</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,a[<span class="hljs-number">1000001</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">qsort</span><span class="hljs-params">(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span><span class="hljs-comment">//应用二分思想</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> mid=a[(l+r)/<span class="hljs-number">2</span>];<span class="hljs-comment">//中间数</span><br>    <span class="hljs-type">int</span> i=l,j=r;<br>    <span class="hljs-keyword">do</span>&#123;<br>        <span class="hljs-keyword">while</span>(a[i]&lt;mid) i++;<span class="hljs-comment">//查找左半部分比中间数大的数</span><br>        <span class="hljs-keyword">while</span>(a[j]&gt;mid) j--;<span class="hljs-comment">//查找右半部分比中间数小的数</span><br>        <span class="hljs-keyword">if</span>(i&lt;=j)<span class="hljs-comment">//如果有一组不满足排序条件（左小右大）的数</span><br>        &#123;<br>            <span class="hljs-built_in">swap</span>(a[i],a[j]);<span class="hljs-comment">//交换</span><br>            i++;<br>            j--;<br>        &#125;<br>    &#125;<span class="hljs-keyword">while</span>(i&lt;=j);<span class="hljs-comment">//这里注意要有=</span><br>    <span class="hljs-keyword">if</span>(l&lt;j) <span class="hljs-built_in">qsort</span>(l,j);<span class="hljs-comment">//递归搜索左半部分</span><br>    <span class="hljs-keyword">if</span>(i&lt;r) <span class="hljs-built_in">qsort</span>(i,r);<span class="hljs-comment">//递归搜索右半部分</span><br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];<br>    <span class="hljs-built_in">qsort</span>(<span class="hljs-number">1</span>,n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) cout&lt;&lt;a[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="椭球公式"><a href="#椭球公式" class="headerlink" title="椭球公式"></a><strong>椭球公式</strong></h2><p>x2 &#x2F; a2+y2 &#x2F; b2+z2 &#x2F; c2&#x3D;1。</p>
+<p>当x^2&#x2F;a^2+y^2&#x2F;b^2+z^2&#x2F;c^2&lt;1时　则点(x,y,z)在内部</p>
+<h2 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a><strong>反转链表</strong></h2><h2 id="删除导数第N个数"><a href="#删除导数第N个数" class="headerlink" title="删除导数第N个数"></a><strong>删除导数第N个数</strong></h2><p>总体很简单，有两个特殊的需要注意，第一是只有一个数或者零个数，第二个是需要删除的是第一个数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span>(!head || !head -&gt; next) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<span class="hljs-comment">//判断是否只有一个数或者零个数</span><br>ListNode* first = head;<br>ListNode* second = head;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i&lt;n;i++) second = second-&gt;next;<br><span class="hljs-keyword">if</span>(!second) <span class="hljs-keyword">return</span> head-&gt;next; <span class="hljs-comment">//判断是否要删的是第一个数，因为你要是走完发现走到了尽头就说明倒数第N个数是开头，那么久直接返回head-&gt;next就行，用源代码会有bug</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="高精度加法"><a href="#高精度加法" class="headerlink" title="高精度加法"></a><strong>高精度加法</strong></h2><p>一个很妙的不用判断进位并且前面0的处理方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(n1&gt;=<span class="hljs-number">0</span> || n2&gt;=<span class="hljs-number">0</span> || jw)&#123;<br>    <span class="hljs-type">int</span> x = n1 &gt;= <span class="hljs-number">0</span> ? num1[n1] - <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> y = n2 &gt;= <span class="hljs-number">0</span> ? num2[n2] - <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="n变成1"><a href="#n变成1" class="headerlink" title="n变成1"></a><strong>n变成1</strong></h2><p>n如果是奇数就变成n-1或者n+1，如果是偶数就变成n&#x2F;2</p>
+<p>用动态规划</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">vector&lt;<span class="hljs-type">int</span>&gt; dp;<br>dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>dp[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>;i&lt;n;i++)&#123;<br>    <span class="hljs-keyword">if</span>(i%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>) dp[i] = dp[i/<span class="hljs-number">2</span>] +<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> dp[i] = <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>],dp[i+<span class="hljs-number">1</span>]) + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">return</span> dp[n];<br></code></pre></td></tr></table></figure>
+
+<h2 id="寻找第k大"><a href="#寻找第k大" class="headerlink" title="寻找第k大"></a><strong>寻找第k大</strong></h2><p>（1）基于快排，每轮划分选择一个基准值，把比它小的数放在左边，大的放在右边，函数返回基准值的位置，如果该位置恰好是K，就说明了这是第K小的数，所以从0-基准值位置的数是序列中的前K小数。若返回基准值的位置小于或者大于K，再进行相应调整：如果返回的基准值大于k，在基准值左边序列查找，如果小于，在基准值右边进行查找。递归地进行快排，直到返回的结果&#x3D;K；时间复杂度为O(n)。</p>
+<p>（2）基于堆排序，求前K个最小的数用最大顶堆，求前K个最大的数用最小顶堆。以最大顶堆为例，要维护一个大小为K的顶堆，就是先将K个数插入堆中，随后，对每一个数，与堆顶的最大元素比较，若该数比堆顶元素小，则替换掉堆顶元素，然后调整堆，若大于堆顶元素，则不管，那么将所有元素比较和插入后，该堆维护的就是最小的K个数。求前k小的数用最大顶堆的目的(原理）：这是一种局部淘汰的思想，尽量的把小的数都放在堆中，最后使得即使堆中最大的数，也比外界的所有数都小，就达到了目的。</p>
+<h2 id="洗牌算法"><a href="#洗牌算法" class="headerlink" title="洗牌算法"></a><strong>洗牌算法</strong></h2><p>遍历1到n，生成一个随机数，然后把当前位置的和生成位置的交换，复杂度O（n）</p>
 
                 
               </div>
@@ -405,7 +424,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C++刷题语法</div>
+      <div>面经-刷题语法和一些经典算法题思路</div>
       <div>https://rorschachandbat.github.io/找工作/面经-刷题语法和一些经典算法题思路/</div>
     </div>
     <div class="license-meta">
