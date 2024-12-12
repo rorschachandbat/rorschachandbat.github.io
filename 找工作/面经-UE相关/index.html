@@ -24,7 +24,7 @@
 <meta property="og:description" content="UE知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-06T02:17:10.445Z">
+<meta property="article:modified_time" content="2024-12-12T03:47:51.000Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -287,7 +287,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          5.2k 字
         
       </span>
     
@@ -298,7 +298,7 @@
         
         
         
-          34 分钟
+          44 分钟
         
       </span>
     
@@ -349,7 +349,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月6日 上午
+                    本文最后更新于：2024年12月12日 中午
                   
                 
               </p>
@@ -588,6 +588,27 @@
 </tr>
 </tbody></table>
 <h1 id="PUERTS"><a href="#PUERTS" class="headerlink" title="PUERTS"></a>PUERTS</h1><h1 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h1><h1 id="ts和js有什么区别"><a href="#ts和js有什么区别" class="headerlink" title="ts和js有什么区别"></a>ts和js有什么区别</h1><h1 id="函数压栈的过程"><a href="#函数压栈的过程" class="headerlink" title="函数压栈的过程"></a>函数压栈的过程</h1><h1 id="四元数和欧拉角"><a href="#四元数和欧拉角" class="headerlink" title="四元数和欧拉角"></a>四元数和欧拉角</h1><h1 id="如何判断在凸多边形的内部还是外部"><a href="#如何判断在凸多边形的内部还是外部" class="headerlink" title="如何判断在凸多边形的内部还是外部"></a>如何判断在凸多边形的内部还是外部</h1><h1 id="如何做一个反弹的手榴弹"><a href="#如何做一个反弹的手榴弹" class="headerlink" title="如何做一个反弹的手榴弹"></a>如何做一个反弹的手榴弹</h1><p>成就系统怎么做</p>
+<p>光照与阴影</p>
+<p>材质系统</p>
+<p>特效</p>
+<p>动画系统</p>
+<h1 id="程序化生成"><a href="#程序化生成" class="headerlink" title="程序化生成"></a>程序化生成</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/434028533">【UE5】给Landscape加一点料-地形篇（零）-前前言 - 徐凯鸣的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MRNFcywkUSA&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3&index=3">Procedural Landmass Generation Youtube</a></p>
+<p>地形编辑</p>
+<p>Houdini</p>
+<h1 id="自定义编辑器FAssetEditorToolkit"><a href="#自定义编辑器FAssetEditorToolkit" class="headerlink" title="自定义编辑器FAssetEditorToolkit"></a>自定义编辑器FAssetEditorToolkit</h1><h3 id="3-1-InitCustomAssetEditor方法："><a href="#3-1-InitCustomAssetEditor方法：" class="headerlink" title="3.1 InitCustomAssetEditor方法："></a><strong>3.1 InitCustomAssetEditor方法：</strong></h3><p>在此方法中，主要分为两个内容：<br><strong>① 初始化编辑器布局，可以使用以下步骤：</strong></p>
+<ol>
+<li>通过创建适当类的实例并设置其属性来定义自定义 FLayout、菜单和工具栏。</li>
+<li>自定义 Slate 窗口现在将绑定到 TabManager，并使用自定义 FLayout、菜单和工具栏显示资产编辑器。</li>
+</ol>
+<p><strong>② 调用父类方法InitAssetEditor将自定义 Slate 窗口绑定到 TabManager。</strong></p>
+<h3 id="3-2-RegistorTabSpawners-x2F-UnRegistorTabSpawner方法："><a href="#3-2-RegistorTabSpawners-x2F-UnRegistorTabSpawner方法：" class="headerlink" title="3.2 RegistorTabSpawners&#x2F;UnRegistorTabSpawner方法："></a>3.2 RegistorTabSpawners&#x2F;UnRegistorTabSpawner方法：</h3><p>+ 我们首先需要知道，Tab(SDockTab)是引擎定义的一个控件类，每一个Tab都是可以被关闭或打开的SWidget.Tab类型的窗口右上角包含一个关闭按钮。窗口内则可以包含自定义显示的各种Slate内容。</p>
+<p>+ 我们打开编辑器时，就会根据Layout布局加载对应的Tab控件，并显示其中的内容，即Tab装入的子控件(Child Slate)。</p>
+<p>+ 在此方法中，最重要的是调用TabManager对象，TabManager类主要用于管理编辑器中的布局，创建Tab对象。在类中我们需要定义一个FName类型的TabID变量，用于在该方法中指示一个Slate窗口。我们需要通过调用TabManager的方法RegisterTabSpawner绑定TabID和Slate，用于后续定义Slate控件的显示。</p>
+<h3 id="3-3-SpawnTab-CustomWidget方法"><a href="#3-3-SpawnTab-CustomWidget方法" class="headerlink" title="3.3 SpawnTab_CustomWidget方法"></a>3.3 SpawnTab_CustomWidget方法</h3><p>在此方法中，将会创建并返回一个SWidget实例。<br>而RegistorTabSpawner方法通过调用TabManager的接口，将该Slate控件实例注册，与TabID进行绑定，并能够在InitCustomAssetEditor方法中添加到布局Flayout中被显示出来。<br>我们不仅可以创建简单的Slate控件（如SButton、IDetailsViews）,也可以创建较为复杂的窗口，如SEditorViewport(3D预览窗口)、SGraphEditor(可以连接复杂自定义的节点<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=222180537&content_type=Article&match_order=1&q=%E5%9B%BE%E8%A1%A8%E7%B3%BB%E7%BB%9F&zhida_source=entity">图表系统</a>)等内容，并将其添加到我们的自定义编辑器中。<br>在本文实例中，我在该方法中创建了一个最简单的Slate类SButton。</p>
+<h1 id="分型布朗运动-Fractal-Brownian-Motion"><a href="#分型布朗运动-Fractal-Brownian-Motion" class="headerlink" title="分型布朗运动 - Fractal Brownian Motion"></a><strong>分型布朗运动 - Fractal Brownian Motion</strong></h1><h1 id="模拟云"><a href="#模拟云" class="headerlink" title="模拟云"></a>模拟云</h1><p>Worley Noise</p>
+<p>在空间中随机随便放点，然后计算最近的点的距离，为了连续，把这个的点放八个地方</p>
+<h1 id="虚幻渲染编程"><a href="#虚幻渲染编程" class="headerlink" title="虚幻渲染编程"></a>虚幻渲染编程</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36675543">虚幻4渲染编程专题概述及目录 - YivanLee的文章 - 知乎</a></p>
 
                 
               </div>

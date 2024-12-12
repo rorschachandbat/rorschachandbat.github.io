@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-06T02:17:10.598Z">
+<meta property="article:modified_time" content="2024-12-12T03:47:51.123Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
@@ -291,7 +291,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k 字
+          13k 字
         
       </span>
     
@@ -302,7 +302,7 @@
         
         
         
-          95 分钟
+          105 分钟
         
       </span>
     
@@ -353,7 +353,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月6日 上午
+                    本文最后更新于：2024年12月12日 中午
                   
                 
               </p>
@@ -420,7 +420,18 @@
 <p>为了确保两个不同对象的地址不同，必须如此。</p>
 <p>类的实例化是在内存中分配⼀块地址，每个实例在内存中都有独⼀⽆⼆的地址。 </p>
 <p>同样，空类也会实例化，所以编译器会给空类隐含的添加⼀个字节，这样空类实例化后就有独⼀⽆⼆的地址了。 </p>
-<p>所以，空类的sizeof为1，⽽不是0。 </p>
+<p>所以，空类的sizeof为1，⽽不是0。</p>
+<h3 id="strlen"><a href="#strlen" class="headerlink" title="strlen"></a>strlen</h3><p>不会计算字符串最末尾的’&#x2F;0’，sizeof会计算</p>
+<h3 id="pragma-pack"><a href="#pragma-pack" class="headerlink" title="#pragma pack()"></a>#pragma pack()</h3><p>#pragma pack()不带参数时，可以取消之前自定义的字节对齐方式，恢复默认的自然对齐。</p>
+<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><p>int i &#x3D; (int)p; 等同于 int i &#x3D; static_cast<int>(p);</p>
+<p>(int)p是C风格的强制类型转换</p>
+<p>static_cast<int>(p)是C++的类型转换</p>
+<p>对于指针到整数的转换，使用static_cast</p>
+<p>各种类型转换：</p>
+<p>const_cast：去除const属性</p>
+<p>dynamic_cast：安全的向下转型</p>
+<p>static_cast：编译时静态转换</p>
+<p>reinterpret_cast：重新解释底层内存</p>
 <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="C-如何实现反射？"><a href="#C-如何实现反射？" class="headerlink" title="C++如何实现反射？"></a>C++如何实现反射？</h3><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用和指针的区别？从底层角度考虑"><a href="#引用和指针的区别？从底层角度考虑" class="headerlink" title="引用和指针的区别？从底层角度考虑"></a>引用和指针的区别？从底层角度考虑</h3><p>引用必须初始化，不能改变引用的指向，从汇编的角度来看，引用就是一个const指针</p>
 <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h3 id="C-中的智能指针有哪些，各自有什么作用"><a href="#C-中的智能指针有哪些，各自有什么作用" class="headerlink" title="C++中的智能指针有哪些，各自有什么作用?"></a>C++中的智能指针有哪些，各自有什么作用?</h3><p><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/SaXIX">C++智能指针weak_ptr详解</a></p>
 <p>智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)：</p>
@@ -489,8 +500,25 @@
 <p>unordered_map：散列表（哈希表）</p>
 <p><strong>而C++ STL 标准库中，不仅是 unordered_map 容器，所有无序容器的底层实现都采用的是哈希表存储结构。更准确地说，是用“链地址法”（又称“开链法”）解决数据存储位置发生冲突的哈希表。</strong></p>
 <h3 id="哈希表原理"><a href="#哈希表原理" class="headerlink" title="哈希表原理"></a>哈希表原理</h3><p>首先是哈希函数，就是把一个长的二级制数据转换成一个短的二进制数据的函数；然后就是解决哈希冲突的方法，常见的有开放寻址法和链表法，前者是通过探测并占用下一个可用的存储位置，后者是在冲突的位置用链表记录多个值。</p>
-<h2 id="编译问题"><a href="#编译问题" class="headerlink" title="编译问题"></a>编译问题</h2><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>（1）预处理阶段处理头文件包含关系，对预编译命令进行替换，生成预编译文件；</p>
-<p>（2）编译阶段将预编译文件编译，生成汇编文件（编译的过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码)；</p>
+<h1 id="模板编程"><a href="#模板编程" class="headerlink" title="模板编程"></a>模板编程</h1><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>有三种类型</p>
+<p>模板实际上分为三类：</p>
+<p>类型模板参数（类型模板）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123; &#125;;<br></code></pre></td></tr></table></figure>
+
+<p>非类型模板参数（常量模板）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-type">int</span> Size&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Array</span> &#123; &#125;;<br></code></pre></td></tr></table></figure>
+
+<p>模板模板参数（模板的模板参数）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span>&gt; <span class="hljs-keyword">class</span> <span class="hljs-title class_">Container</span>&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123; &#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="应用示例"><a href="#应用示例" class="headerlink" title="应用示例"></a>应用示例</h2><h3 id="类型模板参数（通用游戏对象）"><a href="#类型模板参数（通用游戏对象）" class="headerlink" title="类型模板参数（通用游戏对象）"></a>类型模板参数（通用游戏对象）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GameObject</span> &#123;<br>    T position;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">move</span><span class="hljs-params">(T delta)</span> </span>&#123;<br>        position += delta;<br>    &#125;<br>&#125;;<br><br><span class="hljs-comment">// 可以用于不同类型的位置表示</span><br>GameObject&lt;Vector2&gt; player;<br>GameObject&lt;Vector3&gt; enemy3D;<br></code></pre></td></tr></table></figure>
+
+<h3 id="非类型模板参数（固定大小游戏数组）"><a href="#非类型模板参数（固定大小游戏数组）" class="headerlink" title="非类型模板参数（固定大小游戏数组）"></a>非类型模板参数（固定大小游戏数组）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-type">int</span> MaxUnits = <span class="hljs-number">100</span>&gt;<br><span class="hljs-keyword">class</span> ArmyManager &#123;<br>    Unit units[MaxUnits];<br>    <span class="hljs-type">int</span> currentUnitCount = <span class="hljs-number">0</span>;<br>&#125;;<br><br><span class="hljs-comment">// 编译期确定最大单位数</span><br>ArmyManager&lt;<span class="hljs-number">50</span>&gt; smallArmy;<br>ArmyManager&lt;<span class="hljs-number">200</span>&gt; largeArmy;<br></code></pre></td></tr></table></figure>
+
+<h3 id="模板模板参数（容器策略）"><a href="#模板模板参数（容器策略）" class="headerlink" title="模板模板参数（容器策略）"></a>模板模板参数（容器策略）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span>&gt; <span class="hljs-keyword">class</span> <span class="hljs-title class_">Container</span>&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Inventory</span> &#123;<br>    Container&lt;T&gt; items;<br>&#125;;<br><br><span class="hljs-comment">// 可以使用不同容器</span><br>Inventory&lt;Weapon, vector&gt; playerWeapons;<br>Inventory&lt;Weapon, list&gt; backupWeapons;<br></code></pre></td></tr></table></figure>
+
+<h1 id="编译问题"><a href="#编译问题" class="headerlink" title="编译问题"></a>编译问题</h1><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>（1）预处理阶段处理头文件包含关系，对预编译命令进行替换，生成预编译文件；包括展开宏定义，处理条件编译指令，包含头文件</p>
+<p>（2）编译阶段将预编译文件编译，删除注释，生成汇编文件（编译的过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码)；</p>
 <p>（3）汇编阶段将汇编文件转换成机器码，生成可重定位目标文件（.obj文件）（汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可）；</p>
 <p>（4）链接阶段，将多个目标文件和所需要的库连接成可执行文件（.exe文件）</p>
 <h3 id="＃include-lt-file-h-gt-与-＃include-“file-h”的区别？"><a href="#＃include-lt-file-h-gt-与-＃include-“file-h”的区别？" class="headerlink" title="＃include&lt;file.h&gt; 与 ＃include “file.h”的区别？"></a>＃include&lt;file.h&gt; 与 ＃include “file.h”的区别？</h3><p>前者从标准库查找寻找和引用file.h，后者从当前路径寻找和引用</p>
