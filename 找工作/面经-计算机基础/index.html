@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-13T06:52:30.817Z">
+<meta property="article:modified_time" content="2024-12-18T15:57:27.672Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
@@ -291,7 +291,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k 字
+          15k 字
         
       </span>
     
@@ -302,7 +302,7 @@
         
         
         
-          105 分钟
+          122 分钟
         
       </span>
     
@@ -353,7 +353,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月13日 下午
+                    本文最后更新于：2024年12月18日 晚上
                   
                 
               </p>
@@ -450,6 +450,37 @@
 <p>动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。<br>动态多态是在虚函数的基础上实现的，而实现的条件有：<br>(1) 在类中声明为虚函数</p>
 <p>(2) 函数的函数名，返回值，函数参数个数，参数类型，全都与基类的所声明的虚函数相同（否则是函数重载的条件）</p>
 <p>(3) 将子类对象的指针（或以引用形式）赋值给父类对象的指针（或引用），再用该指向父类对象的指针（或引用）调用虚函数<br>如此，便可以实现动态多态，程序会按照实际对象类型来选择要实行的函数具体时哪一个。</p>
+<h2 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/688090551">C++11、C++14、C++17、C++20新特性总结 - cpp后端技术的文章 - 知乎</a></p>
+<h3 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h3><h3 id="C-11使用using定义别名（替代typedef）"><a href="#C-11使用using定义别名（替代typedef）" class="headerlink" title="C++11使用using定义别名（替代typedef）"></a>C++11使用using定义别名（替代typedef）</h3><h3 id="函数模板的更改"><a href="#函数模板的更改" class="headerlink" title="函数模板的更改"></a>函数模板的更改</h3><p>支持默认参数</p>
+<p>支持可变参数</p>
+<h3 id="元组tuple"><a href="#元组tuple" class="headerlink" title="元组tuple"></a>元组tuple</h3><p>新的std</p>
+<p>tuple 最大的特点是：实例化的对象可以存储任意数量、任意类型的数据。</p>
+<p>tuple 的应用场景很广泛，例如当需要存储多个不同类型的元素时，可以使用 tuple；当函数需要返回多个数据时，可以将这些数据存储在 tuple 中，函数只需返回一个 tuple 对象即可。</p>
+<h3 id="lamda表达式"><a href="#lamda表达式" class="headerlink" title="lamda表达式"></a>lamda表达式</h3><p>Lambda可以很方便的定义函数列表的个数，以及获取方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++">[] 什么也不捕获，无法lambda函数体使用任何<br><br>[=] 按值的方式捕获所有变量<br><br>[&amp;] 按引用的方式捕获所有变量<br><br>[=, &amp;a] 除了变量a之外，按值的方式捕获所有局部变量，变量a使用引用的方式来捕获。这里可以按引用捕获多个，例如 [=, &amp;a, &amp;b,&amp;c]。这里注意，如果前面加了=，后面加的具体的参数必须以引用的方式来捕获，否则会报错。<br><br>[&amp;, a] 除了变量a之外，按引用的方式捕获所有局部变量，变量a使用值的方式来捕获。这里后面的参数也可以多个，例如 [&amp;, a, b, c]。这里注意，如果前面加了&amp;，后面加的具体的参数必须以值的方式来捕获。<br><br>[a, &amp;b] 以值的方式捕获a，引用的方式捕获b，也可以捕获多个。<br><br>[<span class="hljs-keyword">this</span>] 在成员函数中，也可以直接捕获<span class="hljs-keyword">this</span>指针，其实在成员函数中，[=]和[&amp;]也会捕获<span class="hljs-keyword">this</span>指针。<br></code></pre></td></tr></table></figure>
+
+<p>如果想要修改外部变量，可以用mutable，但是也只是修改拷贝的那一份变量，真正外部不会修改</p>
+<h3 id="for循环的新方式"><a href="#for循环的新方式" class="headerlink" title="for循环的新方式"></a>for循环的新方式</h3><p>之前只能三段式，现在可以直接auto来for循环</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">char</span> arc[] = <span class="hljs-string">&quot;http://c.biancheng.net/cplus/11/&quot;</span>;<br>    <span class="hljs-comment">//for循环遍历普通数组</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> ch : arc) &#123;<br>        cout &lt;&lt; ch;<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&#x27;!&#x27;</span> &lt;&lt; endl;<br>    vector&lt;<span class="hljs-type">char</span>&gt;<span class="hljs-built_in">myvector</span>(arc, arc + <span class="hljs-number">23</span>);<br>    <span class="hljs-comment">//for循环遍历 vector 容器</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> ch : myvector) &#123;<br>        cout &lt;&lt; ch;<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&#x27;!&#x27;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 1)</span><br><span class="hljs-type">int</span> url[<span class="hljs-number">10</span>];<span class="hljs-comment">//正确</span><br><span class="hljs-comment">// 2)</span><br><span class="hljs-type">int</span> url[<span class="hljs-number">6</span> + <span class="hljs-number">4</span>];<span class="hljs-comment">//正确</span><br><span class="hljs-comment">// 3)</span><br><span class="hljs-type">int</span> length = <span class="hljs-number">6</span>;<br><span class="hljs-type">int</span> url[length];<span class="hljs-comment">//错误，length是变量</span><br></code></pre></td></tr></table></figure>
+
+<p>C++ 程序的执行过程大致要经历编译、链接、运行这 3 个阶段。常量表达式和非常量表达式的计算时机不同，非常量表达式只能在程序运行阶段计算出结果；而常量表达式的计算往往发生在程序的编译阶段，这可以极大提高程序的执行效率，因为表达式只需要在编译阶段计算一次，节省了每次程序运行时都需要计算一次的时间。</p>
+<h4 id="constexpr修饰普通变量"><a href="#constexpr修饰普通变量" class="headerlink" title="constexpr修饰普通变量"></a>constexpr修饰普通变量</h4><p>C++11 标准中，定义变量时可以用 constexpr 修饰，从而使该变量获得在编译阶段即可计算出结果的能力。</p>
+<h4 id="constexpr修饰函数"><a href="#constexpr修饰函数" class="headerlink" title="constexpr修饰函数"></a>constexpr修饰函数</h4><p>constexpr 还可以用于修饰函数的返回值，这样的函数又称为“常量表达式函数”。</p>
+<p>注意，constexpr 并非可以修改任意函数的返回值。换句话说，一个函数要想成为常量表达式函数，必须满足如下 4 个条件。</p>
+<p>1.整个函数的函数体中，除了可以包含 using 指令、typedef 语句以及 static_assert 断言外，只能包含一条 return 返回语句。</p>
+<h4 id="const"><a href="#const" class="headerlink" title="const"></a>const</h4><p>const最好只用来用作只读的作用，要注意只读不意味不可以修改，可以通过其他的来改</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包是当外部函数返回内部函数时，内部函数随后在不同的范围内执行，内部函数继续保持对外部函数变量的访问，即使外部函数不再存在。</p>
+<p>就比如一个function再套一个function</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">hello</span>(<span class="hljs-params"></span>) &#123;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`hello <span class="hljs-subst">$&#123;item&#125;</span>`</span>);<br>    &#125;;<br>&#125;<br><br><span class="hljs-keyword">const</span> helloWorld = <span class="hljs-title function_">hello</span>();<br><br><span class="hljs-title function_">helloWorld</span>(<span class="hljs-string">&#x27;world&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h2><h3 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h3><p>1.定义一个函数(outer)，该函数存在声明的局部变量(b)</p>
+<p>2.该函数的返回值也是一个函数(inner)</p>
+<p>3.返回的函数(inner)调用了该函数声明的局部变量(b)</p>
+<p>4.该函数被调用(outer)</p>
 <h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23971699/answer/2358595798">c++虚函数的作用是什么？ - 心试的回答 - 知乎</a></p>
 <p>每个子类会生成一个虚函数表，根据这个子类有无重写父类的虚函数，重写了会覆盖对应的内存空间</p>
 <p>一个继承一个比较好理解，一个继承了多个可以看下面的图</p>
