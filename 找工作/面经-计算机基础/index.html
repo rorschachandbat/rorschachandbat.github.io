@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-18T16:23:49.423Z">
+<meta property="article:modified_time" content="2024-12-20T06:45:30.049Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
@@ -291,7 +291,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          16k 字
         
       </span>
     
@@ -302,7 +302,7 @@
         
         
         
-          122 分钟
+          131 分钟
         
       </span>
     
@@ -353,7 +353,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月19日 凌晨
+                    本文最后更新于：2024年12月20日 下午
                   
                 
               </p>
@@ -432,7 +432,7 @@
 <p>dynamic_cast：安全的向下转型</p>
 <p>static_cast：编译时静态转换</p>
 <p>reinterpret_cast：重新解释底层内存</p>
-<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="C-如何实现反射？"><a href="#C-如何实现反射？" class="headerlink" title="C++如何实现反射？"></a>C++如何实现反射？</h3><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用和指针的区别？从底层角度考虑"><a href="#引用和指针的区别？从底层角度考虑" class="headerlink" title="引用和指针的区别？从底层角度考虑"></a>引用和指针的区别？从底层角度考虑</h3><p>引用必须初始化，不能改变引用的指向，从汇编的角度来看，引用就是一个const指针</p>
+<h3 id="funture和promise"><a href="#funture和promise" class="headerlink" title="funture和promise"></a>funture和promise</h3><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="C-如何实现反射？"><a href="#C-如何实现反射？" class="headerlink" title="C++如何实现反射？"></a>C++如何实现反射？</h3><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用和指针的区别？从底层角度考虑"><a href="#引用和指针的区别？从底层角度考虑" class="headerlink" title="引用和指针的区别？从底层角度考虑"></a>引用和指针的区别？从底层角度考虑</h3><p>引用必须初始化，不能改变引用的指向，从汇编的角度来看，引用就是一个const指针</p>
 <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h3 id="C-中的智能指针有哪些，各自有什么作用"><a href="#C-中的智能指针有哪些，各自有什么作用" class="headerlink" title="C++中的智能指针有哪些，各自有什么作用?"></a>C++中的智能指针有哪些，各自有什么作用?</h3><p><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/SaXIX">C++智能指针weak_ptr详解</a></p>
 <p>智能指针主要解决一个内存泄露的问题，它可以自动地释放内存空间。因为它本身是一个类，当函数结束的时候会调用析构函数，并由析构函数释放内存空间。智能指针分为共享指针(shared_ptr), 独占指针(unique_ptr)和弱指针(weak_ptr)：</p>
 <p>（1）shared_ptr ，多个共享指针可以指向相同的对象，采用了引用计数的机制，当最后一个引用销毁时，释放内存空间；</p>
@@ -501,6 +501,15 @@
 <p>内联函数是为了在代码中直接展开，减少函数调用花费的代价，虚函数是为了在继承后对象能够准确的执行自己的动作，并且inline函数在编译时被展开，虚函数在运行时才能动态地绑定函数。</p>
 <h3 id="虚析构函数有什么作用？"><a href="#虚析构函数有什么作用？" class="headerlink" title="虚析构函数有什么作用？"></a>虚析构函数有什么作用？</h3><p>在Effective C++ 中，Scott Meyers在《条款07:为多态基类声明virtual析构函数》中提到，当derived class对象经由一个base class指针被删除，而该base class带着一个non-virtual析构函数，其结果未有定义——实际执行时通常发生的是对象的derived成分没有被销毁。也就是说，如果派生类继承了父类的情况下，如果父类的析构函数不是虚函数，而在使用中用了多态的写法，就会导致没有调用到派生类的析构函数，导致资源没有释放，造成泄漏。</p>
 <p>总的来说虚析构函数是为了避免内存泄露，而且是当子类中会有指针成员变量时才会使用得到的。也就说<strong>虚析构函数使得在删除指向子类对象的基类指针时可以调用子类的析构函数达到释放子类中堆内存的目的，而防止内存泄露的</strong>。<br> （1）<strong>如果父类的析构函数不加virtual关键字</strong><br> 当父类的析构函数不声明成虚析构函数的时候，当子类继承父类，父类的指针指向子类时，delete掉父类的指针，只调动父类的析构函数，而不调动子类的析构函数。<br> （2）<strong>如果父类的析构函数加virtual关键字</strong><br> 当父类的析构函数声明成虚析构函数的时候，当子类继承父类，父类的指针指向子类时，delete掉父类的指针，先调动子类的析构函数，再调动父类的析构函数。</p>
+<h3 id="一个指向nullptr的类能调用虚函数吗？"><a href="#一个指向nullptr的类能调用虚函数吗？" class="headerlink" title="一个指向nullptr的类能调用虚函数吗？"></a>一个指向nullptr的类能调用虚函数吗？</h3><p>这种情况</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span></span>&#123; cout&lt;&lt;<span class="hljs-string">&quot;f1&quot;</span>&lt;&lt;endl; &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span></span>&#123; cout&lt;&lt;<span class="hljs-string">&quot;f2&quot;</span>&lt;&lt;endl; &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f3</span><span class="hljs-params">()</span></span>&#123; cout&lt;&lt;num&lt;&lt;endl; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">f4</span><span class="hljs-params">()</span> </span>&#123;cout&lt;&lt;<span class="hljs-string">&quot;f4&quot;</span>&lt;&lt;endl; &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> num;<br>&#125;;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc,<span class="hljs-type">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>	A* pa = <span class="hljs-literal">NULL</span>;<br>	pa-&gt;<span class="hljs-built_in">f1</span>();	<span class="hljs-comment">//正常</span><br>	pa-&gt;<span class="hljs-built_in">f2</span>();   <span class="hljs-comment">//正常</span><br>	pa-&gt;<span class="hljs-built_in">f3</span>();   <span class="hljs-comment">//错误，提示段错误</span><br>	pa-&gt;<span class="hljs-built_in">f4</span>();   <span class="hljs-comment">//错误，提示段错误</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>不能，但是可以调用成员函数和static的成员函数（不能使用这个类的成员变量），因为成员函数地址已经确定了，和你的类其实是无关的，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">A *pa = <span class="hljs-literal">NULL</span>;<br>pa-&gt;<span class="hljs-built_in">func</span>(<span class="hljs-number">2</span>);<br><span class="hljs-comment">//在编译器看来就好像是 A_func(pa, 2);且pa==NULL</span><br>((A*)<span class="hljs-literal">NULL</span>)-&gt;<span class="hljs-built_in">func</span>(<span class="hljs-number">2</span>);<br><span class="hljs-comment">//在编译器看来就好像是 A_func( ((A*)NULL), 2);</span><br></code></pre></td></tr></table></figure>
+
+<p>类的成员函数并不与具体对象绑定，所有的对象共用同一份成员函数体，当程序被编译后，成员函数的地址即已确定，这份共有的成员函数体之所以能够把不同对象的数据区分开来，靠的是隐式传递给成员函数的this指针，成员函数中对成员变量的访问都是转化成”this-&gt;数据成员”的方式。因此，从这一角度说，成员函数与普通函数一样，只是多了一个隐式参数，即指向对象的this指针。而类的静态成员函数只能访问<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F&spm=1001.2101.3001.7020">静态成员变量</a>，不能访问非静态成员变量，所以静态成员函数不需要指向对象的this指针作为隐式参数。<br>有了上面的分析，就可以解释为什么空对象指针对f1, f2的调用成功，对f3的调用不成功。</p>
 <h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="内存空间有哪些分类？"><a href="#内存空间有哪些分类？" class="headerlink" title="内存空间有哪些分类？"></a>内存空间有哪些分类？</h3><p>（1）堆，使用malloc、free动态分配和释放空间，能分配较大的内存；</p>
 <p>（2）栈，为函数的局部变量分配内存，能分配较小的内存；</p>
 <p>（3）全局&#x2F;静态存储区，用于存储全局变量和静态变量；</p>
