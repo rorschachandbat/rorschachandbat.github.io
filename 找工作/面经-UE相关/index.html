@@ -24,8 +24,9 @@
 <meta property="og:description" content="UE知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://picx.zhimg.com/v2-21dde7f72b7b87f9133b60ab9190e5b5_r.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20241220222047918.png">
 <meta property="article:published_time" content="2024-12-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-20T06:45:29.948Z">
+<meta property="article:modified_time" content="2024-12-20T16:48:54.791Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://picx.zhimg.com/v2-21dde7f72b7b87f9133b60ab9190e5b5_r.jpg">
@@ -289,7 +290,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.2k 字
+          6.6k 字
         
       </span>
     
@@ -300,7 +301,7 @@
         
         
         
-          52 分钟
+          56 分钟
         
       </span>
     
@@ -351,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月20日 下午
+                    本文最后更新于：2024年12月21日 凌晨
                   
                 
               </p>
@@ -613,13 +614,16 @@
 <h1 id="虚幻渲染编程"><a href="#虚幻渲染编程" class="headerlink" title="虚幻渲染编程"></a>虚幻渲染编程</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36675543">虚幻4渲染编程专题概述及目录 - YivanLee的文章 - 知乎</a></p>
 <h1 id="GAS"><a href="#GAS" class="headerlink" title="GAS"></a>GAS</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486808688">【Unreal】虚幻GAS系统快速入门 - LunarMaxim的文章 - 知乎</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/DriedMachine/GASDocumentation5.3_CN">GAS Document中文翻译</a></p>
-<h2 id="1-2-Gameplay-Ability-System"><a href="#1-2-Gameplay-Ability-System" class="headerlink" title="1.2 Gameplay Ability System"></a>1.2 Gameplay Ability System</h2><p>GAS主要包含以下内容：</p>
+<h2 id="包括什么东西"><a href="#包括什么东西" class="headerlink" title="包括什么东西"></a>包括什么东西</h2><p>GAS主要包含以下内容：</p>
 <ul>
-<li>ASC(Ability System Component) 主要组件，由C++编写，代码里有很多方法是蓝图未实现的。</li>
-<li>GA(Gameplay Abilities) 角色的技能，包括攻击、疾跑、施法、翻滚、使用道具等，但不包括基础移动和UI</li>
-<li>AS(Attribute Set) 角色身上<strong>可以用float表示的属性</strong>，如生命值、体力值、魔力值等</li>
-<li>GE(Gameplay Effects) 用于<strong>修改属性</strong>，如增加50移动速度10s；还能配合GA实现更多玩法</li>
-<li>GC(Gameplay Cues) 播放特效、音效等</li>
+<li>Who:ASC(Ability System Component) 主要组件，由C++编写，代码里有很多方法是蓝图未实现的。</li>
+<li>How:GA(Gameplay Abilities) 角色的技能，包括攻击、疾跑、施法、翻滚、使用道具等，但不包括基础移动和UI</li>
+<li>What:AS(Attribute Set) 角色身上<strong>可以用float表示的属性</strong>，如生命值、体力值、魔力值等，有BaseValue和CurrentValue，方便回滚</li>
+<li>Change:GE(Gameplay Effects) 用于<strong>修改属性</strong>，如增加50移动速度10s；还能配合GA实现更多玩法</li>
+<li>Visual:GC(Gameplay Cues) 播放特效、音效等</li>
+<li>If:Tag:用来分类，底层是FName，用.来分隔</li>
+<li>Async：Task：如果想要异步的做一些东西，比如做完技能播一个蒙太奇，可以用这个来搞</li>
+<li>Send：Event:ASC之间通信</li>
 </ul>
 <h2 id="做冷却"><a href="#做冷却" class="headerlink" title="做冷却"></a>做冷却</h2><p>角色在启动的时候可以保存一个specAbility，然后拿一个他的handle。</p>
 <p>比如我想实现一个技能的冷却，其实就是做一个GE，然后这个GE启动的时候挂上在人物身上挂一个cooldown的tag，这个tag是有一个duration的，然后释放技能的时候加一个条件，有这个tag的时候无法释放，在ASC上面有一个Activation Blocked Tags，在里面加上刚刚搞的那个tag</p>
@@ -629,7 +633,25 @@
 <p><img src="https://picx.zhimg.com/v2-21dde7f72b7b87f9133b60ab9190e5b5_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h2 id="AsyncTask系统"><a href="#AsyncTask系统" class="headerlink" title="AsyncTask系统"></a>AsyncTask系统</h2><h2 id="TaskGraph系统"><a href="#TaskGraph系统" class="headerlink" title="TaskGraph系统"></a>TaskGraph系统</h2><p>Task Graph 系统是UE4一套抽象的异步任务处理系统，可以创建多个<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=7702163&content_type=Article&match_order=1&q=%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1&zhida_source=entity">多线程任务</a>，指定各个任务之间的依赖关系，按照该关系来依次处理任务。具体的实现方式网上也有很多案例，这里先给出UE4Wiki的教程链接：</p>
 <h1 id="网络同步"><a href="#网络同步" class="headerlink" title="网络同步"></a>网络同步</h1><p>《Exploring in UE4》关于网络同步的理解与思考[概念理解] - Jerish的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34721113">https://zhuanlan.zhihu.com/p/34721113</a></p>
+<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p>要将一个函数声明为 RPC，您只需将 <code>Server</code>、<code>Client</code> 或 <code>NetMulticast</code> 关键字添加到 <code>UFUNCTION</code> 声明。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">UFUNCTION</span>( Client )<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ClientRPCFunction</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="Root-Motion"><a href="#Root-Motion" class="headerlink" title="Root Motion"></a>Root Motion</h1><p>《Exploring in UE4》RootMotion详解【原理分析】 - Jerish的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/74554876">https://zhuanlan.zhihu.com/p/74554876</a></p>
+<h1 id="DS-专用服务器"><a href="#DS-专用服务器" class="headerlink" title="DS 专用服务器"></a>DS 专用服务器</h1><p><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/networking-overview-for-unreal-engine#%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">网络概述官方文档</a></p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mP4y1R7UR/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">【[UOD2022]虚幻DS的机遇与挑战 | 晶核 刘豪</a> </p>
+<p>NetworkPrediction</p>
+<h3 id="属性同步"><a href="#属性同步" class="headerlink" title="属性同步"></a>属性同步</h3><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20241220222047918.png" srcset="/img/loading.gif" lazyload alt="image-20241220222047918"></p>
+<p>等级低只同步自己</p>
+<p>把宠物，npc全放在逻辑服，不用同步</p>
+<p>大世界网格小，副本网格范围大</p>
+<p>摄像机背后的actor同步频率低</p>
+<p>不移动的时候降低同步频率</p>
+<p>把不需要同步的属性清理掉。</p>
+<p>使用pushModel，手动标记哪些属性需要更新，这样就不需要同步所有的信息</p>
+<h3 id="物理计算优化"><a href="#物理计算优化" class="headerlink" title="物理计算优化"></a>物理计算优化</h3><p>服务器剔除角色身上所有的装饰器组件</p>
+<p>服务器关闭动画计算，只有业务需要具体坐标时才计算。</p>
 
                 
               </div>
