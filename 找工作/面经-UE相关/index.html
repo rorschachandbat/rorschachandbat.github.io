@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://picx.zhimg.com/v2-21dde7f72b7b87f9133b60ab9190e5b5_r.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20241220222047918.png">
 <meta property="article:published_time" content="2024-12-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-21T08:42:55.448Z">
+<meta property="article:modified_time" content="2024-12-22T02:35:02.897Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://picx.zhimg.com/v2-21dde7f72b7b87f9133b60ab9190e5b5_r.jpg">
@@ -290,7 +290,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.6k 字
+          8.1k 字
         
       </span>
     
@@ -301,7 +301,7 @@
         
         
         
-          56 分钟
+          68 分钟
         
       </span>
     
@@ -352,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年12月21日 下午
+                    本文最后更新于：2024年12月22日 上午
                   
                 
               </p>
@@ -360,7 +360,31 @@
             
               <div class="markdown-body">
                 
-                <h1 id="UE4反射机制"><a href="#UE4反射机制" class="headerlink" title="UE4反射机制"></a>UE4反射机制</h1><p>UHT</p>
+                <h1 id="UE最基础的五个类是什么"><a href="#UE最基础的五个类是什么" class="headerlink" title="UE最基础的五个类是什么"></a>UE最基础的五个类是什么</h1><ol>
+<li>GameMode是整个关卡的控制器，用来编写整个关卡的<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=212792905&content_type=Article&match_order=1&q=%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91&zhida_source=entity">业务逻辑</a>；</li>
+<li>GameState是整个关卡的状态，用来存储整个关卡的游戏数据；</li>
+<li>DefaultPawn是玩家角色，若是角色扮演类游戏则就是在游戏场景中看到的角色实体；</li>
+<li>PlayerController是玩家的控制器，用来编写和玩家相关的控制逻辑；</li>
+<li>PlayerState是玩家的状态，用来存储和玩家相关的状态数据。</li>
+</ol>
+<h1 id="FName和FString"><a href="#FName和FString" class="headerlink" title="FName和FString"></a>FName和FString</h1><p>① <strong>FName：</strong>着重于表示<strong>名称</strong>，<strong>不区分大小写</strong>，<strong>不可更改</strong>，引擎中的资源名称都是FName类型，通过一个轻型系统重复使用字符串，FName创建时会根据内容创建一个<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=178876897&content_type=Article&match_order=1&q=Hash%E5%80%BC&zhida_source=entity">Hash值</a>，且同样的内容只会存储一次。通过Hash值在进行FName的查找和访问时速度较快，而在比较的时，也不需要比较字符串内容，直接比较Hash值来区分不同FName字符串。</p>
+<p>另外两种字符串<strong>到FName的转换</strong>（特别注意的是，<strong>FText不能直接转换到FName</strong>，可<strong>先转换为FString</strong>，再转换为FName）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp">FString str = <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Hello world~&quot;</span>);<br>FText txt = <span class="hljs-built_in">LOCTEXT</span>(<span class="hljs-string">&quot;keyName&quot;</span>, <span class="hljs-string">&quot;theValue&quot;</span>);<br>FText txtNS = <span class="hljs-built_in">NSLOCTEXT</span>(<span class="hljs-string">&quot;TextNameSpace&quot;</span>, <span class="hljs-string">&quot;keyName&quot;</span>, <span class="hljs-string">&quot;theValue&quot;</span>);<br> <br><span class="hljs-comment">// FString 转 FName：不可靠，丢失大小写信息</span><br>FName name1 = <span class="hljs-built_in">FName</span>(*str);<br><br>FString strFromTxt = txt.<span class="hljs-built_in">ToString</span>();<br><span class="hljs-comment">// FText 先转 FString，再转 FName：不可靠，丢失大小写信息，丢失本地化信息可能导致语言转换的潜在风险</span><br>FName name2 = <span class="hljs-built_in">FName</span>(*strFromTxt);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>② <strong>FString：</strong>最接近std::string，着重在于<strong>字符串的操作</strong>，提供了大量对字符串的操作接口，是<strong>三者中唯一可修改的字符串类型</strong>，也正因如此，FString对比其它两种字符串来说<strong>消耗更高</strong>，<strong>性能更低</strong>。</p>
+<p>另外两种字符串<strong>到FString的转换</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">FName name = <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;I am Frank~&quot;</span>);<br>FText txt = <span class="hljs-built_in">LOCTEXT</span>(<span class="hljs-string">&quot;keyName&quot;</span>, <span class="hljs-string">&quot;theValue&quot;</span>);<br>FText txtNS = <span class="hljs-built_in">NSLOCTEXT</span>(<span class="hljs-string">&quot;TextNameSpace&quot;</span>, <span class="hljs-string">&quot;keyName&quot;</span>, <span class="hljs-string">&quot;theValue&quot;</span>);<br><br><span class="hljs-comment">// FName 转 FString：可靠</span><br>FString str1 = name.<span class="hljs-built_in">ToString</span>();<br><span class="hljs-comment">// FText 转 FString：不可靠，丢失本地化信息可能导致语言转换的潜在风险</span><br>FString str2 = txt.<span class="hljs-built_in">ToString</span>();<br></code></pre></td></tr></table></figure>
+
+
+
+<p>③ <strong>FText：</strong>着重在于<strong>显示与本地化</strong>，显示可理解玩家能直接看到的信息，本地化即多语言的处理，<strong>不可更改</strong>。相较于另外两种类型，FText会更加的臃肿，但提供了优秀的本地化功能。</p>
+<p>另外两种字符串<strong>到FText的转换</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp">FString str = <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Hello world~&quot;</span>);<br>FName name = <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;I am Frank~&quot;</span>);<br><br><span class="hljs-comment">// FString 转 FText：可靠</span><br>FText txt1 = FText::<span class="hljs-built_in">FromString</span>(str);<br><span class="hljs-comment">// FName 转 FText：可靠</span><br>FText txt2 = FText::<span class="hljs-built_in">FromName</span>(name);<br></code></pre></td></tr></table></figure>
+
+<h1 id="软引用和硬引用"><a href="#软引用和硬引用" class="headerlink" title="软引用和硬引用"></a>软引用和硬引用</h1><p>加载的步骤</p>
+<h1 id="Actor如何实现一个借口类"><a href="#Actor如何实现一个借口类" class="headerlink" title="Actor如何实现一个借口类?"></a>Actor如何实现一个借口类?</h1><h1 id="UE4反射机制"><a href="#UE4反射机制" class="headerlink" title="UE4反射机制"></a>UE4反射机制</h1><p>UHT</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60622181">UE4反射机制</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/duan19920101/article/details/127557454">C++反射机制</a></p>
 <h1 id="UFUNCTION"><a href="#UFUNCTION" class="headerlink" title="UFUNCTION"></a>UFUNCTION</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149392857">UFUNCTION&#x2F;UPROPERTY&#x2F;UCLASS</a></p>
@@ -609,7 +633,7 @@
 <p>+ 我们打开编辑器时，就会根据Layout布局加载对应的Tab控件，并显示其中的内容，即Tab装入的子控件(Child Slate)。</p>
 <p>+ 在此方法中，最重要的是调用TabManager对象，TabManager类主要用于管理编辑器中的布局，创建Tab对象。在类中我们需要定义一个FName类型的TabID变量，用于在该方法中指示一个Slate窗口。我们需要通过调用TabManager的方法RegisterTabSpawner绑定TabID和Slate，用于后续定义Slate控件的显示。</p>
 <h3 id="3-3-SpawnTab-CustomWidget方法"><a href="#3-3-SpawnTab-CustomWidget方法" class="headerlink" title="3.3 SpawnTab_CustomWidget方法"></a>3.3 SpawnTab_CustomWidget方法</h3><p>在此方法中，将会创建并返回一个SWidget实例。<br>而RegistorTabSpawner方法通过调用TabManager的接口，将该Slate控件实例注册，与TabID进行绑定，并能够在InitCustomAssetEditor方法中添加到布局Flayout中被显示出来。<br>我们不仅可以创建简单的Slate控件（如SButton、IDetailsViews）,也可以创建较为复杂的窗口，如SEditorViewport(3D预览窗口)、SGraphEditor(可以连接复杂自定义的节点<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=222180537&content_type=Article&match_order=1&q=%E5%9B%BE%E8%A1%A8%E7%B3%BB%E7%BB%9F&zhida_source=entity">图表系统</a>)等内容，并将其添加到我们的自定义编辑器中。<br>在本文实例中，我在该方法中创建了一个最简单的Slate类SButton。</p>
-<h1 id="分型布朗运动-Fractal-Brownian-Motion"><a href="#分型布朗运动-Fractal-Brownian-Motion" class="headerlink" title="分型布朗运动 - Fractal Brownian Motion"></a><strong>分型布朗运动 - Fractal Brownian Motion</strong></h1><h1 id="模拟云"><a href="#模拟云" class="headerlink" title="模拟云"></a>模拟云</h1><p>Worley Noise</p>
+<h1 id="模拟云"><a href="#模拟云" class="headerlink" title="模拟云"></a>模拟云</h1><p>Worley Noise</p>
 <p>在空间中随机随便放点，然后计算最近的点的距离，为了连续，把这个的点放八个地方</p>
 <h1 id="虚幻渲染编程"><a href="#虚幻渲染编程" class="headerlink" title="虚幻渲染编程"></a>虚幻渲染编程</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36675543">虚幻4渲染编程专题概述及目录 - YivanLee的文章 - 知乎</a></p>
 <h1 id="GAS"><a href="#GAS" class="headerlink" title="GAS"></a>GAS</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486808688">【Unreal】虚幻GAS系统快速入门 - LunarMaxim的文章 - 知乎</a></p>
