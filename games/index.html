@@ -384,13 +384,11 @@
        rel="external">
         已玩
         (107)</a>
-    <!-- 添加年份选择器 -->
     <select id="year-selector" class="hexo-douban-year-select">
         <option value="all">全部年份</option>
     </select>
 </div>
 
-<!-- 添加CSS样式 -->
 <style>
 .hexo-douban-year-select {
     float: right;
@@ -445,8 +443,66 @@
         }
 
 
-        
-        // 初始化年份选择器
+        // ======== pagination ========
+        (function initPagination() {
+            let firstpage = document.querySelector(".hexo-douban-firstpage");
+            let previouspage = document.querySelector(".hexo-douban-previouspage");
+            let nextpage = document.querySelector(".hexo-douban-nextpage");
+            let lastpage = document.querySelector(".hexo-douban-lastpage");
+
+            //add listener
+            firstpage.onclick = () => renderList(nav.action, 1);
+            previouspage.onclick = () => renderList(nav.action, Math.max(1, nav.page - 1));
+            nextpage.onclick = () => renderList(nav.action, Math.min(nav.page + 1, nav.pageMax));
+            lastpage.onclick = () => renderList(nav.action, nav.pageMax);
+        })();
+
+
+        // ======== init index ========
+
+        (function initIndex() {
+            let tabDo = document.querySelector(".hexo-douban-tab-do");
+            tabDo.onclick = () => tabClick(tabDo, 'do');
+
+            let tabWish = document.querySelector(".hexo-douban-tab-wish");
+            tabWish.onclick = () => tabClick(tabWish, 'wish');
+
+            let tabCollect = document.querySelector(".hexo-douban-tab-collect");
+            tabCollect.onclick = () => tabClick(tabCollect, 'collect');
+
+            tabCollect.click();
+        })();
+
+        // ======== render ========
+        function renderList(action, page) {
+            if (action === nav.action && page === nav.page) {
+                return
+            }
+            
+            // 获取符合年份条件的数据
+            let filteredData = data[action];
+            if (nav.selectedYear !== 'all') {
+                filteredData = filteredData.filter(item => 
+                    item.rating && item.rating.startsWith(nav.selectedYear)
+                );
+            }
+            
+            nav.page = page;
+            nav.pageMax = Math.max(1, Math.floor((filteredData.length - 1) / item_per_page) + 1);
+            nav.action = action;
+
+            document.querySelector('.hexo-douban-pagenum').textContent = `${nav.page} / ${nav.pageMax}`;
+
+            let container = document.querySelector('.hexo-douban-items');
+            container.innerHTML = '';
+            
+            for (let i = (page - 1) * item_per_page; 
+                 i < Math.min(page * item_per_page, filteredData.length); 
+                 i++) {
+                container.append(renderItem(action, filteredData[i]));
+            }
+        }
+
         function initYearSelector() {
             const yearSet = new Set();
             
@@ -477,84 +533,6 @@
                 nav.selectedYear = this.value;
                 renderList(nav.action, 1);
             };
-        }
-
-        // ======== pagination ========
-        (function initPagination() {
-            let firstpage = document.querySelector(".hexo-douban-firstpage");
-            let previouspage = document.querySelector(".hexo-douban-previouspage");
-            let nextpage = document.querySelector(".hexo-douban-nextpage");
-            let lastpage = document.querySelector(".hexo-douban-lastpage");
-
-            //add listener
-            firstpage.onclick = () => renderList(nav.action, 1);
-            previouspage.onclick = () => renderList(nav.action, Math.max(1, nav.page - 1));
-            nextpage.onclick = () => renderList(nav.action, Math.min(nav.page + 1, nav.pageMax));
-            lastpage.onclick = () => renderList(nav.action, nav.pageMax);
-        })();
-
-
-        // ======== init index ========
-
-        (
-        (function initIndex() {
-            let tabDo = document.querySelector(".hexo-douban-tab-do");
-            tabDo.onclick = () => tabClick(tabDo, 'do');
-
-            let tabWish = document.querySelector(".hexo-douban-tab-wish");
-            tabWish.onclick = () => tabClick(tabWish, 'wish');
-
-            let tabCollect = document.querySelector(".hexo-douban-tab-collect");
-            tabCollect.onclick = () => tabClick(tabCollect, 'collect');
-
-            // 初始化年份选择器
-            initYearSelector();
-
-            tabCollect.click();
-        })();
-
-        // ======== render ========
-        
-        function renderList(action, page) {
-            if (action === nav.action && page === nav.page) {
-                return
-            }
-            
-            // 获取符合年份条件的数据
-            let filteredData = data[action];
-            if (nav.selectedYear !== 'all') {
-                filteredData = filteredData.filter(item => 
-                    item.rating && item.rating.startsWith(nav.selectedYear)
-                );
-            }
-            
-            nav.page = page;
-            nav.pageMax = Math.max(1, Math.floor((filteredData.length - 1) / item_per_page) + 1);
-            nav.action = action;
-
-            document.querySelector('.hexo-douban-pagenum').textContent = `${nav.page} / ${nav.pageMax}`;
-
-            let container = document.querySelector('.hexo-douban-items');
-            container.innerHTML = '';
-            
-            // 渲染当前页的数据
-            for (let i = (page - 1) * item_per_page; 
-                 i < Math.min(page * item_per_page, filteredData.length); 
-                 i++) {
-                container.append(renderItem(action, filteredData[i]));
-            }
-        }
-            nav.page = page
-            nav.pageMax = Math.max(1, Math.floor((data[action].length - 1) / item_per_page) + 1)
-            nav.action = action
-
-            document.querySelector('.hexo-douban-pagenum').textContent = `${nav.page} / ${nav.pageMax}`
-
-            let container = document.querySelector('.hexo-douban-items')
-            container.innerHTML = ''
-            for (let i = (page - 1) * item_per_page; i < Math.min(page * item_per_page, data[action].length); i++) {
-                container.append(renderItem(action, data[action][i]))
-            }
         }
 
         function renderItem(action, data) {
