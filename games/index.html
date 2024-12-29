@@ -427,7 +427,8 @@
             page: 0,
             pageMax: 1,
             action: 'collect',
-            selectedYear: 'all'  // 添加年份选择状态
+            selectedYear: 'all',
+            lastSelectedYear: 'all'  // 添加上次选择的年份记录
         }
 
         let meta_max_line = 4;
@@ -480,18 +481,20 @@
 
         // ======== render ========
         function renderList(action, page) {
-            if (action === nav.action && page === nav.page) {
+            if (action === nav.action && page === nav.page && nav.selectedYear === nav.lastSelectedYear) {
                 return
             }
             
             // 获取符合年份条件的数据
-            let filteredData = data[action];
-            if (nav.selectedYear !== 'all') {
-                filteredData = filteredData.filter(item => 
-                    item.rating && item.rating.startsWith(nav.selectedYear)
-                );
-            }
+            let filteredData = data[action].filter(item => {
+                if (nav.selectedYear === 'all') {
+                    return true;
+                }
+                // 确保 rating 存在且包含指定年份
+                return item.rating && item.rating.split('-')[0] === nav.selectedYear;
+            });
             
+            nav.lastSelectedYear = nav.selectedYear;  // 记录上次选择的年份
             nav.page = page;
             nav.pageMax = Math.max(1, Math.floor((filteredData.length - 1) / item_per_page) + 1);
             nav.action = action;
@@ -506,6 +509,13 @@
                  i++) {
                 container.append(renderItem(action, filteredData[i]));
             }
+            
+            // 更新显示的项目数量
+            let countInfo = document.createElement('div');
+            countInfo.className = 'hexo-douban-info';
+            countInfo.style.marginTop = '10px';
+            countInfo.textContent = `共有 ${filteredData.length} 个项目`;
+            container.appendChild(countInfo);
         }
 
         function renderItem(action, data) {
