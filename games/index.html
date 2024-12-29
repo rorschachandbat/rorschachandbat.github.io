@@ -386,6 +386,11 @@
         (107)</a>
     <select id="year-selector" class="hexo-douban-year-select">
         <option value="all">全部年份</option>
+        <option value="2024">2024年</option>
+        <option value="2023">2023年</option>
+        <option value="2022">2022年</option>
+        <option value="2021">2021年</option>
+        <option value="2020">2020年</option>
     </select>
 </div>
 
@@ -501,38 +506,6 @@
                  i++) {
                 container.append(renderItem(action, filteredData[i]));
             }
-        }
-
-        function initYearSelector() {
-            const yearSet = new Set();
-            
-            // 从所有数据中收集年份
-            for (let category in data) {
-                data[category].forEach(item => {
-                    if (item.rating) {
-                        const year = item.rating.split('-')[0];
-                        yearSet.add(year);
-                    }
-                });
-            }
-            
-            // 排序年份（降序）
-            const years = Array.from(yearSet).sort((a, b) => b - a);
-            
-            // 添加年份选项
-            const selector = document.getElementById('year-selector');
-            years.forEach(year => {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = year + '年';
-                selector.appendChild(option);
-            });
-            
-            // 添加年份变化监听器
-            selector.onchange = function() {
-                nav.selectedYear = this.value;
-                renderList(nav.action, 1);
-            };
         }
 
         function renderItem(action, data) {
