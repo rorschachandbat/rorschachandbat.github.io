@@ -384,27 +384,7 @@
        rel="external">
         已看
         (553)</a>
-    <select id="year-selector" class="hexo-douban-year-select">
-        <option value="all">全部年份</option>
-        <option value="2024">2024年</option>
-        <option value="2023">2023年</option>
-        <option value="2022">2022年</option>
-        <option value="2021">2021年</option>
-        <option value="2020">2020年</option>
-        <option value="2019">2019年</option>
-    </select>
 </div>
-
-<style>
-.hexo-douban-year-select {
-    float: right;
-    margin-right: 10px;
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-</style>
 <div class="hexo-douban-items">
 </div>
 
@@ -427,9 +407,7 @@
         let nav = {
             page: 0,
             pageMax: 1,
-            action: 'collect',
-            selectedYear: 'all',
-            lastSelectedYear: 'all'  // 添加上次选择的年份记录
+            action: 'collect'
         }
 
         let meta_max_line = 4;
@@ -482,41 +460,20 @@
 
         // ======== render ========
         function renderList(action, page) {
-            if (action === nav.action && page === nav.page && nav.selectedYear === nav.lastSelectedYear) {
+            if (action === nav.action && page === nav.page) {
                 return
             }
-            
-            // 获取符合年份条件的数据
-            let filteredData = data[action].filter(item => {
-                if (nav.selectedYear === 'all') {
-                    return true;
-                }
-                // 确保 rating 存在且包含指定年份
-                return item.rating && item.rating.split('-')[0] === nav.selectedYear;
-            });
-            
-            nav.lastSelectedYear = nav.selectedYear;  // 记录上次选择的年份
-            nav.page = page;
-            nav.pageMax = Math.max(1, Math.floor((filteredData.length - 1) / item_per_page) + 1);
-            nav.action = action;
+            nav.page = page
+            nav.pageMax = Math.max(1, Math.floor((data[action].length - 1) / item_per_page) + 1)
+            nav.action = action
 
-            document.querySelector('.hexo-douban-pagenum').textContent = `${nav.page} / ${nav.pageMax}`;
+            document.querySelector('.hexo-douban-pagenum').textContent = `${nav.page} / ${nav.pageMax}`
 
-            let container = document.querySelector('.hexo-douban-items');
-            container.innerHTML = '';
-            
-            for (let i = (page - 1) * item_per_page; 
-                 i < Math.min(page * item_per_page, filteredData.length); 
-                 i++) {
-                container.append(renderItem(action, filteredData[i]));
+            let container = document.querySelector('.hexo-douban-items')
+            container.innerHTML = ''
+            for (let i = (page - 1) * item_per_page; i < Math.min(page * item_per_page, data[action].length); i++) {
+                container.append(renderItem(action, data[action][i]))
             }
-            
-            // 更新显示的项目数量
-            let countInfo = document.createElement('div');
-            countInfo.className = 'hexo-douban-info';
-            countInfo.style.marginTop = '10px';
-            countInfo.textContent = `共有 ${filteredData.length} 个项目`;
-            container.appendChild(countInfo);
         }
 
         function renderItem(action, data) {
