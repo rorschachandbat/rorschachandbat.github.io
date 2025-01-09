@@ -16,23 +16,53 @@
   <meta name="author" content="R">
   <meta name="keywords" content="">
   
-    <meta name="description" content="工作一年之后，感觉和大学生活没什么区别，无非就是从白天上课变成了上班，晚上依旧在自己的小房间里打游戏看番看电影看书。不用加班，不用应酬，领导也不pua不画饼，压力不大，工资还过得去，这么一看没什么可以抱怨的，但还是会不想上班，已经变成了上班摸鱼等着下班，工作日等着周末的循环了。 这么安逸的工作环境往好了说压力不大，往坏了说也没什么成就感，做的是我自己都不会玩的十几年的老mmo。端游确实不卷，节奏很">
+    <meta name="description" content="UE的渲染管线，比较概括">
 <meta property="og:type" content="article">
-<meta property="og:title" content="工作一年之后">
-<meta property="og:url" content="https://rorschachandbat.github.io/%E9%9A%8F%E7%AC%94/%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%B9%B4%E4%B9%8B%E5%90%8E/index.html">
+<meta property="og:title" content="【UE官方培训】UE渲染管线介绍">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E3%80%90UE%E5%AE%98%E6%96%B9%E5%9F%B9%E8%AE%AD%E3%80%91UE%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="R">
-<meta property="og:description" content="工作一年之后，感觉和大学生活没什么区别，无非就是从白天上课变成了上班，晚上依旧在自己的小房间里打游戏看番看电影看书。不用加班，不用应酬，领导也不pua不画饼，压力不大，工资还过得去，这么一看没什么可以抱怨的，但还是会不想上班，已经变成了上班摸鱼等着下班，工作日等着周末的循环了。 这么安逸的工作环境往好了说压力不大，往坏了说也没什么成就感，做的是我自己都不会玩的十几年的老mmo。端游确实不卷，节奏很">
+<meta property="og:description" content="UE的渲染管线，比较概括">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T02:32:22.526Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224045881.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224513490.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224728083.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224816969.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224858383.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106233936337.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235242724.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235428006.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000456448.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000703048.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001225370.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001502973.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001803628.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002050255.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002941208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093512026.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093736129.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093830617.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250107094207091.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107100807363.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107102137758.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107170233535.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107174700602.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107174936082.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107183709373.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107183752385.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107184011328.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107185002691.png">
+<meta property="article:published_time" content="2025-01-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-09T02:32:20.906Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>工作一年之后 - R</title>
+  <title>【UE官方培训】UE渲染管线介绍 - R</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -264,7 +294,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="工作一年之后"></span>
+            <span id="subtitle" data-typed-text="【UE官方培训】UE渲染管线介绍"></span>
           
         </div>
 
@@ -275,8 +305,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-18 00:00" pubdate>
-          2023年7月18日 凌晨
+        <time datetime="2025-01-06 00:00" pubdate>
+          2025年1月6日 凌晨
         </time>
       </span>
     
@@ -287,7 +317,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          405 字
+          2k 字
         
       </span>
     
@@ -298,7 +328,7 @@
         
         
         
-          4 分钟
+          17 分钟
         
       </span>
     
@@ -344,7 +374,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">工作一年之后</h1>
+            <h1 style="display: none">【UE官方培训】UE渲染管线介绍</h1>
             
               <p class="note note-info">
                 
@@ -357,9 +387,107 @@
             
               <div class="markdown-body">
                 
-                <p>工作一年之后，感觉和大学生活没什么区别，无非就是从白天上课变成了上班，晚上依旧在自己的小房间里打游戏看番看电影看书。不用加班，不用应酬，领导也不pua不画饼，压力不大，工资还过得去，这么一看没什么可以抱怨的，但还是会不想上班，已经变成了上班摸鱼等着下班，工作日等着周末的循环了。</p>
-<p>这么安逸的工作环境往好了说压力不大，往坏了说也没什么成就感，做的是我自己都不会玩的十几年的老mmo。端游确实不卷，节奏很慢，没什么动力提升自己了，人生失去了目标这种东西，之前还想着或许自己能开发点自己喜欢的游戏，但是一想到美术和创意自己一概没有，又想到还有那么多好玩的游戏和有趣的书电影可以去看，此消彼长，更没了努力的动力。不过话又说回来，觉得摆烂是一种罪过这种心态本身就有问题，就应该好好享受这种快乐的时光嘛。</p>
-<p>这一年很感谢我的朋友们，每周陪我玩桌游，这一年大概玩了六七十个新桌游，相当的开心，这大概是我能坚持留在北京最重要的原因。</p>
+                <p>【[官方培训]01-实时渲染基础上 | 陈拓 Epic】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Tt4y1H7kQ/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">https://www.bilibili.com/video/BV1Tt4y1H7kQ/?share_source=copy_web&amp;vd_source=5d07d04eb2516df147034367e7af6fd2</a></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png" srcset="/img/loading.gif" lazyload alt="image-20250106223718712"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224045881.png" srcset="/img/loading.gif" lazyload alt="image-20250106224045881"></p>
+<h1 id="渲染前准备"><a href="#渲染前准备" class="headerlink" title="渲染前准备"></a>渲染前准备</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224513490.png" srcset="/img/loading.gif" lazyload alt="image-20250106224513490"></p>
+<p>会有多个线程在跑，游戏线程、渲染线程和GPU线程，这样流水线的走，如果比较理想，就是稳定30帧</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224728083.png" srcset="/img/loading.gif" lazyload alt="image-20250106224728083"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224816969.png" srcset="/img/loading.gif" lazyload alt="image-20250106224816969"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224858383.png" srcset="/img/loading.gif" lazyload alt="image-20250106224858383"></p>
+<p><strong>距离</strong></p>
+<p>距离阈值(Desired Max draw distance)</p>
+<p>如果不想对每一个物体都设置这个距离，可以用Cull Distance Volume，包围的东西都会应用culling，可以设置size和distance，是一个数组，比如0-500size的东西应用一个culling，500-10000的又应用一个culling</p>
+<p>如果想某些不被剔除可以用Never distance Cull，或者勾掉那个volume</p>
+<p><strong>视锥</strong></p>
+<p>这个很好理解，也就是在相机里面才会渲染</p>
+<p>可以用FreezeRendering来跳出观察</p>
+<p>ToggleDebugCamera</p>
+<p><strong>预计算可见性</strong></p>
+<p>Precomputed Visibility Volume</p>
+<p>然后得编译一下，Compile-&gt;Precompute Static Visibility</p>
+<p>要用这个得在Setting里面开启Precompute Visibility</p>
+<p><strong>遮挡剔除</strong></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106233936337.png" srcset="/img/loading.gif" lazyload alt="image-20250106233936337"></p>
+<h1 id="几何体渲染"><a href="#几何体渲染" class="headerlink" title="几何体渲染"></a>几何体渲染</h1><p>通过以上的步骤，可以拿到该被渲染的物体列表，但是如果直接渲染，会造成一些像素重复绘制，所以需要找出哪些模型应该先被渲染。</p>
+<p>Early Z：GPU驱动会在执行像素着色器前先检查改点深度，提前跳过不符合条件的像素。为了利用这个特性，可以开启Prepass，提前把深度写入buffer里面，可以加快速度。</p>
+<p>Drawcall：绘制拥有相同属性的一组多边形。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235242724.png" srcset="/img/loading.gif" lazyload alt="image-20250106235242724"></p>
+<p>不同的材质会不同的drawcall（*2是因为有earlyz）</p>
+<p>切换材质影响性能开销，GPU渲染时，引擎会根据材质对物体进行排序，相同材质的会在同一个批次里绘制。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235428006.png" srcset="/img/loading.gif" lazyload alt="image-20250106235428006"></p>
+<p>stat RHI命令可以查看drawcall数量</p>
+<p>drawcall数量比三角形数量更影响性能。</p>
+<p>引擎有一些基础的drawcall开销</p>
+<p>降低drawcall方法：</p>
+<p><strong>模型合并（Merge Actor）</strong>，但是有副作用：</p>
+<p>遮挡检测性能更差（因为合批模型会变大）</p>
+<p>计算碰撞性能更差（合并之后更大）</p>
+<p>占用更大内存</p>
+<p><strong>Modular Meshes</strong></p>
+<p><strong>Instanceing</strong>（只针对相同模型 ）</p>
+<p><strong>Level Of Detail(LOD)和HLOD</strong></p>
+<p>降低模型面数</p>
+<p>合并模型假如有多个材质还是会多个drawcaal，可以考虑合并材质</p>
+<p>调试可以用Render Doc插件，来看详细的DrawCall信息</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000456448.png" srcset="/img/loading.gif" lazyload alt="image-20250107000456448"></p>
+<h2 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h2><h3 id="VertexShader"><a href="#VertexShader" class="headerlink" title="VertexShader"></a>VertexShader</h3><p>1.坐标转换（局部空间-&gt;世界空间-&gt;投影空间）</p>
+<p>2.顶点着色</p>
+<p>3.应用世界坐标偏移（WPO）：鸟、水体、飘动的草（<strong>顶点动画</strong>）</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000703048.png" srcset="/img/loading.gif" lazyload alt="image-20250107000703048"></p>
+<p>VS并不直接修改模型，只是视觉上的效果，CPU无法察觉VS的修改，所以物理和碰撞都不会发生变化。</p>
+<p>动画越复杂、顶点越多性能越慢</p>
+<p>对远距离的物体应该禁用顶点动画（反正也看不到）</p>
+<p>对高精度的模型应该应用简单的VS</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001225370.png" srcset="/img/loading.gif" lazyload alt="image-20250107001225370"></p>
+<h1 id="光栅化和G-Buffer"><a href="#光栅化和G-Buffer" class="headerlink" title="光栅化和G-Buffer"></a>光栅化和G-Buffer</h1><p>经过这些之后，可以得到每个顶点在屏幕上的坐标</p>
+<p>因为硬件问题，计算一个像素还需要计算周边2*2的像素，所以会造成overShading</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001502973.png" srcset="/img/loading.gif" lazyload alt="image-20250107001502973"></p>
+<h1 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001803628.png" srcset="/img/loading.gif" lazyload alt="image-20250107001803628"></p>
+<p>因为法向是归一化，所以只需要知道两个就够了</p>
+<p>采用mipmap，会让内存变大1.3倍（一直1&#x2F;4)，但是会清晰很多(远处的物体也能平均取到)</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002050255.png" srcset="/img/loading.gif" lazyload alt="image-20250107002050255"></p>
+<h1 id="像素着色器和材质"><a href="#像素着色器和材质" class="headerlink" title="像素着色器和材质"></a>像素着色器和材质</h1><p>Pixel shader，实现光照、雾这些效果</p>
+<p>UE里面会有一个连线的材质器，然后会自动转成不同平台的shader语言嵌入进去</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002941208.png" srcset="/img/loading.gif" lazyload alt="image-20250107002941208"></p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p><strong>反射捕获</strong></p>
+<p>Reflection Capture</p>
+<p>cubemap，预先计算，但是不太准确，而且分辨率会影响反射效果</p>
+<p><strong>屏幕空间反射</strong></p>
+<p>默认开启，准确，有噪点，只会反射能看到的物体（根据G-Buffer算出来的）</p>
+<p><strong>平面反射</strong></p>
+<p>Planar Reflection</p>
+<p>适合需要精确反射的表面（镜子）</p>
+<p>其实就是相机换了一个位置，重新渲染了一遍，所以比较损耗性能，但是比较精确。</p>
+<p>Lumen</p>
+<p>RT Reflection</p>
+<h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093512026.png" srcset="/img/loading.gif" lazyload alt="image-20250107093512026"></p>
+<h2 id="静态光照"><a href="#静态光照" class="headerlink" title="静态光照"></a>静态光照</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093736129.png" srcset="/img/loading.gif" lazyload alt="image-20250107093736129"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093830617.png" srcset="/img/loading.gif" lazyload alt="image-20250107093830617"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250107094207091.png" srcset="/img/loading.gif" lazyload alt="image-20250107094207091"></p>
+<p>UE里面生成lightmap用lightmass</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107100807363.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动态光照"><a href="#动态光照" class="headerlink" title="动态光照"></a>动态光照</h2><h3 id="动态阴影"><a href="#动态阴影" class="headerlink" title="动态阴影"></a>动态阴影</h3><p><strong>常规动态阴影</strong></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107102137758.png" srcset="/img/loading.gif" lazyload></p>
+<p>以光的视角作为摄像机渲染，能看到的就会被点亮 </p>
+<p>把需要渲染的物体在光源的矩阵下转换，然后计算深度，如果前面有东西挡住了，就说这里是阴影</p>
+<p><strong>级联阴影</strong></p>
+<p>因为普通的阴影只有一张map，级联阴影就是分隔了多个视锥，然后叠加</p>
+<p><strong>逐对象阴影</strong></p>
+<p>固定光源，对每个对象都生成阴影</p>
+<p><strong>距离场阴影</strong></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107170233535.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107174700602.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Lumen"><a href="#Lumen" class="headerlink" title="Lumen"></a>Lumen</h2><p>UE5全新的全局光照，有一些新特性</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107174936082.png" srcset="/img/loading.gif" lazyload></p>
+<p>Color Bleeding：物品本身颜色对周围光照的影响</p>
+<p>Soft indirect shadow:间接软阴影，当前帧和前几帧的混合</p>
+<h1 id="半透明"><a href="#半透明" class="headerlink" title="半透明"></a>半透明</h1><p>延迟渲染难以处理半透明材质，可以考虑在前向渲染管线渲染</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107183709373.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="后期处理"><a href="#后期处理" class="headerlink" title="后期处理"></a>后期处理</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107183752385.png" srcset="/img/loading.gif" lazyload></p>
+<p>自带的效果，Post Process Volume（可以设置为无限大）</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107184011328.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="实时Ray-Tracing"><a href="#实时Ray-Tracing" class="headerlink" title="实时Ray Tracing"></a>实时Ray Tracing</h1><h1 id="性能调试"><a href="#性能调试" class="headerlink" title="性能调试"></a>性能调试</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107185002691.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -378,7 +506,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/" class="category-chain-item">游戏杂货铺</a>
   
   
 
@@ -398,8 +526,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>工作一年之后</div>
-      <div>https://rorschachandbat.github.io/随笔/工作一年之后/</div>
+      <div>【UE官方培训】UE渲染管线介绍</div>
+      <div>https://rorschachandbat.github.io/游戏杂货铺/【UE官方培训】UE渲染管线介绍/</div>
     </div>
     <div class="license-meta">
       
@@ -411,7 +539,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月18日</div>
+          <div>2025年1月6日</div>
         </div>
       
       
@@ -443,9 +571,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E4%B9%A6%E8%AF%84/%E6%9D%91%E4%B8%8At/" title="村上t">
+                      <a href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/UE%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93/" title="UE实时渲染">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">村上t</span>
+                        <span class="hidden-mobile">UE实时渲染</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -453,8 +581,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/%E9%9A%8F%E7%AC%94/%E7%9E%8E%E6%8E%B0%E7%8E%8B/" title="瞎掰王">
-                        <span class="hidden-mobile">瞎掰王</span>
+                      <a href="/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-Ts%E8%AF%AD%E6%B3%95%E7%9B%B8%E5%85%B3/" title="面经-Ts语法相关">
+                        <span class="hidden-mobile">面经-Ts语法相关</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
