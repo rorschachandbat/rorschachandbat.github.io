@@ -24,7 +24,7 @@
 <meta property="og:description" content="垃圾回收可能会问到的一切东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T02:45:05.566Z">
+<meta property="article:modified_time" content="2025-01-09T16:02:56.070Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -287,7 +287,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          4.5k 字
         
       </span>
     
@@ -298,7 +298,7 @@
         
         
         
-          32 分钟
+          38 分钟
         
       </span>
     
@@ -349,7 +349,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月9日 上午
+                    本文最后更新于：2025年1月10日 凌晨
                   
                 
               </p>
@@ -442,6 +442,48 @@
 <p>RAII（<strong>R</strong>esource <strong>A</strong>cquisition <strong>I</strong>s <strong>I</strong>nitialization）是由c++之父Bjarne Stroustrup提出的，中文翻译为资源获取即初始化，他说：使用局部对象来管理资源的技术称为资源获取即初始化；这里的资源主要是指操作系统中有限的东西如内存、网络套接字等等，局部对象是指存储在栈的对象，它的生命周期是由操作系统来管理的，无需人工介入；</p>
 <p>如果要自己写一个内存泄漏，可以考虑在new和malloc里面记录内存。</p>
 <p>调试可以用数据断点来操作。</p>
+<h1 id="内存碎片"><a href="#内存碎片" class="headerlink" title="内存碎片"></a>内存碎片</h1><h2 id="避免内存碎片"><a href="#避免内存碎片" class="headerlink" title="避免内存碎片"></a>避免内存碎片</h2><ol>
+<li>使用内存池（Memory Pool）</li>
+</ol>
+<p>预先分配一大块内存，并在其中管理小块内存的分配和释放。这样可以减少频繁的动态内存分配和释放带来的碎片。</p>
+<p>内存池可以根据对象的大小进行分区，确保相同大小的对象使用相同的内存块。</p>
+<ol start="2">
+<li>对象重用：</li>
+</ol>
+<p>尽量重用对象，避免频繁的创建和销毁。可以使用对象池（Object Pool）来管理可重用的对象。</p>
+<p>对象池可以在游戏中常用的对象（如子弹、敌人等）中使用，减少内存分配和释放的次数。</p>
+<ol start="3">
+<li>合理的内存分配策略：</li>
+</ol>
+<p>使用合适的内存分配器，选择适合应用场景的分配策略（如分配器的对齐方式、分配大小等）。</p>
+<p>避免频繁的小块内存分配，尽量使用较大的内存块进行分配。</p>
+<ol start="4">
+<li>合并空闲块：</li>
+</ol>
+<p>在释放内存时，检查相邻的空闲块并合并它们，以减少外部碎片。</p>
+<p>许多内存分配器会自动处理合并空闲块的逻辑。</p>
+<ol start="5">
+<li>使用智能指针：</li>
+</ol>
+<p>在 C++ 中，使用智能指针（如 std::shared_ptr 和 std::unique_ptr）来管理内存，减少内存泄漏和碎片的可能性。</p>
+<h2 id="解决内存碎片"><a href="#解决内存碎片" class="headerlink" title="解决内存碎片"></a>解决内存碎片</h2><ol>
+<li>内存整理（Compaction）：</li>
+</ol>
+<p>在某些情况下，可以通过内存整理来解决外部碎片。内存整理的过程是将活动对象移动到内存的一端，释放出连续的空闲内存块。</p>
+<p>这种方法在实时系统中可能不适用，因为它可能导致停顿。</p>
+<ol start="2">
+<li>使用更高效的内存分配器：</li>
+</ol>
+<p>如果发现当前的内存分配器导致了严重的内存碎片，可以考虑使用其他内存分配器（如 jemalloc、tcmalloc 等），这些分配器在处理碎片方面通常更高效。</p>
+<ol start="3">
+<li>监控和分析内存使用：</li>
+</ol>
+<p>使用内存分析工具（如 Valgrind、Visual Studio 的内存分析工具等）监控内存使用情况，识别和解决内存碎片问题。</p>
+<p>定期检查和分析内存使用情况，及时发现和解决潜在的内存碎片问题。</p>
+<ol start="4">
+<li>重启应用程序：</li>
+</ol>
+<p>在某些情况下，重启应用程序可以清除内存碎片，尤其是在长时间运行的应用程序中。</p>
 
                 
               </div>

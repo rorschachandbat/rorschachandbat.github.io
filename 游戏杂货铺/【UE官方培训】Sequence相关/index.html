@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250108113508355.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250108115515103.png">
 <meta property="article:published_time" content="2025-01-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T02:45:05.577Z">
+<meta property="article:modified_time" content="2025-01-09T16:02:56.251Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107192455758.png">
@@ -299,7 +299,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          485 字
+          2k 字
         
       </span>
     
@@ -310,7 +310,7 @@
         
         
         
-          5 分钟
+          18 分钟
         
       </span>
     
@@ -361,7 +361,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月9日 上午
+                    本文最后更新于：2025年1月10日 凌晨
                   
                 
               </p>
@@ -400,6 +400,17 @@
 <li>白模和资产制作可以并行制作，因为资源都是引用，后期再替换就可以了</li>
 <li><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250108115515103.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
+<p>如何用c++ Add Track？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 添加一个新的 Track</span><br><span class="hljs-function">FMovieSceneTrack* <span class="hljs-title">AddNewTrack</span><span class="hljs-params">(ULevelSequence* Sequence, UClass* TrackClass, FName TrackName)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 获取 MovieScene</span><br>    UMovieScene* MovieScene = Sequence-&gt;<span class="hljs-built_in">GetMovieScene</span>();<br>    <br>    <span class="hljs-comment">// 创建新的 Track</span><br>    FMovieSceneTrackMetaData MetaData;<br>    MetaData.DisplayName = FText::<span class="hljs-built_in">FromName</span>(TrackName);<br>    <br>    FMovieSceneTrack* NewTrack = MovieScene-&gt;<span class="hljs-built_in">AddTrack</span>(TrackClass, MetaData);<br>    <br>    <span class="hljs-keyword">return</span> NewTrack;<br>&#125;<br><br><span class="hljs-comment">// 使用示例 - 添加一个 Transform Track</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AddTransformTrack</span><span class="hljs-params">(ULevelSequence* Sequence, AActor* TargetActor)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 确保序列和Actor都有效</span><br>    <span class="hljs-keyword">if</span> (!Sequence || !TargetActor)<br>    &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 添加 Transform Track</span><br>    FMovieSceneTrack* TransformTrack = <span class="hljs-built_in">AddNewTrack</span>(<br>        Sequence, <br>        UMovieScene3DTransformTrack::<span class="hljs-built_in">StaticClass</span>(),<br>        <span class="hljs-built_in">FName</span>(*FString::<span class="hljs-built_in">Printf</span>(<span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;%s Transform&quot;</span>), *TargetActor-&gt;<span class="hljs-built_in">GetName</span>()))<br>    );<br><br>    <span class="hljs-comment">// 绑定 Actor</span><br>    FGuid ObjectBinding = Sequence-&gt;<span class="hljs-built_in">GetMovieScene</span>()-&gt;<span class="hljs-built_in">AddPossessable</span>(<br>        TargetActor-&gt;<span class="hljs-built_in">GetActorLabel</span>(), <br>        TargetActor-&gt;<span class="hljs-built_in">GetClass</span>()<br>    );<br>    <br>    <span class="hljs-comment">// 将 Track 添加到绑定对象</span><br>    Sequence-&gt;<span class="hljs-built_in">GetMovieScene</span>()-&gt;<span class="hljs-built_in">AddTrack</span>(UMovieScene3DTransformTrack::<span class="hljs-built_in">StaticClass</span>(), ObjectBinding);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>常见的 Track 类型包括:</p>
+<p>UMovieScene3DTransformTrack - 变换轨道</p>
+<p>UMovieSceneFloatTrack - 浮点值轨道</p>
+<p>UMovieSceneEventTrack - 事件轨道</p>
+<p>UMovieSceneAudioTrack - 音频轨道</p>
+<p>UMovieSceneCameraAnimTrack - 相机动画轨道</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 添加关键帧示例</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AddTransformKeyframe</span><span class="hljs-params">(UMovieScene3DTransformTrack* TransformTrack, FFrameNumber TimeFrame, FTransform Transform)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (UMovieScene3DTransformSection* Section = <span class="hljs-built_in">Cast</span>&lt;UMovieScene3DTransformSection&gt;(TransformTrack-&gt;<span class="hljs-built_in">CreateNewSection</span>()))<br>    &#123;<br>        TransformTrack-&gt;<span class="hljs-built_in">AddSection</span>(*Section);<br>        Section-&gt;<span class="hljs-built_in">AddKey</span>(TimeFrame, Transform);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>

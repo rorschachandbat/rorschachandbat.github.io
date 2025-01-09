@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-01056f4f051d715cc5de57314b0e9ba1_720w.webp">
 <meta property="og:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/image-20220309220924444.png">
 <meta property="article:published_time" content="2024-03-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T02:45:05.568Z">
+<meta property="article:modified_time" content="2025-01-09T16:02:56.085Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/jiang_liyong/cloudimage/raw/master/v2-04eed39e986d359dcdd32ac2b8c5e658_720w.webp">
@@ -291,7 +291,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          19k 字
+          20k 字
         
       </span>
     
@@ -302,7 +302,7 @@
         
         
         
-          160 分钟
+          167 分钟
         
       </span>
     
@@ -353,7 +353,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月9日 上午
+                    本文最后更新于：2025年1月10日 凌晨
                   
                 
               </p>
@@ -555,6 +555,17 @@
 <h3 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h3><p><strong>纯虚函数是指在基类中定义的没有实现的虚函数</strong>。使用纯虚函数可以使该函数只有<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:%22629281871%22%7D">函数原型</a>，而没有具体的实现。注：这里的“&#x3D;0”表示该函数为纯虚函数。</p>
 <p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
 <p><strong>抽象类是包含纯虚函数的类</strong>，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
+<h3 id="抽象函数和接口"><a href="#抽象函数和接口" class="headerlink" title="抽象函数和接口"></a>抽象函数和接口</h3><p><strong>抽象类的定义</strong></p>
+<ol>
+<li>最少具有一个<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=202138011&content_type=Article&match_order=1&q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&zhida_source=entity">纯虚函数</a>。</li>
+<li>可以有实现的方法。</li>
+<li>可以进行变量定义。</li>
+</ol>
+<p><strong>接口</strong></p>
+<ol>
+<li>所有的函数必须被声明为纯虚函数。</li>
+<li>没有变量的声明。</li>
+</ol>
 <h3 id="哪些函数不能声明成虚函数？"><a href="#哪些函数不能声明成虚函数？" class="headerlink" title="哪些函数不能声明成虚函数？"></a>哪些函数不能声明成虚函数？</h3><p><strong>非成员函数</strong></p>
 <p>非成员函数只能被重载(overload)，不能被继承(override)，而虚函数主要的作用是在继承中实现动态多态，非成员函数早在编译期间就已经绑定函数了，无法实现动态多态，那声明成虚函数还有什么意义呢？</p>
 <p><strong>构造函数</strong></p>
@@ -619,8 +630,35 @@
 
 <h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StringHash</span> <br>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-built_in">int</span> BASE = <span class="hljs-number">31</span>; <span class="hljs-comment">// 基数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-built_in">int</span> MOD = <span class="hljs-number">1000000007</span>; <span class="hljs-comment">// 大质数</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">long</span> <span class="hljs-title">ComputeHash</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> str</span>)</span> <br>    &#123;<br>        <span class="hljs-built_in">long</span> hash = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">long</span> power = <span class="hljs-number">1</span>;<br>        <br>        <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">char</span> c <span class="hljs-keyword">in</span> str) <br>        &#123;<br>            hash = (hash + (c - <span class="hljs-string">&#x27;a&#x27;</span> + <span class="hljs-number">1</span>) * power) % MOD;<br>            power = (power * BASE) % MOD;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> hash;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h3><p><strong>拼接原理</strong></p>
+<ol>
+<li>计算拼接后字符串的总长度。</li>
+<li>分配足够的内存以存储新字符串。</li>
+<li>将原字符串和要拼接的字符串的内容复制到新分配的内存中。</li>
+<li>释放原字符串的内存（如果需要）。</li>
+</ol>
+<p><strong>大量字符串如何优化</strong></p>
+<p>当需要拼接大量字符串（例如一万个字符串）时，可以采取以下优化策略：</p>
+<p>预分配内存：</p>
+<p>使用 std::string::reserve 方法预分配足够的内存，以避免在拼接过程中多次分配内存。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::string result;<br>result.<span class="hljs-built_in">reserve</span>(total_length); <span class="hljs-comment">// total_length 是所有字符串的总长度</span><br></code></pre></td></tr></table></figure>
 
+<ol start="2">
+<li>使用 std::ostringstream：</li>
+</ol>
+<p>使用 std::ostringstream 来拼接字符串。ostringstream 是一个输出流，可以高效地处理字符串拼接，避免多次内存分配。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br>std::vector&lt;std::string&gt; strings = &#123;<span class="hljs-comment">/* 一万个字符串 */</span>&#125;;<br>std::ostringstream oss;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; str : strings) &#123;<br>    oss &lt;&lt; str; <span class="hljs-comment">// 使用流操作符拼接</span><br>&#125;<br><br>std::string result = oss.<span class="hljs-built_in">str</span>(); <span class="hljs-comment">// 获取最终拼接的字符串</span><br></code></pre></td></tr></table></figure>
 
+<ol start="3">
+<li>使用 std::string::append：</li>
+</ol>
+<p>如果不使用 ostringstream，可以使用 std::string::append 方法，它在某些情况下比 operator+ 更高效。</p>
+<ol start="4">
+<li>避免不必要的拼接：</li>
+</ol>
+<p>在拼接字符串时，尽量避免在循环中进行不必要的拼接操作。可以先将所有字符串存储在一个容器中，然后一次性拼接。</p>
 <h1 id="模板编程"><a href="#模板编程" class="headerlink" title="模板编程"></a>模板编程</h1><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>有三种类型</p>
 <p>模板实际上分为三类：</p>
 <p>类型模板参数（类型模板）</p>
