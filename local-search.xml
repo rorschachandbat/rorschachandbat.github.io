@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>games104学习笔记</title>
+    <link href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/games104%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <url>/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/games104%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p><strong>面领的挑战</strong></p><p>玩家行为是不可控的，要和gameplay互动；实时性；真实性（Motion Matching）</p><h2 id="2D动画"><a href="#2D动画" class="headerlink" title="2D动画"></a>2D动画</h2><p><strong>精灵动画（Sprite）</strong>：一帧一帧循环播放</p><p><strong>Live2D</strong></p><p>把每个图元都分隔，然后各种拉伸的时候可以做出各种动作</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png"></p><p>每一个部位生成一个图元来控制，非常直观的动画系统，简单又生动</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110163825295.png"></p><h2 id="3D动画分类"><a href="#3D动画分类" class="headerlink" title="3D动画分类"></a>3D动画分类</h2><p>基于层次的刚体动画，是一个树形结构，但是可能会穿帮，因为只操纵骨骼会互相穿插有可能。</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110165402649.png"></p><p>顶点动画，存offerset的texture和法向的texture，然后根据帧数来计算，可以做一些布料或者流体什么的</p><p><strong>蒙皮动画</strong></p><p><strong>基于物理的动画</strong>：衣料、布娃娃系统、IK（反向动力学）</p><h2 id="蒙皮动画"><a href="#蒙皮动画" class="headerlink" title="蒙皮动画"></a>蒙皮动画</h2><p>蒙皮动画步骤</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110170653403.png"></p><p>坐标系的转换，要理解怎么变化的，乘旋转和平移矩阵，每一个骨骼都有自己的Local Space，并且会是一个一直传递相乘的矩阵（正向运动学），比如手指要一直乘各个手臂</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110170946080.png"></p><p>骨骼树的起点是胯部（脊椎的最后一块骨头）</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171338432.png"></p><p>可能会加入一些额外的骨骼，比如什么眼球啊，翅膀啊，斗篷，武器，绑定节点（人骑在马上）这些都是用骨骼来驱动的</p><p>为了更好地计算移速、离地高度，会加一个root</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171929544.png"></p><p>四足动物的位置如下：</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171955248.png"></p><h2 id="3D旋转数学基础"><a href="#3D旋转数学基础" class="headerlink" title="3D旋转数学基础"></a>3D旋转数学基础</h2><p><strong>2d旋转</strong></p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110172921112.png"></p><p><strong>3D旋转</strong></p><p>可以证明任何旋转都可以用xyz旋转等价，也就是欧拉角</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173332296.png"></p><p>但是欧拉角是有很多问题的，首先他顺序乘的不同会导致结果不同</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173510295.png"></p><p>其次欧拉角会有锁死的情况，比如y轴转了90度，这时x轴和z轴是同轴了，那么就两个的旋转等于只有一个旋转了，造成退化的情况。</p><p>非常难插值</p><p>传递的时候不能直接相乘</p><p>并且很难绕着一个任意的轴来旋转</p><p><strong>四元数</strong></p><p>这时候就要用到四元数（Quaternion）了</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110175428592.png"></p><p>没太听懂，到时候仔细研究一下四元数吧</p><p><a href="https://www.bilibili.com/video/BV1SW411y7W1/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">四元数的可视化</a></p><h2 id="关节与蒙皮"><a href="#关节与蒙皮" class="headerlink" title="关节与蒙皮"></a>关节与蒙皮</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>游戏杂货铺</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【UE官方培训】Sequence相关</title>
     <link href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E3%80%90UE%E5%AE%98%E6%96%B9%E5%9F%B9%E8%AE%AD%E3%80%91Sequence%E7%9B%B8%E5%85%B3/"/>
     <url>/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E3%80%90UE%E5%AE%98%E6%96%B9%E5%9F%B9%E8%AE%AD%E3%80%91Sequence%E7%9B%B8%E5%85%B3/</url>
@@ -118,25 +137,6 @@
   
   
   <entry>
-    <title>基于蓝图的多人游戏玩法设计</title>
-    <link href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E5%9F%BA%E4%BA%8E%E8%93%9D%E5%9B%BE%E7%9A%84%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E8%AE%BE%E8%AE%A1/"/>
-    <url>/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E5%9F%BA%E4%BA%8E%E8%93%9D%E5%9B%BE%E7%9A%84%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E8%AE%BE%E8%AE%A1/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV18Y41187vo/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">[UOD2021]与众乐乐 - 基于蓝图的多人游戏玩法设计 | Epic Games 何骞</a> </p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20241221120244763.png"></p><p>复制Replication</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>游戏杂货铺</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>面经-Lua高性能编程</title>
     <link href="/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-Lua%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/"/>
     <url>/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-Lua%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/</url>
@@ -147,6 +147,25 @@
     <categories>
       
       <category>找工作</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>基于蓝图的多人游戏玩法设计</title>
+    <link href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E5%9F%BA%E4%BA%8E%E8%93%9D%E5%9B%BE%E7%9A%84%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E8%AE%BE%E8%AE%A1/"/>
+    <url>/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E5%9F%BA%E4%BA%8E%E8%93%9D%E5%9B%BE%E7%9A%84%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E8%AE%BE%E8%AE%A1/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV18Y41187vo/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">[UOD2021]与众乐乐 - 基于蓝图的多人游戏玩法设计 | Epic Games 何骞</a> </p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20241221120244763.png"></p><p>复制Replication</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>游戏杂货铺</category>
       
     </categories>
     
@@ -472,25 +491,6 @@
       <tag>GDC讲座</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>games104学习笔记</title>
-    <link href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/games104%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <url>/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/games104%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    
-    <content type="html"><![CDATA[<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p><strong>面领的挑战</strong></p><p>玩家行为是不可控的，要和gameplay互动；实时性；真实性（Motion Matching）</p><h2 id="2D动画"><a href="#2D动画" class="headerlink" title="2D动画"></a>2D动画</h2><p><strong>精灵动画（Sprite）</strong>：一帧一帧循环播放</p><p><strong>Live2D</strong></p><p>把每个图元都分隔，然后各种拉伸的时候可以做出各种动作</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png"></p><p>每一个部位生成一个图元来控制，非常直观的动画系统，简单又生动</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110163825295.png"></p><h2 id="3D动画分类"><a href="#3D动画分类" class="headerlink" title="3D动画分类"></a>3D动画分类</h2><p>基于层次的刚体动画，是一个树形结构，但是可能会穿帮，因为只操纵骨骼会互相穿插有可能。</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110165402649.png"></p><p>顶点动画，存offerset的texture和法向的texture，然后根据帧数来计算，可以做一些布料或者流体什么的</p><p><strong>蒙皮动画</strong></p><p><strong>基于物理的动画</strong>：衣料、布娃娃系统、IK（反向动力学）</p><h2 id="蒙皮动画"><a href="#蒙皮动画" class="headerlink" title="蒙皮动画"></a>蒙皮动画</h2><p>蒙皮动画步骤</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110170653403.png"></p><p>坐标系的转换，要理解怎么变化的，乘旋转和平移矩阵，每一个骨骼都有自己的Local Space，并且会是一个一直传递相乘的矩阵（正向运动学），比如手指要一直乘各个手臂</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110170946080.png"></p><p>骨骼树的起点是胯部（脊椎的最后一块骨头）</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171338432.png"></p><p>可能会加入一些额外的骨骼，比如什么眼球啊，翅膀啊，斗篷，武器，绑定节点（人骑在马上）这些都是用骨骼来驱动的</p><p>为了更好地计算移速、离地高度，会加一个root</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171929544.png"></p><p>四足动物的位置如下：</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110171955248.png"></p><h2 id="3D旋转数学基础"><a href="#3D旋转数学基础" class="headerlink" title="3D旋转数学基础"></a>3D旋转数学基础</h2><p><strong>2d旋转</strong></p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110172921112.png"></p><p><strong>3D旋转</strong></p><p>可以证明任何旋转都可以用xyz旋转等价，也就是欧拉角</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173332296.png"></p><p>但是欧拉角是有很多问题的，首先他顺序乘的不同会导致结果不同</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173510295.png"></p><p>其次欧拉角会有锁死的情况，比如y轴转了90度，这时x轴和z轴是同轴了，那么就两个的旋转等于只有一个旋转了，造成退化的情况。</p><p>非常难插值</p><p>传递的时候不能直接相乘</p><p>并且很难绕着一个任意的轴来旋转</p><p><strong>四元数</strong></p><p>这时候就要用到四元数（Quaternion）了</p><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110175428592.png"></p><p>没太听懂，到时候仔细研究一下四元数吧</p><p><a href="https://www.bilibili.com/video/BV1SW411y7W1/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">四元数的可视化</a></p><h2 id="关节与蒙皮"><a href="#关节与蒙皮" class="headerlink" title="关节与蒙皮"></a>关节与蒙皮</h2>]]></content>
-    
-    
-    <categories>
-      
-      <category>游戏杂货铺</category>
-      
-    </categories>
-    
     
   </entry>
   
