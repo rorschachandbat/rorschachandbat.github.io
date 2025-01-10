@@ -35,8 +35,15 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173332296.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173510295.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110175428592.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110235935822.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111000422109.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001302077.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001647296.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001908597.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002200716.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002713988.png">
 <meta property="article:published_time" content="2025-01-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-10T10:41:58.859Z">
+<meta property="article:modified_time" content="2025-01-10T16:38:02.375Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png">
@@ -300,7 +307,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          692 字
+          1.3k 字
         
       </span>
     
@@ -311,7 +318,7 @@
         
         
         
-          6 分钟
+          11 分钟
         
       </span>
     
@@ -362,7 +369,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月10日 晚上
+                    本文最后更新于：2025年1月11日 凌晨
                   
                 
               </p>
@@ -410,7 +417,28 @@
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110175428592.png" srcset="/img/loading.gif" lazyload></p>
 <p>没太听懂，到时候仔细研究一下四元数吧</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SW411y7W1/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">四元数的可视化</a></p>
-<h2 id="关节与蒙皮"><a href="#关节与蒙皮" class="headerlink" title="关节与蒙皮"></a>关节与蒙皮</h2>
+<h2 id="关节与蒙皮"><a href="#关节与蒙皮" class="headerlink" title="关节与蒙皮"></a>关节与蒙皮</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110235935822.png" srcset="/img/loading.gif" lazyload></p>
+<p>MJm，是从root上一步一步累计的transform矩阵，记住要乘一个自己绑定的时候的逆，然后可能还要乘一个骨骼到世界坐标的transform，一般编程的时候会把这个逆直接存储下来。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111000422109.png" srcset="/img/loading.gif" lazyload></p>
+<p>因为动画的帧数不够，所以需要插值，NLERP，然后可能要满足最短路径，这样才能看起来比较自然一点，夹角小的时候用NLERP，大的时候用SLEPR</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001302077.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动画压缩"><a href="#动画压缩" class="headerlink" title="动画压缩"></a>动画压缩</h2><p>动画一个帧就三十个pose，然后几十个骨骼，每个都要存旋转位移scale，这种时候就需要压缩，因为很多时候他们的数据是不变的</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001647296.png" srcset="/img/loading.gif" lazyload></p>
+<p>首先不变的值直接干掉，然后可以用keyframe插值，如果插值造成的误差没超过阈值，那么就可以接受。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001908597.png" srcset="/img/loading.gif" lazyload></p>
+<p>直接线性插值会对旋转矩阵会比较差，可以用catmull-rom spline</p>
+<p>如果浮点数的范围是有限的，可以转成定点数，归一数压缩一下</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002200716.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果避免error累积，防止出现动画飘来飘去的情况？要更换计算error的方式，直接比较矩阵函数和插值之后的差值其实不太直观，最好的是visual error，但是又不可能真的直接算，所以会在每个joint拿两个垂直的点，然后来计算这个前后的差值。敏感的可以给大一点。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002713988.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动画制作流程（DCC）"><a href="#动画制作流程（DCC）" class="headerlink" title="动画制作流程（DCC）"></a>动画制作流程（DCC）</h2><p>先用低模做，但是在关节地方会多加一点mesh</p>
+<p><strong>骨骼绑定</strong></p>
+<p><strong>Skinning</strong></p>
+<p>一般自动计算权重，但是也可能要手动调整一下</p>
+<p><strong>动画制作</strong></p>
+<p><strong>Exporting</strong></p>
+<p>要注意跳跃的时候root可能会变化，</p>
+<h2 id="动画混合"><a href="#动画混合" class="headerlink" title="动画混合"></a>动画混合</h2>
                 
               </div>
             
