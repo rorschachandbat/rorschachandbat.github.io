@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107184011328.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107185002691.png">
 <meta property="article:published_time" content="2025-01-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T16:25:38.265Z">
+<meta property="article:modified_time" content="2025-01-10T10:07:22.227Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png">
@@ -379,7 +379,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月10日 凌晨
+                    本文最后更新于：2025年1月10日 晚上
                   
                 
               </p>
@@ -388,13 +388,13 @@
               <div class="markdown-body">
                 
                 <p>【[官方培训]01-实时渲染基础上 | 陈拓 Epic】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Tt4y1H7kQ/?share_source=copy_web&vd_source=5d07d04eb2516df147034367e7af6fd2">https://www.bilibili.com/video/BV1Tt4y1H7kQ/?share_source=copy_web&amp;vd_source=5d07d04eb2516df147034367e7af6fd2</a></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png" srcset="/img/loading.gif" lazyload alt="image-20250106223718712"></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224045881.png" srcset="/img/loading.gif" lazyload alt="image-20250106224045881"></p>
-<h1 id="渲染前准备"><a href="#渲染前准备" class="headerlink" title="渲染前准备"></a>渲染前准备</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224513490.png" srcset="/img/loading.gif" lazyload alt="image-20250106224513490"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106223718712.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224045881.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="渲染前准备"><a href="#渲染前准备" class="headerlink" title="渲染前准备"></a>渲染前准备</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224513490.png" srcset="/img/loading.gif" lazyload></p>
 <p>会有多个线程在跑，游戏线程、渲染线程和GPU线程，这样流水线的走，如果比较理想，就是稳定30帧</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224728083.png" srcset="/img/loading.gif" lazyload alt="image-20250106224728083"></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224816969.png" srcset="/img/loading.gif" lazyload alt="image-20250106224816969"></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224858383.png" srcset="/img/loading.gif" lazyload alt="image-20250106224858383"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224728083.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224816969.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106224858383.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>距离</strong></p>
 <p>距离阈值(Desired Max draw distance)</p>
 <p>如果不想对每一个物体都设置这个距离，可以用Cull Distance Volume，包围的东西都会应用culling，可以设置size和distance，是一个数组，比如0-500size的东西应用一个culling，500-10000的又应用一个culling</p>
@@ -408,14 +408,14 @@
 <p>然后得编译一下，Compile-&gt;Precompute Static Visibility</p>
 <p>要用这个得在Setting里面开启Precompute Visibility</p>
 <p><strong>遮挡剔除</strong></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106233936337.png" srcset="/img/loading.gif" lazyload alt="image-20250106233936337"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106233936337.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="几何体渲染"><a href="#几何体渲染" class="headerlink" title="几何体渲染"></a>几何体渲染</h1><p>通过以上的步骤，可以拿到该被渲染的物体列表，但是如果直接渲染，会造成一些像素重复绘制，所以需要找出哪些模型应该先被渲染。</p>
 <p>Early Z：GPU驱动会在执行像素着色器前先检查改点深度，提前跳过不符合条件的像素。为了利用这个特性，可以开启Prepass，提前把深度写入buffer里面，可以加快速度。</p>
 <p>Drawcall：绘制拥有相同属性的一组多边形。</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235242724.png" srcset="/img/loading.gif" lazyload alt="image-20250106235242724"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235242724.png" srcset="/img/loading.gif" lazyload></p>
 <p>不同的材质会不同的drawcall（*2是因为有earlyz）</p>
 <p>切换材质影响性能开销，GPU渲染时，引擎会根据材质对物体进行排序，相同材质的会在同一个批次里绘制。</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235428006.png" srcset="/img/loading.gif" lazyload alt="image-20250106235428006"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250106235428006.png" srcset="/img/loading.gif" lazyload></p>
 <p>stat RHI命令可以查看drawcall数量</p>
 <p>drawcall数量比三角形数量更影响性能。</p>
 <p>引擎有一些基础的drawcall开销</p>
@@ -430,7 +430,7 @@
 <p>降低模型面数</p>
 <p>合并模型假如有多个材质还是会多个drawcaal，可以考虑合并材质</p>
 <p>调试可以用Render Doc插件，来看详细的DrawCall信息</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000456448.png" srcset="/img/loading.gif" lazyload alt="image-20250107000456448"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107000456448.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h2><h3 id="VertexShader"><a href="#VertexShader" class="headerlink" title="VertexShader"></a>VertexShader</h3><p>1.坐标转换（局部空间-&gt;世界空间-&gt;投影空间）</p>
 <p>2.顶点着色</p>
 <p>3.应用世界坐标偏移（WPO）：鸟、水体、飘动的草（<strong>顶点动画</strong>）</p>
@@ -439,17 +439,17 @@
 <p>动画越复杂、顶点越多性能越慢</p>
 <p>对远距离的物体应该禁用顶点动画（反正也看不到）</p>
 <p>对高精度的模型应该应用简单的VS</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001225370.png" srcset="/img/loading.gif" lazyload alt="image-20250107001225370"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001225370.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="光栅化和G-Buffer"><a href="#光栅化和G-Buffer" class="headerlink" title="光栅化和G-Buffer"></a>光栅化和G-Buffer</h1><p>经过这些之后，可以得到每个顶点在屏幕上的坐标</p>
 <p>因为硬件问题，计算一个像素还需要计算周边2*2的像素，所以会造成overShading</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001502973.png" srcset="/img/loading.gif" lazyload alt="image-20250107001502973"></p>
-<h1 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001803628.png" srcset="/img/loading.gif" lazyload alt="image-20250107001803628"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001502973.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107001803628.png" srcset="/img/loading.gif" lazyload></p>
 <p>因为法向是归一化，所以只需要知道两个就够了</p>
 <p>采用mipmap，会让内存变大1.3倍（一直1&#x2F;4)，但是会清晰很多(远处的物体也能平均取到)</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002050255.png" srcset="/img/loading.gif" lazyload alt="image-20250107002050255"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002050255.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="像素着色器和材质"><a href="#像素着色器和材质" class="headerlink" title="像素着色器和材质"></a>像素着色器和材质</h1><p>Pixel shader，实现光照、雾这些效果</p>
 <p>UE里面会有一个连线的材质器，然后会自动转成不同平台的shader语言嵌入进去</p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002941208.png" srcset="/img/loading.gif" lazyload alt="image-20250107002941208"></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107002941208.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p><strong>反射捕获</strong></p>
 <p>Reflection Capture</p>
 <p>cubemap，预先计算，但是不太准确，而且分辨率会影响反射效果</p>
@@ -461,10 +461,10 @@
 <p>其实就是相机换了一个位置，重新渲染了一遍，所以比较损耗性能，但是比较精确。</p>
 <p>Lumen</p>
 <p>RT Reflection</p>
-<h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093512026.png" srcset="/img/loading.gif" lazyload alt="image-20250107093512026"></p>
-<h2 id="静态光照"><a href="#静态光照" class="headerlink" title="静态光照"></a>静态光照</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093736129.png" srcset="/img/loading.gif" lazyload alt="image-20250107093736129"></p>
-<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093830617.png" srcset="/img/loading.gif" lazyload alt="image-20250107093830617"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250107094207091.png" srcset="/img/loading.gif" lazyload alt="image-20250107094207091"></p>
+<h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093512026.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="静态光照"><a href="#静态光照" class="headerlink" title="静态光照"></a>静态光照</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093736129.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107093830617.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250107094207091.png" srcset="/img/loading.gif" lazyload></p>
 <p>UE里面生成lightmap用lightmass</p>
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250107100807363.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="动态光照"><a href="#动态光照" class="headerlink" title="动态光照"></a>动态光照</h2><h3 id="动态阴影"><a href="#动态阴影" class="headerlink" title="动态阴影"></a>动态阴影</h3><p><strong>常规动态阴影</strong></p>
