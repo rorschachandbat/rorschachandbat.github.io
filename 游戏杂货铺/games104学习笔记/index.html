@@ -42,8 +42,24 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111001908597.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002200716.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111002713988.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111091311695.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111092138796.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111092612627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100048688.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100201347.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100545330.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100825429.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111101948230.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102021279.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102213306.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102609241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111111624550.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111112344279.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111113632285.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%AA%A8%E9%AA%BC%E6%8F%92%E5%80%BC.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%97%AE%E9%A2%98.gif">
 <meta property="article:published_time" content="2025-01-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-10T16:38:02.375Z">
+<meta property="article:modified_time" content="2025-01-11T03:49:34.226Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png">
@@ -307,7 +323,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          2.4k 字
         
       </span>
     
@@ -318,7 +334,7 @@
         
         
         
-          11 分钟
+          20 分钟
         
       </span>
     
@@ -369,7 +385,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月11日 凌晨
+                    本文最后更新于：2025年1月11日 中午
                   
                 
               </p>
@@ -438,7 +454,51 @@
 <p><strong>动画制作</strong></p>
 <p><strong>Exporting</strong></p>
 <p>要注意跳跃的时候root可能会变化，</p>
-<h2 id="动画混合"><a href="#动画混合" class="headerlink" title="动画混合"></a>动画混合</h2>
+<h2 id="动画混合"><a href="#动画混合" class="headerlink" title="动画混合"></a>动画混合</h2><p>两个动作之间插值，比如走到跑，weight根据速度来变化，要保证两个动作的时间是一样的，这样才能确定是哪一帧</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111091311695.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="混合空间（Blending-Space）"><a href="#混合空间（Blending-Space）" class="headerlink" title="混合空间（Blending Space）"></a>混合空间（Blending Space）</h2><p>2d空间中，动作不是一维的，所以有可能有些地方动作密（因为觉得这里需要更细腻的表现），然后插值的时候，不可能把全部动作都插值，这时候就需要用到delaunay三角化，其实也就是把每三个点都连成三角形，然后你插值的时候判断是在哪个三角形里面，只插值这最近的三角形的动作。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111092138796.png" srcset="/img/loading.gif" lazyload></p>
+<p>鼓掌可以有一个mask，某些动作只应用到上半身</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111092612627.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>Additive Blending</strong></p>
+<p>混合之后再叠加一个blend，比如旋转，可以做一直朝着一个地方点头</p>
+<h2 id="动画状态机（Action-State-Machine）"><a href="#动画状态机（Action-State-Machine）" class="headerlink" title="动画状态机（Action State Machine）"></a>动画状态机（Action State Machine）</h2><p>每一个状态也可以是一个动画状态空间</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100048688.png" srcset="/img/loading.gif" lazyload></p>
+<p>一般还可以是多层状态机，分开独立控制</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100201347.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动画混合树"><a href="#动画混合树" class="headerlink" title="动画混合树"></a>动画混合树</h2><p>定义控制变量，暴露给gameplay系统，让他们来改变，然后通过这些变量来选择当前树该选择哪个节点</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100545330.png" srcset="/img/loading.gif" lazyload></p>
+<p>也可以通过事件来控制，比如切枪（从步枪变成火箭筒）</p>
+<p><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/skeletal-mesh-animation-system-in-unreal-engine?application_version=5.4">UE骨架动画文档</a></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111100825429.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Inverse-Kinematics-IK反向动力学"><a href="#Inverse-Kinematics-IK反向动力学" class="headerlink" title="Inverse Kinematics(IK反向动力学)"></a>Inverse Kinematics(IK反向动力学)</h2><p>ik可能是多解的，所以这时候需要一个指定朝向，相当于再多加一个平面</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111101948230.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102021279.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果不止两个，有多个关节，该怎么解？（解有无穷多种可能）</p>
+<p>首先要判断解空间，考虑最大和最小，并且还有考虑关节的约束度</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102213306.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>CCD</strong>，不断地翻滚骨头，循环到目标</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111102609241.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>FABRIK</strong></p>
+<p>把末端直接放在终点，这时候那个骨头会突出去，然后把这个作为下一个的起点，最后迭代过去会导致root也有偏差，这时候再backward一遍，把root拉过去，然后一直这样forward和backward迭代，设置一个error误差。</p>
+<p><strong>多目标约束</strong>怎么办？共同的节点发生变化，可以用雅可比矩阵+逼近的方式。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111111624550.png" srcset="/img/loading.gif" lazyload alt="一些其他的IK技术"></p>
+<h2 id="面部动画"><a href="#面部动画" class="headerlink" title="面部动画"></a>面部动画</h2><p>Facical Action Code System</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111112344279.png" srcset="/img/loading.gif" lazyload alt="46个基础表情"></p>
+<p>存的是顶点动画，每一个node相对于自然状态的delta，morph target animation</p>
+<p>也有些使用骨骼动画，捏脸，眼球，这些需要。</p>
+<p>2d的话也可以直接用uv texture</p>
+<h2 id="动画重定向"><a href="#动画重定向" class="headerlink" title="动画重定向"></a>动画重定向</h2><p>Source Character-&gt;Target Character</p>
+<p>Source Animation-&gt;Target Animation</p>
+<p>重定向的时候存的是相对旋转、scale和位移</p>
+<p>要根据腰线的高度等比例放缩一下</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111113632285.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果还不行就得用IK</p>
+<p>有些时候，如果骨骼数量不一样怎么办？简单的办法就是把数量不一样的地方，按照数量的差异，做一个插值，4-&gt;3就是0.3，0.7，然后把插值找到的位置直接认为是少的那个骨骼的终点位置。</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%AA%A8%E9%AA%BC%E6%8F%92%E5%80%BC.gif" srcset="/img/loading.gif" lazyload></p>
+<p>也存在一些问题，比如自身穿模，或者没达到效果，因为有些动作是有语义的，比如鼓掌没合手，可以加一些约束</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%97%AE%E9%A2%98.gif" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Gameplay框架"><a href="#Gameplay框架" class="headerlink" title="Gameplay框架"></a>Gameplay框架</h1><h2 id="寻路（Navigation）"><a href="#寻路（Navigation）" class="headerlink" title="寻路（Navigation）"></a>寻路（Navigation）</h2>
                 
               </div>
             
