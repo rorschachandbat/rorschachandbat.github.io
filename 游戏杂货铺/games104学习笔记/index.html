@@ -58,8 +58,22 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111113632285.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%AA%A8%E9%AA%BC%E6%8F%92%E5%80%BC.gif">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%97%AE%E9%A2%98.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111124936819.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/ringbuffer.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111145922323.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111164800906.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112094034081.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E5%AF%BB%E8%B7%AF.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112100838253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112102944686.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112103423743.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/Funnel-Algorithm.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112105406114.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110114138.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112105958036.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110056936.png">
 <meta property="article:published_time" content="2025-01-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-11T03:49:34.226Z">
+<meta property="article:modified_time" content="2025-01-12T04:49:54.089Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png">
@@ -323,7 +337,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          3.8k 字
         
       </span>
     
@@ -334,7 +348,7 @@
         
         
         
-          20 分钟
+          33 分钟
         
       </span>
     
@@ -385,7 +399,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月11日 中午
+                    本文最后更新于：2025年1月12日 下午
                   
                 
               </p>
@@ -393,7 +407,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p><strong>面领的挑战</strong></p>
+                <h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p><strong>面临的挑战</strong></p>
 <p>玩家行为是不可控的，要和gameplay互动；实时性；真实性（Motion Matching）</p>
 <h2 id="2D动画"><a href="#2D动画" class="headerlink" title="2D动画"></a>2D动画</h2><p><strong>精灵动画（Sprite）</strong>：一帧一帧循环播放</p>
 <p><strong>Live2D</strong></p>
@@ -498,7 +512,84 @@
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%AA%A8%E9%AA%BC%E6%8F%92%E5%80%BC.gif" srcset="/img/loading.gif" lazyload></p>
 <p>也存在一些问题，比如自身穿模，或者没达到效果，因为有些动作是有语义的，比如鼓掌没合手，可以加一些约束</p>
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%97%AE%E9%A2%98.gif" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Gameplay框架"><a href="#Gameplay框架" class="headerlink" title="Gameplay框架"></a>Gameplay框架</h1><h2 id="寻路（Navigation）"><a href="#寻路（Navigation）" class="headerlink" title="寻路（Navigation）"></a>寻路（Navigation）</h2>
+<h1 id="Gameplay框架"><a href="#Gameplay框架" class="headerlink" title="Gameplay框架"></a>Gameplay框架</h1><h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p>一般是用<strong>观察者模式</strong>，需要定义以下三个东西</p>
+<p><strong>Event Definition</strong></p>
+<p>有一个enum和parament，要做到可拓展，能实时修改</p>
+<p><strong>Callback Registration</strong></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111124936819.png" srcset="/img/loading.gif" lazyload></p>
+<p>要考虑事件和回调的线程安全性问题，比如有可能你invoke的时候那个对象已经被销毁了</p>
+<p>可以用强引用，保证invoke的的对象一定不被销毁；或这软引用，使用之前先判断是否已经被销毁了。</p>
+<p><strong>Event Dispatching</strong></p>
+<p>派发，如果来一个事件就直接派发，可能会产生堵塞、或者可能发生链式反应，事件一直会有。</p>
+<p>一般会实现一个消息队列，把一帧到来的事件全部收集好，然后下一帧统一执行。</p>
+<p>要实现序列化和反序列化，以及Ring buffer，这样就不用重复申请和释放内存，好处是不会崩，顶多是那一瞬间卡一下</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/ringbuffer.gif" srcset="/img/loading.gif" lazyload alt="ringbuffer"></p>
+<p>不同的类型要分批分发</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111145922323.png" srcset="/img/loading.gif" lazyload></p>
+<p>也会有问题，比如有些事件就需要即时发生；以及delay会一直累积</p>
+<h2 id="游戏逻辑和脚本系统"><a href="#游戏逻辑和脚本系统" class="headerlink" title="游戏逻辑和脚本系统"></a>游戏逻辑和脚本系统</h2><p>热更新所以得用脚本语言？</p>
+<p>GO的管理靠谁来管理？一般是脚本，因为很多跟逻辑相关，一般是靠GC</p>
+<p>如果本身对象没有那么多，比如单机游戏，更加注重ai动画，那么就直接引擎来管理</p>
+<p>解释性语言可能会比较慢，可以用JIT（一边执行一边编译）</p>
+<h2 id="可视化脚本"><a href="#可视化脚本" class="headerlink" title="可视化脚本"></a>可视化脚本</h2><p>面向设计师，让他们免于管理生命周期。可视化脚本也要实现编程语言的那些共同的要素。</p>
+<p><strong>变量</strong>：类型和作用域（管脚不一样，同颜色对同颜色就可以了）</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250111164800906.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>语句和表达式</strong></p>
+<p><strong>Control Flow</strong></p>
+<p><strong>函数</strong>：input，body和return</p>
+<p><strong>类</strong>：蓝图本身就是一个类</p>
+<p><strong>debug</strong>：直接可视化一步一步走</p>
+<h2 id="3C"><a href="#3C" class="headerlink" title="3C"></a>3C</h2><p><strong>Character</strong></p>
+<p>各种复杂的状态</p>
+<p><strong>Control</strong></p>
+<p>处理各种输入设备</p>
+<p>细节很多，比如会自动锁定，反馈，多态的输入</p>
+<p><strong>Camera</strong></p>
+<p>不能穿墙</p>
+<p>Camera Effect</p>
+<p>Cmmera Manager:会有很多不同视角的相机</p>
+<h2 id="寻路（Navigation）"><a href="#寻路（Navigation）" class="headerlink" title="寻路（Navigation）"></a>寻路（Navigation）</h2><p>地图的表达；寻路；path smoothing</p>
+<h3 id="表达的不同形式"><a href="#表达的不同形式" class="headerlink" title="表达的不同形式"></a>表达的不同形式</h3><p><strong>路点网络</strong></p>
+<p>类似地铁，但是每次地图变化也改变路网的图，而且npc很容易往中间走</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112094034081.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>Grid</strong></p>
+<p>障碍物可以自动更新，类似于光栅化的方式；</p>
+<p>存储空间可能比较浪费；而且很难表达3d的层叠结构（桥上桥下）</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E5%AF%BB%E8%B7%AF.gif" srcset="/img/loading.gif" lazyload alt="动态更新"></p>
+<p><strong>寻路网格（Navigation Mesh）</strong></p>
+<p>需要用凸三多边形</p>
+<p>寻路比较快，内存占用比较低。</p>
+<p>生成比较复杂，且不支持3d空间</p>
+<p><strong>八叉树</strong></p>
+<p>可以表达3d空间</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112100838253.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="寻路算法"><a href="#寻路算法" class="headerlink" title="寻路算法"></a>寻路算法</h3><p>其实不管什么表达方式连接点都可以变成一张图</p>
+<p><strong>dfs</strong></p>
+<p><strong>bfs</strong></p>
+<p><strong>Dijkstra算法</strong></p>
+<p><strong>Astar</strong></p>
+<p>navmesh里面直接用多边形相交边的中点的欧拉距离</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112102944686.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Path-Smoothing"><a href="#Path-Smoothing" class="headerlink" title="Path Smoothing"></a>Path Smoothing</h3><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112103423743.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>funnel算法</strong></p>
+<p>从几何理解比较简单</p>
+<ol>
+<li>创建沿 A* 路径的portal（多边形交线）列表。确保每个portal的点相对于起点以相同的方式存储。您需要知道某个点是在起点的左侧还是右侧。</li>
+<li>创建一个由三个点组成的“漏斗”：角色的起始位置（顶点）、portal的右侧和portal的左侧。</li>
+<li>交替更新funnel的左右两侧，每次都使其变窄</li>
+<li>当funnel的两侧交叉时，请注意不要更新新漏斗的顶点，并将其存储为平滑路径的一部分。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/Funnel-Algorithm.png" srcset="/img/loading.gif" lazyload alt="Funnel-Algorithm"></p>
+<p>假如创建的funnel里面直接包含了终点，那么直接连过去就行</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112105406114.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Navmesh-Generation"><a href="#Navmesh-Generation" class="headerlink" title="Navmesh Generation"></a>Navmesh Generation</h3><p><strong>voxelization（体素化）</strong></p>
+<p>先体素化，然后标记出能通行的区域（通过高度差距），然后用洪水算法，从一个最深的点开始判断哪些是可达的，然后再根据这个生成多边形</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110114138.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112105958036.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110056936.png" srcset="/img/loading.gif" lazyload></p>
+<p>还可以给navmesh添加flag，比如水陆地，来实现复杂的寻路算法，习性不同的怪物会走不同的路，一般是直接在地图上放flag然后映射到navmesh上面。</p>
+<p>tile：大的meshmp可以分隔成多个小的tilie，因为实际游戏中map可能会变</p>
+<h2 id="转向系统"><a href="#转向系统" class="headerlink" title="转向系统"></a>转向系统</h2>
                 
               </div>
             
