@@ -72,8 +72,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110114138.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112105958036.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110056936.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113145756701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113153524365.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113153730001.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113155904232.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113161310624.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113161458366.png">
 <meta property="article:published_time" content="2025-01-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-12T04:49:54.089Z">
+<meta property="article:modified_time" content="2025-01-13T12:38:12.601Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250110173000363.png">
@@ -337,7 +343,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          4.3k 字
         
       </span>
     
@@ -348,7 +354,7 @@
         
         
         
-          33 分钟
+          36 分钟
         
       </span>
     
@@ -399,7 +405,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月12日 下午
+                    本文最后更新于：2025年1月13日 晚上
                   
                 
               </p>
@@ -512,7 +518,7 @@
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%AA%A8%E9%AA%BC%E6%8F%92%E5%80%BC.gif" srcset="/img/loading.gif" lazyload></p>
 <p>也存在一些问题，比如自身穿模，或者没达到效果，因为有些动作是有语义的，比如鼓掌没合手，可以加一些约束</p>
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/%E9%97%AE%E9%A2%98.gif" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Gameplay框架"><a href="#Gameplay框架" class="headerlink" title="Gameplay框架"></a>Gameplay框架</h1><h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p>一般是用<strong>观察者模式</strong>，需要定义以下三个东西</p>
+<h1 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h1><h1 id="Gameplay框架"><a href="#Gameplay框架" class="headerlink" title="Gameplay框架"></a>Gameplay框架</h1><h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p>一般是用<strong>观察者模式</strong>，需要定义以下三个东西</p>
 <p><strong>Event Definition</strong></p>
 <p>有一个enum和parament，要做到可拓展，能实时修改</p>
 <p><strong>Callback Registration</strong></p>
@@ -589,7 +595,40 @@
 <p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250112110056936.png" srcset="/img/loading.gif" lazyload></p>
 <p>还可以给navmesh添加flag，比如水陆地，来实现复杂的寻路算法，习性不同的怪物会走不同的路，一般是直接在地图上放flag然后映射到navmesh上面。</p>
 <p>tile：大的meshmp可以分隔成多个小的tilie，因为实际游戏中map可能会变</p>
-<h2 id="转向系统"><a href="#转向系统" class="headerlink" title="转向系统"></a>转向系统</h2>
+<h2 id="转向系统"><a href="#转向系统" class="headerlink" title="转向系统"></a>转向系统</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113145756701.png" srcset="/img/loading.gif" lazyload></p>
+<p>需要更自然，先加速再匀速然后减速</p>
+<h2 id="群体模拟"><a href="#群体模拟" class="headerlink" title="群体模拟"></a>群体模拟</h2><p>微观的方法，定义每个个体的规则</p>
+<p>鱼群效果：远离、接近和跟随</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113153524365.png" srcset="/img/loading.gif" lazyload></p>
+<p>宏观</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113153730001.png" srcset="/img/loading.gif" lazyload></p>
+<p>两者结合，比如说蜂群，多个结合成一个小团体，有一个大趋势，然后团体内部每个个体有自己的规则</p>
+<p>如何避免碰撞？</p>
+<p>直接加斥力or方向场</p>
+<p><strong>RVO</strong></p>
+<p>计算别人的速度向量是否在自己的路径上，如果在路径上就各自调整速度向量</p>
+<h2 id="感知"><a href="#感知" class="headerlink" title="感知"></a>感知</h2><p><strong>自身信息</strong></p>
+<p>位置、HP</p>
+<p>地形信息：寻路、战术信息、可交互物体、掩护点</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113155904232.png" srcset="/img/loading.gif" lazyload></p>
+<p>动态数据：影响力图，动态寻路数据、视线图、游戏中的object（它身上的各种信息）</p>
+<p>视觉感知、听觉感知</p>
+<h2 id="AI"><a href="#AI" class="headerlink" title="AI"></a>AI</h2><h3 id="常规决策算法"><a href="#常规决策算法" class="headerlink" title="常规决策算法"></a>常规决策算法</h3><h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a><strong>状态机</strong></h4><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113161310624.png" srcset="/img/loading.gif" lazyload></p>
+<p>状态太多就不好处理，可以分层，但是不太好飞线</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20250113161458366.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="行为树"><a href="#行为树" class="headerlink" title="行为树"></a><strong>行为树</strong></h4><p><strong>Sequence</strong></p>
+<p>所有子节点依次执行，每个都要执行</p>
+<p><strong>Selector</strong></p>
+<p>一直试，直到某个节点成功完成</p>
+<p><strong>Parallel</strong></p>
+<p>同时执行所有节点</p>
+<p>比如一边走向目标一边开枪</p>
+<p><strong>Decorator</strong></p>
+<p>有各种判断条件，以及loop，time这种</p>
+<p><strong>Blackboard</strong></p>
+<p>行为树的各个节点直接互相通信，存储一些变量</p>
+<p>没有目标，只是遇到情况就来判断做什么</p>
+<h3 id="层次任务网络（HTN）"><a href="#层次任务网络（HTN）" class="headerlink" title="层次任务网络（HTN）"></a>层次任务网络（HTN）</h3><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h1 id="面向数据编程和任务系统"><a href="#面向数据编程和任务系统" class="headerlink" title="面向数据编程和任务系统"></a>面向数据编程和任务系统</h1><h1 id="Lumen"><a href="#Lumen" class="headerlink" title="Lumen"></a>Lumen</h1><h1 id="Nanite"><a href="#Nanite" class="headerlink" title="Nanite"></a>Nanite</h1>
                 
               </div>
             

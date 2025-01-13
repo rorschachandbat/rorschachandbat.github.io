@@ -24,7 +24,7 @@
 <meta property="og:description" content="垃圾回收可能会问到的一切东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-12T04:49:53.869Z">
+<meta property="article:modified_time" content="2025-01-13T12:38:12.425Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -349,7 +349,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2025年1月12日 下午
+                    本文最后更新于：2025年1月13日 晚上
                   
                 
               </p>
@@ -415,7 +415,8 @@
 <h4 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h4><h4 id="函数引用"><a href="#函数引用" class="headerlink" title="函数引用"></a>函数引用</h4><h4 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h4><p>6.5之前的版本会因为迭代器有内存垃圾</p>
 <h3 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h3><p>比如把对象里面的string拆出来，这样就不用频繁地在GC里面类型检查</p>
 <h3 id="定时执行GC"><a href="#定时执行GC" class="headerlink" title="定时执行GC"></a>定时执行GC</h3><p>比如过场的时候主动调用GC操作</p>
-<h1 id="UE"><a href="#UE" class="headerlink" title="UE"></a>UE</h1><h1 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/133939450">Lua GC机制分析与理解-上 - 小破孩不会编程序的文章 - 知乎</a></p>
+<h1 id="UE"><a href="#UE" class="headerlink" title="UE"></a>UE</h1><p>也是标记清除</p>
+<h1 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/133939450">Lua GC机制分析与理解-上 - 小破孩不会编程序的文章 - 知乎</a></p>
 <h2 id="gc的思想"><a href="#gc的思想" class="headerlink" title="gc的思想"></a>gc的思想</h2><p>会遍历所有对象，标记颜色，那些不可达的就是需要gc的对象，又分为双色和三色，双色就是不能中断，三色可以中断，但是实现复杂，</p>
 <h2 id="何时会触发gc？"><a href="#何时会触发gc？" class="headerlink" title="何时会触发gc？"></a>何时会触发gc？</h2><p>分为两种，一种是自动触发</p>
 <p>在以下代码中，使用 luaC_checkGC 检查 gc 阈值 GCdebt ，当 GCdebt 大于0 时，执行 gc<br>1、创建新数据时 string, thread, userdata, table, closure<br>3、语法解析时<br>4、错误发生时<br>5、字符串拼接时 concat<br>6、栈增长时</p>
