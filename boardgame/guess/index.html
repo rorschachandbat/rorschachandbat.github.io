@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="R">
 <meta property="og:description" content="数字冷知识问答              body {             font-family: &#39;Microsoft YaHei&#39;, sans-serif;             max-width: 800px;             margin: 0 auto;             padding: 20px;             ba">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-01T02:19:42.754Z">
-<meta property="article:modified_time" content="2025-06-01T02:19:42.754Z">
+<meta property="article:published_time" content="2025-06-01T04:01:58.684Z">
+<meta property="article:modified_time" content="2025-06-01T04:01:58.684Z">
 <meta property="article:author" content="R">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -343,6 +343,50 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        .filter-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .filter-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .filter-buttons button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #6c757d;
+            color: white;
+        }
+        .filter-buttons button:hover {
+            background-color: #5a6268;
+        }
         .question-box {
             background-color: #f8f9fa;
             padding: 20px;
@@ -362,6 +406,7 @@
             display: flex;
             gap: 10px;
             justify-content: center;
+            flex-wrap: wrap;
         }
         button {
             padding: 12px 24px;
@@ -388,11 +433,83 @@
             cursor: not-allowed;
             transform: none;
         }
+        .current-filters {
+            text-align: center;
+            color: #666;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .mode-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .mode-selector select {
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            cursor: pointer;
+        }
+        .question-info {
+            text-align: center;
+            color: #666;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        #restartBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+        #restartBtn:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>数字冷知识问答</h1>
+        
+        <div class="mode-selector">
+            <select id="answerMode">
+                <option value="random">随机模式</option>
+                <option value="sequence">顺序模式</option>
+                <option value="custom">随机顺序模式</option>
+            </select>
+            <button id="generateSequence" style="display: none;">生成随机序列</button>
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>选择类型：</label>
+                <div class="filter-options" id="typeFilters">
+                    <!-- 类型选项将通过JavaScript动态添加 -->
+                </div>
+                <div class="filter-buttons">
+                    <button onclick="toggleAll('type', true)">全选类型</button>
+                    <button onclick="toggleAll('type', false)">反选类型</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>选择难度：</label>
+                <div class="filter-options" id="levelFilters">
+                    <!-- 难度选项将通过JavaScript动态添加 -->
+                </div>
+                <div class="filter-buttons">
+                    <button onclick="toggleAll('level', true)">全选难度</button>
+                    <button onclick="toggleAll('level', false)">反选难度</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="current-filters" id="currentFilters">
+            当前筛选：全部类型，全部难度
+        </div>
+        
+        <div class="question-info" id="questionInfo">
+            当前进度：0/0
+        </div>
+        
         <div class="question-box" id="questionBox">
             点击"显示问题"按钮开始游戏！
         </div>
@@ -401,79 +518,244 @@
         <div class="button-group">
             <button id="showQuestion">显示问题</button>
             <button id="showAnswer" disabled>显示答案</button>
+            <button id="restartBtn">重新开始</button>
         </div>
     </div>
 
+    <!-- 引入题库数据 -->
+    <script src="trivia_data.js"></script>
     <script>
-        const triviaData = [
-            {
-                question: "人类大脑平均每天会产生多少个想法？",
-                answer: "60000"
-            },
-            {
-                question: "一个成年人平均每天眨眼多少次？",
-                answer: "15000"
-            },
-            {
-                question: "地球表面被水覆盖的百分比是多少？",
-                answer: "71"
-            },
-            {
-                question: "人类一生中平均会走多少步？",
-                answer: "216262500"
-            },
-            {
-                question: "一个成年人平均每天呼吸多少次？",
-                answer: "23000"
-            },
-            {
-                question: "人体内有多少块骨头？",
-                answer: "206"
-            },
-            {
-                question: "太阳表面的温度（摄氏度）大约是多少？",
-                answer: "5500"
-            },
-            {
-                question: "地球到月球的平均距离（公里）是多少？",
-                answer: "384400"
-            },
-            {
-                question: "人类大脑平均重量（克）是多少？",
-                answer: "1400"
-            },
-            {
-                question: "一个成年人平均每天心跳多少次？",
-                answer: "100000"
-            }
-        ];
-
         let currentQuestion = null;
+        let questionSequence = [];
+        let currentIndex = -1;
+        let isCustomSequence = false;
+        
         const questionBox = document.getElementById('questionBox');
         const answerBox = document.getElementById('answerBox');
         const showQuestionBtn = document.getElementById('showQuestion');
         const showAnswerBtn = document.getElementById('showAnswer');
+        const restartBtn = document.getElementById('restartBtn');
+        const typeFilters = document.getElementById('typeFilters');
+        const levelFilters = document.getElementById('levelFilters');
+        const currentFilters = document.getElementById('currentFilters');
+        const questionInfo = document.getElementById('questionInfo');
+        const answerMode = document.getElementById('answerMode');
+        const generateSequenceBtn = document.getElementById('generateSequence');
 
-        function getRandomQuestion() {
-            const randomIndex = Math.floor(Math.random() * triviaData.length);
-            return triviaData[randomIndex];
+        // 全选/反选功能
+        function toggleAll(filterType, selectAll) {
+            const checkboxes = document.querySelectorAll(`input[name="${filterType}"]`);
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll ? true : !checkbox.checked;
+            });
+            updateFilterDisplay();
         }
 
+        // 初始化筛选选项
+        function initializeFilters() {
+            // 添加类型选项
+            availableTypes.forEach(type => {
+                const label = document.createElement('label');
+                label.className = 'filter-option';
+                label.innerHTML = `
+                    <input type="checkbox" name="type" value="${type}" checked>
+                    ${type}
+                `;
+                typeFilters.appendChild(label);
+            });
+
+            // 添加难度选项
+            availableLevels.forEach(level => {
+                const label = document.createElement('label');
+                label.className = 'filter-option';
+                label.innerHTML = `
+                    <input type="checkbox" name="level" value="${String(level)}" checked>
+                    ${level}
+                `;
+                levelFilters.appendChild(label);
+            });
+
+            // 添加筛选变化监听
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    updateFilterDisplay();
+                    restart();
+                });
+            });
+
+            // 初始化筛选显示
+            updateFilterDisplay();
+        }
+
+        // 更新筛选显示
+        function updateFilterDisplay() {
+            const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value);
+            const selectedLevels = Array.from(document.querySelectorAll('input[name="level"]:checked')).map(cb => cb.value);
+            
+            const typeText = selectedTypes.length === availableTypes.length ? '全部类型' : selectedTypes.join('、');
+            const levelText = selectedLevels.length === availableLevels.length ? '全部难度' : selectedLevels.join('、');
+            
+            currentFilters.textContent = `当前筛选：${typeText}，${levelText}`;
+        }
+
+        // 更新问题信息显示
+        function updateQuestionInfo() {
+            const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value);
+            const selectedLevels = Array.from(document.querySelectorAll('input[name="level"]:checked')).map(cb => cb.value);
+            
+            const filteredQuestions = triviaData.filter(q => 
+                selectedTypes.includes(q.Type) && selectedLevels.includes(String(q.Level))
+            );
+
+            if (filteredQuestions.length === 0) {
+                questionInfo.textContent = "当前进度：0/0";
+                return;
+            }
+
+            switch(answerMode.value) {
+                case 'random':
+                    // 随机模式显示总题数
+                    questionInfo.textContent = `当前模式：随机模式 (共${filteredQuestions.length}题)`;
+                    break;
+                case 'sequence':
+                case 'custom':
+                    if (currentIndex === -1) {
+                        // 初始状态或重置后显示 0/n
+                        questionInfo.textContent = `当前进度：0/${filteredQuestions.length}`;
+                    } else {
+                        // 正常显示进度
+                        questionInfo.textContent = `当前进度：${currentIndex + 1}/${questionSequence.length}`;
+                    }
+                    break;
+            }
+        }
+
+        // 初始化问题序列
+        function initializeQuestionSequence() {
+            const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value);
+            const selectedLevels = Array.from(document.querySelectorAll('input[name="level"]:checked')).map(cb => cb.value);
+            
+            const filteredQuestions = triviaData.filter(q => 
+                selectedTypes.includes(q.Type) && selectedLevels.includes(String(q.Level))
+            );
+            
+            if (filteredQuestions.length === 0) {
+                questionSequence = [];
+                currentIndex = -1;
+                updateQuestionInfo(); // 确保在初始化失败时更新显示
+                return false;
+            }
+
+            // 根据模式设置问题序列
+            switch(answerMode.value) {
+                case 'random':
+                    // 随机模式：每次都是随机抽取，不需要保存序列
+                    questionSequence = filteredQuestions;
+                    currentIndex = -1;  // 保持-1，这样每次都会重新随机
+                    break;
+                case 'sequence':
+                    // 顺序模式：按索引排序
+                    questionSequence = [...filteredQuestions].sort((a, b) => a.index - b.index);
+                    currentIndex = -1;
+                    break;
+                case 'custom':
+                    // 随机顺序模式：生成随机序列
+                    questionSequence = [...filteredQuestions].sort(() => Math.random() - 0.5);
+                    currentIndex = -1;
+                    break;
+            }
+            
+            updateQuestionInfo(); // 确保在初始化成功时更新显示
+            return true;
+        }
+
+        // 获取下一个问题
+        function getNextQuestion() {
+            if (questionSequence.length === 0) {
+                return null;
+            }
+            
+            if (answerMode.value === 'random') {
+                // 随机模式：每次都随机抽取
+                const randomIndex = Math.floor(Math.random() * questionSequence.length);
+                currentIndex = randomIndex; // 更新索引但不用于进度显示
+                return questionSequence[randomIndex];
+            } else {
+                // 顺序模式和自定义顺序：按顺序获取
+                currentIndex = (currentIndex + 1) % questionSequence.length;
+                return questionSequence[currentIndex];
+            }
+        }
+
+        // 重新开始功能
+        function restart() {
+            currentQuestion = null;
+            questionBox.textContent = '点击"显示问题"按钮开始游戏！';
+            answerBox.style.display = 'none';
+            answerBox.textContent = '';
+            showAnswerBtn.disabled = true;
+            currentIndex = -1;
+            questionSequence = [];
+            updateQuestionInfo();
+        }
+
+        // 模式切换处理
+        answerMode.addEventListener('change', () => {
+            generateSequenceBtn.style.display = answerMode.value === 'custom' ? 'inline-block' : 'none';
+            restart();
+            updateQuestionInfo(); // 确保在切换模式时更新显示
+        });
+
+        // 生成随机序列按钮（仅在自定义顺序模式下可用）
+        generateSequenceBtn.addEventListener('click', () => {
+            if (initializeQuestionSequence()) {
+                showQuestionBtn.click();
+            } else {
+                questionBox.textContent = '没有符合当前筛选条件的问题，请调整筛选条件！';
+            }
+        });
+
+        // 重新开始按钮
+        restartBtn.addEventListener('click', restart);
+
         showQuestionBtn.addEventListener('click', () => {
-            currentQuestion = getRandomQuestion();
-            questionBox.textContent = currentQuestion.question;
+            if (currentIndex === -1 || currentQuestion === null || answerMode.value === 'random') {
+                if (!initializeQuestionSequence()) {
+                    questionBox.textContent = '没有符合当前筛选条件的问题，请调整筛选条件！';
+                    showAnswerBtn.disabled = true;
+                    updateQuestionInfo(); // 确保在初始化失败时也更新显示
+                    return;
+                }
+            }
+            
+            currentQuestion = getNextQuestion();
+            questionBox.textContent = currentQuestion.Question;
             answerBox.style.display = 'none';
             answerBox.textContent = '';
             showAnswerBtn.disabled = false;
+            updateQuestionInfo(); // 在显示新问题时更新进度
         });
 
+        // 筛选变化时重置状态
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateFilterDisplay();
+                restart();
+                updateQuestionInfo(); // 确保在筛选条件改变时更新显示
+            });
+        });
+
+        // 显示答案功能
         showAnswerBtn.addEventListener('click', () => {
             if (currentQuestion) {
-                answerBox.textContent = `答案：${currentQuestion.answer}`;
+                answerBox.textContent = `答案：${currentQuestion.Answer}`;
                 answerBox.style.display = 'block';
                 showAnswerBtn.disabled = true;
             }
         });
+
+        // 初始化页面
+        initializeFilters();
     </script>
 </body>
 </html> 
