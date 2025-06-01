@@ -4,14 +4,14 @@ import os
 
 def convert_excel_to_js():
     try:
-        excel_file = 'trivia_data.xls'
+        excel_file = 'trivia_data_auto.xlsx'
         
         # 检查文件是否存在
         if not os.path.exists(excel_file):
             raise FileNotFoundError(f"找不到文件：{excel_file}")
             
         # 读取Excel文件
-        df = pd.read_excel(excel_file, engine='xlrd')
+        df = pd.read_excel(excel_file)
         
         # 验证数据格式
         if df.empty:
@@ -33,38 +33,35 @@ def convert_excel_to_js():
         # 添加索引列
         df['index'] = range(1, len(df) + 1)
         
-        # 转换为JavaScript数组格式
-        trivia_data = df.to_dict('records')
+        # 将DataFrame转换为JavaScript数组格式
+        js_data = "const triviaDataAuto = [\n"
         
-        # 获取所有唯一的类型和难度
-        types = sorted(df['Type'].unique().tolist())
-        levels = sorted(df['Level'].unique().tolist())
+        for _, row in df.iterrows():
+            js_data += "    {\n"
+            js_data += f'        "Question": "{row["Question"]}",\n'
+            js_data += f'        "Answer": {row["Answer"]},\n'
+            js_data += f'        "Type": "{row["Type"]}",\n'
+            js_data += f'        "Level": {row["Level"]},\n'
+            js_data += f'        "Source": "{row["Source"]}",\n'
+            js_data += f'        "Source_Link": "{row["Source_Link"]}"\n'
+            js_data += "    },\n"
         
-        js_content = f"""// 自动生成的题库数据
-const triviaData = {json.dumps(trivia_data, ensure_ascii=False, indent=2)};
-
-// 所有可用的类型和难度
-const availableTypes = {json.dumps(types, ensure_ascii=False)};
-const availableLevels = {json.dumps(levels, ensure_ascii=False)};
-"""
+        js_data += "];\n"
         
         # 写入JavaScript文件
-        with open('trivia_data.js', 'w', encoding='utf-8') as f:
-            f.write(js_content)
+        with open('trivia_data_auto.js', 'w', encoding='utf-8') as f:
+            f.write(js_data)
             
-        print("转换成功！数据已保存到 trivia_data.js")
-        print(f"可用的类型：{', '.join(types)}")
-        print(f"可用的难度：{', '.join(levels)}")
-        print(f"总题目数：{len(df)}")
+        print("成功创建 trivia_data_auto.js 文件！")
         
     except Exception as e:
         print(f"转换失败：{str(e)}")
         print("\n请确保：")
-        print("1. Excel文件格式正确（.xls）")
+        print("1. Excel文件格式正确（.xlsx）")
         print("2. 文件包含 Question 和 Answer 列")
         print("3. Type 和 Level 列可以为空（将使用默认值）")
         print("4. 已安装所需的Python包：")
-        print("   pip install pandas xlrd")
+        print("   pip install pandas")
 
 if __name__ == "__main__":
     convert_excel_to_js() 
