@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cute.jpg">
+  <link rel="icon" href="/img/cute.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="R">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="UE的松散八叉树，非常多工程细节，非常的恐怖啊，但是学到了很多~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE松散八叉树分析">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/UE%E6%9D%BE%E6%95%A3%E5%85%AB%E5%8F%89%E6%A0%91%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="R">
+<meta property="og:description" content="UE的松散八叉树，非常多工程细节，非常的恐怖啊，但是学到了很多~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/v2-57b2891ac5d1b6749a6ae617c16751b0_1440w.jpg">
+<meta property="article:published_time" content="2025-11-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-04T16:15:02.107Z">
+<meta property="article:author" content="R">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/v2-57b2891ac5d1b6749a6ae617c16751b0_1440w.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>UE松散八叉树分析 - R</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rorschachandbat.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+ <meta name="referrer" content="no-referrer" />
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="R" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>R君的秘密基地</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-douban-fill"></i>
+                <span>书影音</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/books/">
+                    
+                    <span>读过</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/movies/">
+                    
+                    <span>看过</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/">
+                    
+                    <span>玩过</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/gdc/">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>gdc</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>桌游生成器</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/boardgame/guess/">
+                    
+                    <span>猜来猜趣</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/boardgame/bluff/">
+                    
+                    <span>瞎掰王</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/elder%20ring.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="UE松散八叉树分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-05 00:00" pubdate>
+          2025年11月5日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          68 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">UE松散八叉树分析</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2025年11月5日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="朴素的八叉树"><a href="#朴素的八叉树" class="headerlink" title="朴素的八叉树"></a>朴素的八叉树</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FOTreeNode</span>&#123;<br>    <span class="hljs-keyword">public</span>:<br>    	TUniquePtr&lt;FOTreeNode&gt; Childs[<span class="hljs-number">8</span>];<br>    	TUniquePtr&lt;FOTreeNode&gt; Parent;<br>    	<br>    	FVector Origin = FVector:ZeroVector;<br>    	FVector Extent = FVector:ZeroVector;<br>    <br>    	Tarray&lt;AActor*&gt; Actors;<br>    	<span class="hljs-type">bool</span> bLeaf = <span class="hljs-literal">true</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Origin（原点）</strong></p>
+<ul>
+<li><p>表示节点的中心点坐标</p>
+</li>
+<li><p>是该节点代表的3D空间盒子的中心位置</p>
+</li>
+<li><p>类型：FVector（X, Y, Z 坐标）</p>
+</li>
+</ul>
+<p><strong>Extent（范围）</strong></p>
+<ul>
+<li><p>表示从中心点到边界的半径距离</p>
+</li>
+<li><p>定义了该节点空间的大小</p>
+</li>
+<li><p>类型：FVector（X轴半径、Y轴半径、Z轴半径）</p>
+</li>
+</ul>
+<p>如何优化？</p>
+<ul>
+<li>8个子节点都用TUniqePtr，有点内存浪费</li>
+<li>八个子节点的Parent都相同，没必要每个子节点都存一份Parent</li>
+<li>每个节点不需要自己存Origin和Extent，只要知道父节点的数据，以及自己多少层即可</li>
+<li>bLeaf也不用单独存</li>
+</ul>
+<h2 id="UE八叉树节点定义"><a href="#UE八叉树节点定义" class="headerlink" title="UE八叉树节点定义"></a>UE八叉树节点定义</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">FNode</span><br>&#123;<br>	FNodeIndex ChildNodes = INDEX_NONE;<br>	uint32 InclusiveNumElements = <span class="hljs-number">0</span>;<br><br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">IsLeaf</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">return</span> ChildNodes == INDEX_NONE;<br>	&#125;<br>&#125;;<br><br>TArray&lt;FNode&gt; TreeNodes;<br>TArray&lt;FNodeIndex&gt; ParentLinks;<br></code></pre></td></tr></table></figure>
+
+<p>UE八叉树的一个约定是，一个节点包含的所有元素，其Bounds也在这个节点边界内。那么即使待插入元素的Center在某个子树中，但Bounds超出了子树边界，也不能强行把他加入到子树中去。UE做法是直接把元素插入到父节点的TreeElements数组即可。</p>
+<p>比如下面那个跨越边界的节点，会被直接插入到父节点的元素数组中</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/v2-57b2891ac5d1b6749a6ae617c16751b0_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>但是这么操作，Bounds稍微超过子节点，元素就会存到父节点，父节点存了太多元素怎么办，这又会影响后续查询效率。UE做法是把子树边界适当放宽 1&#x2F;16 的大小，缓解一下，目的是让一些处于子树边界上的元素，如果Bounds不大，就还是存在子树里，这个细节看下面的node有分析。</p>
+<h1 id="UE4源码分析"><a href="#UE4源码分析" class="headerlink" title="UE4源码分析"></a>UE4源码分析</h1><p>主要看了一下这个文件：GenericOctree.h</p>
+<h2 id="碰撞盒"><a href="#碰撞盒" class="headerlink" title="碰撞盒"></a>碰撞盒</h2><p>碰撞盒检测数学原理</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 两个盒子相交，当且仅当在所有轴上都相交</span><br>|CenterA - CenterB| &lt;= ExtentA + <span class="hljs-built_in">ExtentB</span>  (对于 X, Y, Z 轴)<br></code></pre></td></tr></table></figure>
+
+<h2 id="SIMD"><a href="#SIMD" class="headerlink" title="SIMD"></a>SIMD</h2><h3 id="有啥好处？"><a href="#有啥好处？" class="headerlink" title="有啥好处？"></a>有啥好处？</h3><p>SIMD &#x3D; Single Instruction, Multiple Data（单指令多数据）</p>
+<p>传统 CPU 指令：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tex">一次只能处理一个数据<br>ADD 寄存器A, 寄存器B  → 计算 A + B<br></code></pre></td></tr></table></figure>
+
+<p>SIMD</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tex">一次处理多个数据（通常4个或8个）<br>VADD 向量寄存器A, 向量寄存器B  → 同时计算 [A0+B0, A1+B1, A2+B2, A3+B3]<br></code></pre></td></tr></table></figure>
+
+<p>看源码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">friend</span> FORCEINLINE <span class="hljs-type">bool</span> <span class="hljs-title">Intersect</span><span class="hljs-params">(<span class="hljs-type">const</span> FBoxCenterAndExtent&amp; A, <span class="hljs-type">const</span> FBoxCenterAndExtent&amp; B)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// CenterDifference is the vector between the centers of the bounding boxes.</span><br>    <span class="hljs-type">const</span> VectorRegister CenterDifference = <span class="hljs-built_in">VectorAbs</span>(<span class="hljs-built_in">VectorSubtract</span>(<span class="hljs-built_in">VectorLoadAligned</span>(&amp;A.Center), <span class="hljs-built_in">VectorLoadAligned</span>(&amp;B.Center)));<br><br>    <span class="hljs-comment">// CompositeExtent is the extent of the bounding box which is the convolution of A with B.</span><br>    <span class="hljs-type">const</span> VectorRegister CompositeExtent = <span class="hljs-built_in">VectorAdd</span>(<span class="hljs-built_in">VectorLoadAligned</span>(&amp;A.Extent), <span class="hljs-built_in">VectorLoadAligned</span>(&amp;B.Extent));<br><br>    <span class="hljs-comment">// For each axis, the boxes intersect on that axis if the projected distance between their centers is less than the sum of their</span><br>    <span class="hljs-comment">// extents.  If the boxes don&#x27;t intersect on any of the axes, they don&#x27;t intersect.</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">VectorAnyGreaterThan</span>(CenterDifference, CompositeExtent) == <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>假如是传统写法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Intersect_Slow</span><span class="hljs-params">(<span class="hljs-type">const</span> FBoxCenterAndExtent&amp; A, <span class="hljs-type">const</span> FBoxCenterAndExtent&amp; B)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 需要9次浮点运算</span><br>    <span class="hljs-type">float</span> DiffX = <span class="hljs-built_in">abs</span>(A.Center.X - B.Center.X);  <span class="hljs-comment">// 2次运算</span><br>    <span class="hljs-type">float</span> DiffY = <span class="hljs-built_in">abs</span>(A.Center.Y - B.Center.Y);  <span class="hljs-comment">// 2次运算</span><br>    <span class="hljs-type">float</span> DiffZ = <span class="hljs-built_in">abs</span>(A.Center.Z - B.Center.Z);  <span class="hljs-comment">// 2次运算</span><br>    <br>    <span class="hljs-type">float</span> SumExtentX = A.Extent.X + B.Extent.X;  <span class="hljs-comment">// 1次运算</span><br>    <span class="hljs-type">float</span> SumExtentY = A.Extent.Y + B.Extent.Y;  <span class="hljs-comment">// 1次运算</span><br>    <span class="hljs-type">float</span> SumExtentZ = A.Extent.Z + B.Extent.Z;  <span class="hljs-comment">// 1次运算</span><br>    <br>    <span class="hljs-comment">// 3次比较</span><br>    <span class="hljs-keyword">return</span> (DiffX &lt;= SumExtentX) &amp;&amp; (DiffY &lt;= SumExtentY) &amp;&amp; (DiffZ &lt;= SumExtentZ);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果使用FVector4</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Intersect_Fast</span><span class="hljs-params">(<span class="hljs-type">const</span> FBoxCenterAndExtent&amp; A, <span class="hljs-type">const</span> FBoxCenterAndExtent&amp; B)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 只需要3条SIMD指令！</span><br>    <span class="hljs-type">const</span> VectorRegister CenterDiff = <span class="hljs-built_in">VectorAbs</span>(<span class="hljs-built_in">VectorSubtract</span>(<br>        <span class="hljs-built_in">VectorLoadAligned</span>(&amp;A.Center),    <span class="hljs-comment">// 1条：加载</span><br>        <span class="hljs-built_in">VectorLoadAligned</span>(&amp;B.Center)));  <span class="hljs-comment">// 2条：减法+绝对值（同时处理X,Y,Z,W）</span><br>    <br>    <span class="hljs-type">const</span> VectorRegister CompositeExtent = <span class="hljs-built_in">VectorAdd</span>(<br>        <span class="hljs-built_in">VectorLoadAligned</span>(&amp;A.Extent),    <span class="hljs-comment">// 3条：加法（同时处理X,Y,Z,W）</span><br>        <span class="hljs-built_in">VectorLoadAligned</span>(&amp;B.Extent));<br>    <br>    <span class="hljs-comment">// 4条：比较（同时比较X,Y,Z,W）</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">VectorAnyGreaterThan</span>(CenterDiff, CompositeExtent) == <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用FVector4还有一个好处是内存对齐，刚好是16个字节，FVector只有12个字节</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>再说两个SIMD指令</p>
+<p>首先VectorCompareGT，可以用SIMD指令一次性比较4对浮点数，返回结果依然是一个Vector4。对于每一对浮点数，如果大于会存0xFFFFFFFF，小于存0。</p>
+<p>然后VectorMaskBits，又可以把4个有符号数，把符号都转化为bitmask，组成一个int数。最后把这个int数当成子节点下标即可。</p>
+<h2 id="两个很神的结构"><a href="#两个很神的结构" class="headerlink" title="两个很神的结构"></a>两个很神的结构</h2><h3 id="FOctreeChildNodeRef"><a href="#FOctreeChildNodeRef" class="headerlink" title="FOctreeChildNodeRef"></a>FOctreeChildNodeRef</h3><p>看了很久终于看懂了，其实这个就是类的关键就是，用一个index来表达该选择八个节点中的哪一个，一般来说这个需要三个参数xyz，但是ue用巧妙的位运算就可以一个index来搞定</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/** A reference to a child of an octree node. */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FOctreeChildNodeRef</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    int8 Index;<br><br>    <span class="hljs-comment">/** Initialization constructor. */</span><br>    <span class="hljs-built_in">FOctreeChildNodeRef</span>(int8 InX, int8 InY, int8 InZ)<br>    &#123;<br>        <span class="hljs-built_in">checkSlow</span>(InX &gt;= <span class="hljs-number">0</span> &amp;&amp; InX &lt;= <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">checkSlow</span>(InY &gt;= <span class="hljs-number">0</span> &amp;&amp; InY &lt;= <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">checkSlow</span>(InZ &gt;= <span class="hljs-number">0</span> &amp;&amp; InZ &lt;= <span class="hljs-number">1</span>);<br>        Index = <span class="hljs-built_in">int8</span>(InX &lt;&lt; <span class="hljs-number">0</span>) | <span class="hljs-built_in">int8</span>(InY &lt;&lt; <span class="hljs-number">1</span>) | <span class="hljs-built_in">int8</span>(InZ &lt;&lt; <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/** Initialized the reference with a child index. */</span><br>    <span class="hljs-built_in">FOctreeChildNodeRef</span>(int8 InIndex = <span class="hljs-number">0</span>)<br>        : <span class="hljs-built_in">Index</span>(InIndex)<br>    &#123;<br>        <span class="hljs-built_in">checkSlow</span>(Index &lt; <span class="hljs-number">8</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/** Advances the reference to the next child node.  If this was the last node remain, Index will be 8 which represents null. */</span><br>    <span class="hljs-function">FORCEINLINE <span class="hljs-type">void</span> <span class="hljs-title">Advance</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        ++Index;<br>    &#125;<br><br>    <span class="hljs-comment">/** @return true if the reference isn&#x27;t set. */</span><br>    <span class="hljs-function">FORCEINLINE <span class="hljs-type">bool</span> <span class="hljs-title">IsNULL</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> Index &gt;= <span class="hljs-number">8</span>;<br>    &#125;<br><br>    <span class="hljs-function">FORCEINLINE <span class="hljs-type">void</span> <span class="hljs-title">SetNULL</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        Index = <span class="hljs-number">8</span>;<br>    &#125;<br><br>    <span class="hljs-function">FORCEINLINE int32 <span class="hljs-title">X</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (Index &gt;&gt; <span class="hljs-number">0</span>) &amp; <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-function">FORCEINLINE int32 <span class="hljs-title">Y</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (Index &gt;&gt; <span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-function">FORCEINLINE int32 <span class="hljs-title">Z</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (Index &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>为啥要这样干呢？因为有个关键函数GetContainingChild，也就是判断一个元素是否完全被某一个子节点包含，如果是返回那个子节点索引，否则返回 NULL。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">FORCEINLINE FOctreeChildNodeRef <span class="hljs-title">FOctreeNodeContext::GetContainingChild</span><span class="hljs-params">(<span class="hljs-type">const</span> FBoxCenterAndExtent&amp; QueryBounds)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>	FOctreeChildNodeRef Result;<br><br>	<span class="hljs-comment">// Load the query bounding box values as VectorRegisters.</span><br>	<span class="hljs-type">const</span> VectorRegister QueryBoundsCenter = <span class="hljs-built_in">VectorLoadAligned</span>(&amp;QueryBounds.Center);<br>	<span class="hljs-type">const</span> VectorRegister QueryBoundsExtent = <span class="hljs-built_in">VectorLoadAligned</span>(&amp;QueryBounds.Extent);<br><br>	<span class="hljs-comment">// Compute the bounds of the node&#x27;s children.</span><br>	<span class="hljs-type">const</span> VectorRegister BoundsCenter = <span class="hljs-built_in">VectorLoadAligned</span>(&amp;Bounds.Center);<br>	<span class="hljs-type">const</span> VectorRegister ChildCenterOffsetVector = <span class="hljs-built_in">VectorLoadFloat1</span>(&amp;ChildCenterOffset);<br>	<span class="hljs-type">const</span> VectorRegister NegativeCenterDifference = <span class="hljs-built_in">VectorSubtract</span>(QueryBoundsCenter,<span class="hljs-built_in">VectorSubtract</span>(BoundsCenter,ChildCenterOffsetVector));<br>	<span class="hljs-type">const</span> VectorRegister PositiveCenterDifference = <span class="hljs-built_in">VectorSubtract</span>(<span class="hljs-built_in">VectorAdd</span>(BoundsCenter,ChildCenterOffsetVector),QueryBoundsCenter);<br><br>	<span class="hljs-comment">// If the query bounds isn&#x27;t entirely inside the bounding box of the child it&#x27;s closest to, it&#x27;s not contained by any of the child nodes.</span><br>	<span class="hljs-type">const</span> VectorRegister MinDifference = <span class="hljs-built_in">VectorMin</span>(PositiveCenterDifference,NegativeCenterDifference);<br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">VectorAnyGreaterThan</span>(<span class="hljs-built_in">VectorAdd</span>(QueryBoundsExtent,MinDifference),<span class="hljs-built_in">VectorLoadFloat1</span>(&amp;ChildExtent)))<br>	&#123;<br>		Result.<span class="hljs-built_in">SetNULL</span>();<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-comment">// Return the child node that the query is closest to as the containing child.</span><br>		Result.Index = <span class="hljs-built_in">VectorMaskBits</span>(<span class="hljs-built_in">VectorCompareGT</span>(QueryBoundsCenter, BoundsCenter)) &amp; <span class="hljs-number">0x7</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> Result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里面用了很多SIMD操作，全都是向量操作</p>
+<p>这个函数是在插入节点的时候用的AddElementInternal</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-type">const</span> FOctreeChildNodeRef ChildRef = NodeContext.<span class="hljs-built_in">GetContainingChild</span>(ElementBounds);<br>    <span class="hljs-keyword">if</span> (ChildRef.<span class="hljs-built_in">IsNULL</span>())<br>    &#123;<br>        <span class="hljs-type">int</span> ElementIndex = TreeElements[CurrentNodeIndex].<span class="hljs-built_in">Emplace</span>(Element);<br>        <span class="hljs-built_in">SetElementId</span>(Element, <span class="hljs-built_in">FOctreeElementId2</span>(CurrentNodeIndex, ElementIndex));<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        FNodeIndex ChildNodeIndex           = TreeNodes[CurrentNodeIndex].ChildNodes + ChildRef.Index;<br>        FOctreeNodeContext ChildNodeContext = NodeContext.<span class="hljs-built_in">GetChildContext</span>(ChildRef);<br>        <span class="hljs-built_in">AddElementInternal</span>(ChildNodeIndex, ChildNodeContext, ElementBounds, Element, TempElementStorage);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="FOctreeChildNodeSubset"><a href="#FOctreeChildNodeSubset" class="headerlink" title="FOctreeChildNodeSubset"></a>FOctreeChildNodeSubset</h3><h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>ue5的子node不存储控件信息，而是在遍历的时候动态生成，因为子节点的空间信息完全由父节点决定</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/** Child node initialization constructor. */</span><br><span class="hljs-function"><span class="hljs-keyword">inline</span> FOctreeNodeContext <span class="hljs-title">GetChildContext</span><span class="hljs-params">(FOctreeChildNodeRef ChildRef)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>    FBoxCenterAndExtent LocalBounds;<br>    VectorRegister ZeroW = <span class="hljs-built_in">MakeVectorRegister</span>(<span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>);<br>    <span class="hljs-built_in">VectorStoreAligned</span>(<span class="hljs-built_in">VectorMultiply</span>(ZeroW, <span class="hljs-built_in">VectorAdd</span>(<span class="hljs-built_in">VectorLoadAligned</span>(&amp;Bounds.Center), <span class="hljs-built_in">GetChildOffsetVec</span>(ChildRef.Index))), &amp;LocalBounds.Center);<br>    <span class="hljs-built_in">VectorStoreAligned</span>(<span class="hljs-built_in">VectorMultiply</span>(ZeroW, <span class="hljs-built_in">VectorSetFloat1</span>(ChildExtent)), &amp;LocalBounds.Extent);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">FOctreeNodeContext</span>(LocalBounds);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这段等价于</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 第 302-308 行</span><br><span class="hljs-function">FOctreeNodeContext <span class="hljs-title">GetChildContext</span><span class="hljs-params">(FOctreeChildNodeRef ChildRef)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>    FBoxCenterAndExtent LocalBounds;<br>    <br>    <span class="hljs-comment">// 子节点中心 = 父节点中心 + 偏移向量</span><br>    LocalBounds.Center = Bounds.Center + <span class="hljs-built_in">GetChildOffsetVec</span>(ChildRef.Index);<br>    <br>    <span class="hljs-comment">// 子节点范围 = ChildExtent（父节点已经预计算好）</span><br>    LocalBounds.Extent = ChildExtent;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">FOctreeNodeContext</span>(LocalBounds);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而且ue的八叉树的节点不是紧密排列的，节点之间有碰撞，可以看这个初始化方法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">FOctreeNodeContext</span>(<span class="hljs-type">const</span> FBoxCenterAndExtent&amp; InBounds, uint32 InInCullBits, uint32 InOutCullBits)<br>    : <span class="hljs-built_in">Bounds</span>(InBounds), <span class="hljs-built_in">InCullBits</span>(InInCullBits), <span class="hljs-built_in">OutCullBits</span>(InOutCullBits)<br>&#123;<br>    <span class="hljs-comment">// A child node&#x27;s tight extents are half its parent&#x27;s extents, and its loose extents are expanded by 1/LoosenessDenominator.</span><br>    <span class="hljs-type">const</span> <span class="hljs-type">float</span> TightChildExtent = Bounds.Extent.X * <span class="hljs-number">0.5f</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">float</span> LooseChildExtent = TightChildExtent * (<span class="hljs-number">1.0f</span> + <span class="hljs-number">1.0f</span> / (<span class="hljs-type">float</span>)LoosenessDenominator);<br><br>    ChildExtent                  = LooseChildExtent;<br>    ChildCenterOffset            = Bounds.Extent.X - LooseChildExtent;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这种有重叠的好处跨越边界的时候不会频繁改动，在重叠区比较稳定，重叠比例是1&#x2F;16，应该是epic的黑科技，这样做的目的</p>
+<h1 id="参考笔记"><a href="#参考笔记" class="headerlink" title="参考笔记"></a>参考笔记</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1968430320870221035">UE5的八叉树实现 - 南京周润发的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1968430320870221035">UE5的八叉树实现 - 南京周润发的文章 - 知乎</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/" class="category-chain-item">游戏杂货铺</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>UE松散八叉树分析</div>
+      <div>https://rorschachandbat.github.io/游戏杂货铺/UE松散八叉树分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>R</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8EUI%E7%9A%84%E5%88%B6%E4%BD%9C%E4%B8%8E%E4%BC%98%E5%8C%96/" title="虚幻引擎UI的制作与优化">
+                        <span class="hidden-mobile">虚幻引擎UI的制作与优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.rorschachblog.cn/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+ 
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
