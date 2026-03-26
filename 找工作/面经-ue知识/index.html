@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cute.jpg">
+  <link rel="icon" href="/img/cute.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="R">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ue相关八股文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经-ue知识">
+<meta property="og:url" content="https://rorschachandbat.github.io/%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9D%A2%E7%BB%8F-ue%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="R">
+<meta property="og:description" content="ue相关八股文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123143826937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123143905157.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123142331672.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/v2-e3bd4399e0d41cf5975677d3b598fb00_1440w.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260204160723179.png">
+<meta property="article:published_time" content="2026-03-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-26T11:47:40.180Z">
+<meta property="article:author" content="R">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123143826937.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>面经-ue知识 - R</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rorschachandbat.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+ <meta name="referrer" content="no-referrer" />
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="R" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>R君的秘密基地</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-douban-fill"></i>
+                <span>书影音</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/books/">
+                    
+                    <span>读过</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/movies/">
+                    
+                    <span>看过</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/">
+                    
+                    <span>玩过</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/gdc/">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>gdc</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>桌游生成器</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/boardgame/guess/">
+                    
+                    <span>猜来猜趣</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/boardgame/bluff/">
+                    
+                    <span>瞎掰王</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/elder%20ring.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面经-ue知识"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-26 00:00" pubdate>
+          2026年3月26日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面经-ue知识</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2026年3月26日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="永星"><a href="#永星" class="headerlink" title="永星"></a>永星</h1><p>ue常用的反射宏有哪些？绑定的时候有没有踩什么坑？</p>
+<p>native和一个什么没听清有什么区别</p>
+<p>Uboject的生命周期？会遇到什么函数</p>
+<h2 id="TObject和SoftObject的区别？垃圾回收有什么区别这两个"><a href="#TObject和SoftObject的区别？垃圾回收有什么区别这两个" class="headerlink" title="TObject和SoftObject的区别？垃圾回收有什么区别这两个"></a>TObject和SoftObject的区别？垃圾回收有什么区别这两个</h2><h3 id="硬引用（Hard-Reference）"><a href="#硬引用（Hard-Reference）" class="headerlink" title="硬引用（Hard Reference）"></a>硬引用（Hard Reference）</h3><p>定义：</p>
+<ul>
+<li><p>直接指针引用，如 UObject<em>、UClass</em></p>
+</li>
+<li><p>资源在包含它的对象加载时会被自动加载到内存</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 硬引用示例</span><br><span class="hljs-built_in">UPROPERTY</span>(EditAnywhere)<br>UAnimMontage* HardReferenceMontage;  <span class="hljs-comment">// 直接指针</span><br><br><span class="hljs-built_in">UPROPERTY</span>(EditAnywhere)<br>UClass* HardReferenceClass;  <span class="hljs-comment">// 直接类指针</span><br></code></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ul>
+<li><p>使用简单，直接访问</p>
+</li>
+<li><p>自动管理，无需手动加载</p>
+</li>
+<li><p>类型安全，编译时检查</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>内存占用：资源会立即加载</p>
+</li>
+<li><p>加载时间：形成依赖链，导致大量资源一起加载</p>
+</li>
+<li><p>循环依赖风险：可能导致资源无法卸载</p>
+</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li><p>核心资源，必须立即可用</p>
+</li>
+<li><p>小资源，内存占用可接受</p>
+</li>
+<li><p>频繁使用的资源</p>
+</li>
+</ul>
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>定义：</p>
+<ul>
+<li><p>只存储资源路径字符串，不立即加载资源</p>
+</li>
+<li><p>使用 TSoftObjectPtr<T>、TSoftClassPtr<T> 或 FSoftObjectPath</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 软引用示例（来自你的代码库）</span><br><span class="hljs-built_in">UPROPERTY</span>(EditDefaultsOnly)<br>TSoftObjectPtr&lt;UAnimMontage&gt; DefaultExpression;  <span class="hljs-comment">// 软引用动画蒙太奇</span><br><br><span class="hljs-built_in">UPROPERTY</span>(EditDefaultsOnly)<br>TSoftObjectPtr&lt;UStaticMesh&gt; ExpressionPlaneStaticMeshSoftPtr;  <span class="hljs-comment">// 软引用静态网格</span><br><br><span class="hljs-comment">// 使用时需要手动加载</span><br>UAnimMontage* Montage = DefaultExpression.<span class="hljs-built_in">LoadSynchronous</span>();<br><span class="hljs-comment">// 或异步加载</span><br>DefaultExpression.<span class="hljs-built_in">LoadAsync</span>();<br></code></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ul>
+<li><p>延迟加载：只在需要时加载</p>
+</li>
+<li><p>减少内存占用：不立即加载到内存</p>
+</li>
+<li><p>加快启动速度：避免加载不必要的资源</p>
+</li>
+<li><p>更好的资源管理：可以控制加载时机</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>需要手动加载：代码更复杂</p>
+</li>
+<li><p>可能为空：需要检查资源是否加载成功</p>
+</li>
+<li><p>异步加载：需要处理回调</p>
+</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li><p>可选资源：可能不使用的资源</p>
+</li>
+<li><p>大型资源：纹理、模型等</p>
+</li>
+<li><p>按需加载：根据游戏状态动态加载</p>
+</li>
+<li><p>减少启动时间：延迟加载非关键资源</p>
+</li>
+</ul>
+<p>GC区别</p>
+<ul>
+<li><p>硬引用：阻止 GC，对象会一直保留在内存中</p>
+</li>
+<li><p>软引用：不阻止 GC，对象可以被回收，需要时重新加载</p>
+</li>
+<li><p>弱引用：不阻止 GC，用于避免循环引用</p>
+</li>
+</ul>
+<p><strong>对象销毁后行为</strong><br>FSoftObjectPtr 在一定时间内仍然可以访问已销毁的对象，直到垃圾回收期间。FWeakObjectPtr 会自动失效（置为空指针），不会访问到已销毁的对象。</p>
+<h2 id="UMG和SlateUI的区别？"><a href="#UMG和SlateUI的区别？" class="headerlink" title="UMG和SlateUI的区别？"></a>UMG和SlateUI的区别？</h2><p>UMG是蓝图，可以绑脚本</p>
+<p>Slateui更底层，就是编辑器那些的ui</p>
+<h2 id="手柄的组合键是什么做的？"><a href="#手柄的组合键是什么做的？" class="headerlink" title="手柄的组合键是什么做的？"></a>手柄的组合键是什么做的？</h2><p>动态修改InputSetting里的ActionMapping按下技能组合键时，把原先 ”X键映射Attack” 删掉，新增一条 ”X键映射Skill1”松开技能组合键时，把 ”X键映射Skill1” 删掉，重新加入 ”X键映射Attack”</p>
+<p>这样做有个问题，有可能出现时序问题</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123143826937.png" srcset="/img/loading.gif" lazyload alt="时序"></p>
+<p>解决办法：加一道工序，如果正在按下，就松开的时候再替换，绑一个回调</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123143905157.png" srcset="/img/loading.gif" lazyload alt="image-20260123143905157"></p>
+<p>思路就是修饰键</p>
+<ul>
+<li><p>组合键通常需要一个“修饰键”（如 GamepadUseSkill）作为触发条件</p>
+</li>
+<li><p>按下修饰键时，临时改变其他按键的行为</p>
+</li>
+<li><p>释放修饰键时，恢复原始映射</p>
+</li>
+</ul>
+<p>这样可以实现：</p>
+<ul>
+<li><p>单独按 y：执行原始功能</p>
+</li>
+<li><p>按住 x + 按 y：执行组合功能（如技能1）</p>
+</li>
+<li><p>按住 x + 按其他键：执行对应的组合功能</p>
+</li>
+</ul>
+<p>这是典型的手柄组合键实现方式，类似键盘的 Ctrl&#x2F;Cmd + 其他键的组合。</p>
+<h2 id="enhance输入什么的"><a href="#enhance输入什么的" class="headerlink" title="enhance输入什么的"></a>enhance输入什么的</h2><p>增强输入：</p>
+<p><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/enhanced-input-in-unreal-engine">https://dev.epicgames.com/documentation/zh-cn/unreal-engine/enhanced-input-in-unreal-engine</a></p>
+<h2 id="IMC-Mapping和Action的区别是什么"><a href="#IMC-Mapping和Action的区别是什么" class="headerlink" title="IMC Mapping和Action的区别是什么"></a>IMC Mapping和Action的区别是什么</h2><h2 id="按键响应的顺序是什么？"><a href="#按键响应的顺序是什么？" class="headerlink" title="按键响应的顺序是什么？"></a>按键响应的顺序是什么？</h2><p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260123142331672.png" srcset="/img/loading.gif" lazyload alt="输入过程"></p>
+<h1 id="网易"><a href="#网易" class="headerlink" title="网易"></a>网易</h1><p>实现一个队列，要求不重复怎么搞？</p>
+<p>listview怎么优化的？</p>
+<p>怎么做一个eventmanager？</p>
+<p>恢复这个任务怎么恢复的？会不会影响场景中的东西？</p>
+<h1 id="深蓝"><a href="#深蓝" class="headerlink" title="深蓝"></a>深蓝</h1><p>植被随机变稀疏是怎么搞得？</p>
+<p>样条曲线实现逻辑</p>
+<p>UobjectGc的逻辑？什么时候会被gc？</p>
+<p>节点怎么跳到任务？</p>
+<h1 id="萨罗斯"><a href="#萨罗斯" class="headerlink" title="萨罗斯"></a>萨罗斯</h1><p>Ue的game play框架？Ds、基础的类分别有什么用？</p>
+<p>C++怎么到lua？lua怎么到C++？</p>
+<p>反射机制如果暴露给蓝图的？</p>
+<p>自研引擎和ue有啥区别？</p>
+<p>TCPheUDP区别？射击游戏一般用哪种？PUBG用了哪种？UE用的哪种？</p>
+<p>UDP如何实现握手？几种方式？可靠性如何保证？</p>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67055774">UE4 垃圾回收 - 南京周润发的文章 - 知乎</a></p>
+<h2 id="AActor生命周期"><a href="#AActor生命周期" class="headerlink" title="AActor生命周期"></a>AActor生命周期</h2><p><a target="_blank" rel="noopener" href="https://nashnie.github.io/gameplay/2019/03/25/net-actor-lifecycle.html">浅析 UE Actor 生命周期管理</a></p>
+<ol>
+<li>PostLoad&#x2F;PostActorCreated - 执行构建 Actor 所需的任何设置。PostLoad 用于序列化 Actor，PostActorCreated 用于生成 Actor。</li>
+<li>AActor::OnConstruction - Actor 的构造函数，蓝图 Actor 在此函数中创建其组件并初始化蓝图变量。</li>
+<li>AActor::PreInitializeComponents - 在对 Actor 的组件调用 InitializeComponent 之前调用</li>
+<li>UActorComponent::InitializeComponent - actor 的 components 数组中的每个组件都会被调用初始化函数（如果该组件的 bWantsInitializeComponent 为 true）。</li>
+<li>AActor::PostInitializeComponents - 在 Actor 的组件初始化完成后调用</li>
+<li>Actor::BeginPlay - 关卡开始时调用</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/actor-lifecycle?application_version=4.27">UE官方文档Actor生命周期</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/672673399">UE 动画系统框架介绍及使用 - TurBo强的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/447895503">Two Bone IK - silvergp的文章 - 知乎</a></p>
+<p>其实很简单，就是想象最后是一个三角形，所以可以这样就知道了三个边的长度（因为ac&#x3D;at），然后就可以求出角的大小，角的大小就是bat-bac，然后就可以旋转过去，这里用个旋转矩阵就可以了，然后就又可以求出其他的了</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/v2-e3bd4399e0d41cf5975677d3b598fb00_1440w.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/673924647">UE 动画系统框架源码解析 - TurBo强的文章 - 知乎</a></p>
+<p>这个文章还介绍了许多大佬的文章</p>
+<h1 id="Motion-Mathcing"><a href="#Motion-Mathcing" class="headerlink" title="Motion Mathcing"></a>Motion Mathcing</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/432663486">Motion Matching 中的代码驱动移动和动画驱动移动 - 小木子的文章 - 知乎</a></p>
+<h1 id="GC优化方法？"><a href="#GC优化方法？" class="headerlink" title="GC优化方法？"></a>GC优化方法？</h1><p>这篇有优化相关的介绍</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/219588301">UE4 垃圾收集大杂烩 - Jiff的文章 - 知乎</a></p>
+<p>通常GC会引起问题都是在LevelStreaming的时候，不过如果你在代码中申请了大规模的UObject，在不再使用的时候也不删除。或者频繁而无意义的调用ForceGC，自然也可能会造成性能问题。</p>
+<p>为了避免LevelStreaming造成的GC瞬间成本，可以通过缩小细分关卡的规模来进行。</p>
+<p>这样的话在进行角色的移动时，就可以形成小规模的载入和移除，而不是一次性的大规模变更。</p>
+<p>设置这个可以减少遍历成本</p>
+<p><img src="https://raw.githubusercontent.com/rorschachandbat/cloudimage/main/image-20260204160723179.png" srcset="/img/loading.gif" lazyload alt="image-20260204160723179"></p>
+<p>Cluster</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/" class="category-chain-item">找工作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面经-ue知识</div>
+      <div>https://rorschachandbat.github.io/找工作/面经-ue知识/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>R</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%B8%B8%E6%88%8F%E6%9D%82%E8%B4%A7%E9%93%BA/UE%E6%9D%BE%E6%95%A3%E5%85%AB%E5%8F%89%E6%A0%91%E5%88%86%E6%9E%90/" title="UE松散八叉树分析">
+                        <span class="hidden-mobile">UE松散八叉树分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.rorschachblog.cn/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+ 
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
