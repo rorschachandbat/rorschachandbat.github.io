@@ -1,0 +1,2 @@
+# Hexo 生成的 HTML 多为 LF；与 Windows 全局 autocrlf 组合时易刷屏警告
+* text=auto eol=lf
