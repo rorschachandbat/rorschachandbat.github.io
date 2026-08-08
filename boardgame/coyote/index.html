@@ -64,6 +64,18 @@
       padding: 18px;
     }
 
+    .help {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .help strong { color: var(--ink); font-weight: 600; }
+
     label {
       display: block;
       margin: 0 0 6px;
@@ -83,9 +95,7 @@
       outline: none;
     }
 
-    input:focus {
-      border-color: var(--accent);
-    }
+    input:focus { border-color: var(--accent); }
 
     .btn-row {
       display: flex;
@@ -93,7 +103,7 @@
       flex-wrap: wrap;
     }
 
-    button {
+    button, .link-btn {
       appearance: none;
       border: none;
       border-radius: 999px;
@@ -104,6 +114,8 @@
       color: #1a1410;
       background: linear-gradient(135deg, var(--accent), #e8a05a);
       transition: transform 0.15s ease, opacity 0.15s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     button.secondary {
@@ -112,20 +124,13 @@
       border: 1px solid var(--line);
     }
 
-    button.danger {
-      background: linear-gradient(135deg, var(--accent-2), #e07a6a);
-      color: #fff;
-    }
-
     button:disabled {
       opacity: 0.45;
       cursor: not-allowed;
       transform: none;
     }
 
-    button:not(:disabled):active {
-      transform: scale(0.98);
-    }
+    button:not(:disabled):active { transform: scale(0.98); }
 
     .status {
       margin-top: 14px;
@@ -190,8 +195,7 @@
       font-size: 0.8rem;
     }
 
-    /* 全屏牌面 */
-    #cardScreen {
+    #cardScreen, #revealScreen {
       position: fixed;
       inset: 0;
       z-index: 20;
@@ -205,6 +209,13 @@
       justify-content: center;
       padding: 24px;
       text-align: center;
+    }
+
+    #revealScreen {
+      z-index: 25;
+      justify-content: flex-start;
+      overflow: auto;
+      padding: 28px 16px 100px;
     }
 
     #cardScreen .hint {
@@ -231,14 +242,23 @@
       color: #ffd29a;
     }
 
+    #cardHelp {
+      margin-top: 16px;
+      max-width: 28rem;
+      color: #ffd29a;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      padding: 0 12px;
+    }
+
     #cardScreen .meta {
-      margin-top: 18px;
+      margin-top: 14px;
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    #cardScreen .actions {
-      position: absolute;
+    #cardScreen .actions, #revealScreen .actions {
+      position: fixed;
       bottom: 28px;
       left: 0;
       right: 0;
@@ -246,6 +266,57 @@
       justify-content: center;
       gap: 10px;
       padding: 0 16px;
+      flex-wrap: wrap;
+    }
+
+    .reveal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+
+    .reveal-total {
+      font-size: clamp(2.4rem, 12vw, 3.6rem);
+      font-weight: 800;
+      color: #ffd29a;
+      margin: 8px 0 18px;
+    }
+
+    .reveal-list {
+      width: min(440px, 100%);
+      text-align: left;
+      display: grid;
+      gap: 8px;
+      margin: 0 auto 16px;
+    }
+
+    .reveal-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #1a1410;
+      border: 1px solid var(--line);
+    }
+
+    .reveal-item .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .reveal-item .note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .reveal-steps {
+      width: min(440px, 100%);
+      margin: 0 auto;
+      text-align: left;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
     }
 
     @media (orientation: landscape) and (max-height: 500px) {
@@ -258,16 +329,25 @@
 <body>
   <div class="wrap">
     <h1>土狼在笑你</h1>
-    <p class="sub">输入房间号进房，房主发牌后每人只显示自己的牌（可当额头牌使用）。</p>
+    <p class="sub">输入房间号进房，房主发牌；每人只显示自己的牌。喊完后房主可「亮牌结算」。</p>
 
     <section id="httpsHint" class="panel hidden" style="margin-bottom:16px;border-color:#d4783a;">
-      <p class="sub" style="margin:0 0 12px;">当前是 HTTPS 博客页，浏览器会拦截不安全的 WebSocket。请改用服务器页面联机（同一套界面）：</p>
+      <p class="sub" style="margin:0 0 12px;">当前是 HTTPS 博客页，浏览器会拦截不安全的 WebSocket。请改用服务器页面联机：</p>
       <div class="btn-row">
-        <a id="openServerBtn" href="http://120.48.19.171:3001/" style="display:inline-block;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,#d4783a,#e8a05a);color:#1a1410;text-decoration:none;font-weight:600;">打开联机发牌页</a>
+        <a class="link-btn" href="http://120.48.19.171:3001/">打开联机发牌页</a>
       </div>
     </section>
 
     <section id="lobby" class="panel">
+      <div class="help">
+        <strong>特殊牌：</strong><br>
+        <strong>MAX0</strong>：场上最大数字变为 0<br>
+        <strong>MAX-</strong>：场上最大数字变为负数<br>
+        <strong>???</strong>：结算时再抽一张（尽量不与场上已有牌面重复）<br>
+        <strong>x2</strong>：最后总分 ×2<br>
+        <strong>0</strong>：就是数字 0
+      </div>
+
       <label for="nickname">昵称</label>
       <input id="nickname" maxlength="12" placeholder="例如：小狼" autocomplete="nickname">
 
@@ -293,7 +373,9 @@
 
       <div class="btn-row">
         <button id="dealBtn" type="button" class="hidden">发牌</button>
+        <button id="revealBtn" type="button" class="hidden">亮牌结算</button>
         <button id="showCardBtn" type="button" class="secondary hidden">查看我的牌</button>
+        <button id="showRevealBtn" type="button" class="secondary hidden">查看结算</button>
         <button id="leaveBtn" type="button" class="secondary">离开房间</button>
       </div>
       <div id="roomStatus" class="status"></div>
@@ -303,22 +385,47 @@
   <div id="cardScreen" class="hidden">
     <div class="hint">把手机举给别人看 · 自己别偷看</div>
     <div id="cardValue">?</div>
+    <div id="cardHelp"></div>
     <div class="meta" id="cardMeta"></div>
     <div class="actions">
       <button id="hideCardBtn" type="button" class="secondary">返回房间</button>
       <button id="redealBtn" type="button" class="hidden">再来一局</button>
+      <button id="revealFromCardBtn" type="button" class="hidden">亮牌结算</button>
+    </div>
+  </div>
+
+  <div id="revealScreen" class="hidden">
+    <div class="reveal-title">本局结算</div>
+    <div class="reveal-total" id="revealTotal">0</div>
+    <div class="reveal-list" id="revealList"></div>
+    <div class="reveal-steps" id="revealSteps"></div>
+    <div class="actions">
+      <button id="hideRevealBtn" type="button" class="secondary">关闭</button>
+      <button id="redealFromRevealBtn" type="button" class="hidden">再来一局</button>
     </div>
   </div>
 
   <script>
-    // 同机部署时用当前 host；博客 HTTPS 页无法连 ws://，会引导到服务器 HTTP 页
     const SERVER_HTTP = 'http://120.48.19.171:3001';
     const WS_URL = (function () {
-      if (location.protocol === 'http:' && /120\.48\.19\.171/.test(location.host)) {
+      const host = location.hostname;
+      const localLike =
+        host === '120.48.19.171' ||
+        host === 'localhost' ||
+        host === '127.0.0.1';
+      if (location.protocol === 'http:' && localLike) {
         return `ws://${location.host}`;
       }
       return 'ws://120.48.19.171:3001';
     })();
+
+    const CARD_HELP = {
+      MAX0: '效果：结算时，场上最大的数字变为 0',
+      'MAX-': '效果：结算时，场上最大的数字变为负数',
+      '???': '效果：亮牌结算时再抽一张（尽量不与场上已有牌面重复）',
+      x2: '效果：结算加总后，总分再 ×2',
+      '0': '数字牌：0',
+    };
 
     const els = {
       lobby: document.getElementById('lobby'),
@@ -331,14 +438,24 @@
       hostBadge: document.getElementById('hostBadge'),
       playerList: document.getElementById('playerList'),
       dealBtn: document.getElementById('dealBtn'),
+      revealBtn: document.getElementById('revealBtn'),
       showCardBtn: document.getElementById('showCardBtn'),
+      showRevealBtn: document.getElementById('showRevealBtn'),
       leaveBtn: document.getElementById('leaveBtn'),
       roomStatus: document.getElementById('roomStatus'),
       cardScreen: document.getElementById('cardScreen'),
       cardValue: document.getElementById('cardValue'),
+      cardHelp: document.getElementById('cardHelp'),
       cardMeta: document.getElementById('cardMeta'),
       hideCardBtn: document.getElementById('hideCardBtn'),
       redealBtn: document.getElementById('redealBtn'),
+      revealFromCardBtn: document.getElementById('revealFromCardBtn'),
+      revealScreen: document.getElementById('revealScreen'),
+      revealTotal: document.getElementById('revealTotal'),
+      revealList: document.getElementById('revealList'),
+      revealSteps: document.getElementById('revealSteps'),
+      hideRevealBtn: document.getElementById('hideRevealBtn'),
+      redealFromRevealBtn: document.getElementById('redealFromRevealBtn'),
     };
 
     const state = {
@@ -348,6 +465,7 @@
       myCard: null,
       roomId: '',
       nickname: '',
+      reveal: null,
     };
 
     function setStatus(el, text, type) {
@@ -363,11 +481,39 @@
     function renderCard(card) {
       els.cardValue.textContent = card;
       els.cardValue.classList.toggle('special', isSpecialCard(card) || card === '0');
+      els.cardHelp.textContent = CARD_HELP[card] || (card ? `数字牌：${card}` : '');
       els.cardMeta.textContent = `房间 ${state.roomId} · ${state.nickname}`;
     }
 
     function showCardScreen(show) {
       els.cardScreen.classList.toggle('hidden', !show);
+    }
+
+    function showRevealScreen(show) {
+      els.revealScreen.classList.toggle('hidden', !show);
+    }
+
+    function renderReveal(reveal) {
+      if (!reveal) return;
+      els.revealTotal.textContent = `总分 ${reveal.total}`;
+      els.revealList.innerHTML = '';
+      (reveal.entries || []).forEach((e) => {
+        const div = document.createElement('div');
+        div.className = 'reveal-item';
+        const face =
+          e.card === '???' && e.effective && e.effective !== e.card
+            ? `${e.card} → ${e.effective}`
+            : e.card;
+        const score =
+          e.scorePart == null ? '' : `（计 ${e.scorePart}）`;
+        div.innerHTML =
+          `<div class="row"><span>${e.nickname}</span><span>${face}${score}</span></div>` +
+          (e.note ? `<div class="note">${e.note}</div>` : '');
+        els.revealList.appendChild(div);
+      });
+      els.revealSteps.innerHTML = (reveal.steps || [])
+        .map((s) => `· ${s}`)
+        .join('<br>');
     }
 
     function renderPlayers(players) {
@@ -390,30 +536,46 @@
     function applyState(msg) {
       state.playerId = msg.playerId || state.playerId;
       state.isHost = !!msg.isHost;
-      state.myCard = msg.myCard ?? state.myCard;
+      if (Object.prototype.hasOwnProperty.call(msg, 'myCard')) {
+        state.myCard = msg.myCard;
+      }
+      if (Object.prototype.hasOwnProperty.call(msg, 'reveal')) {
+        state.reveal = msg.reveal;
+      }
       state.roomId = msg.roomId || state.roomId;
 
       els.lobby.classList.add('hidden');
       els.room.classList.remove('hidden');
       els.roomCode.textContent = state.roomId;
-      els.hostBadge.textContent = state.isHost ? '你是房主' : '等待房主发牌';
+      els.hostBadge.textContent = state.isHost ? '你是房主' : '等待房主操作';
       els.hostBadge.classList.toggle('host', state.isHost);
 
       renderPlayers(msg.players || []);
 
-      els.dealBtn.classList.toggle('hidden', !state.isHost);
-      els.redealBtn.classList.toggle('hidden', !state.isHost);
-      els.dealBtn.textContent = state.myCard ? '再来一局' : '发牌';
-      els.dealBtn.disabled = (msg.players || []).length < 1;
-
       const hasCard = !!state.myCard;
+      els.dealBtn.classList.toggle('hidden', !state.isHost);
+      els.revealBtn.classList.toggle('hidden', !state.isHost || !hasCard);
+      els.redealBtn.classList.toggle('hidden', !state.isHost);
+      els.revealFromCardBtn.classList.toggle('hidden', !state.isHost || !hasCard);
+      els.redealFromRevealBtn.classList.toggle('hidden', !state.isHost);
+      els.dealBtn.textContent = hasCard ? '再来一局' : '发牌';
+      els.dealBtn.disabled = (msg.players || []).length < 1;
       els.showCardBtn.classList.toggle('hidden', !hasCard);
+      els.showRevealBtn.classList.toggle('hidden', !state.reveal);
 
       if (hasCard) {
         renderCard(state.myCard);
-        setStatus(els.roomStatus, '已发牌，可查看你的牌', 'ok');
+        setStatus(
+          els.roomStatus,
+          state.reveal ? '已结算，可查看结果或再来一局' : '已发牌；喊完后房主可亮牌结算',
+          'ok'
+        );
       } else {
-        setStatus(els.roomStatus, `当前 ${ (msg.players || []).length } 人在房间`, 'ok');
+        setStatus(els.roomStatus, `当前 ${(msg.players || []).length} 人在房间`, 'ok');
+      }
+
+      if (state.reveal) {
+        renderReveal(state.reveal);
       }
     }
 
@@ -438,6 +600,7 @@
       state.nickname = nickname;
       state.roomId = roomId;
       state.myCard = null;
+      state.reveal = null;
       els.joinBtn.disabled = true;
       setStatus(els.lobbyStatus, '正在连接服务器…');
 
@@ -472,7 +635,12 @@
           applyState(msg);
           els.joinBtn.disabled = false;
           if (msg.justDealt && state.myCard) {
+            showRevealScreen(false);
             showCardScreen(true);
+          }
+          if (msg.justRevealed && state.reveal) {
+            showCardScreen(false);
+            showRevealScreen(true);
           }
         }
       };
@@ -499,7 +667,9 @@
       state.playerId = null;
       state.isHost = false;
       state.myCard = null;
+      state.reveal = null;
       showCardScreen(false);
+      showRevealScreen(false);
       els.room.classList.add('hidden');
       els.lobby.classList.remove('hidden');
       setStatus(els.lobbyStatus, '已离开房间');
@@ -508,13 +678,26 @@
     els.joinBtn.addEventListener('click', connectAndJoin);
     els.dealBtn.addEventListener('click', () => send('start', {}));
     els.redealBtn.addEventListener('click', () => send('start', {}));
+    els.redealFromRevealBtn.addEventListener('click', () => {
+      showRevealScreen(false);
+      send('start', {});
+    });
+    els.revealBtn.addEventListener('click', () => send('reveal', {}));
+    els.revealFromCardBtn.addEventListener('click', () => send('reveal', {}));
     els.showCardBtn.addEventListener('click', () => {
       if (state.myCard) {
         renderCard(state.myCard);
         showCardScreen(true);
       }
     });
+    els.showRevealBtn.addEventListener('click', () => {
+      if (state.reveal) {
+        renderReveal(state.reveal);
+        showRevealScreen(true);
+      }
+    });
     els.hideCardBtn.addEventListener('click', () => showCardScreen(false));
+    els.hideRevealBtn.addEventListener('click', () => showRevealScreen(false));
     els.leaveBtn.addEventListener('click', leaveRoom);
 
     els.roomId.addEventListener('keydown', (e) => {
@@ -524,12 +707,16 @@
       if (e.key === 'Enter') connectAndJoin();
     });
 
-    // HTTPS 博客页：提示改用服务器 HTTP 页（避免混合内容拦截 ws://）
     if (location.protocol === 'https:') {
       document.getElementById('httpsHint').classList.remove('hidden');
+      els.lobby.classList.add('hidden');
+      setStatus(
+        els.lobbyStatus,
+        '请点击上方按钮，使用 http://120.48.19.171:3001/ 联机',
+        'error'
+      );
     }
 
-    // 记住上次昵称
     try {
       const saved = localStorage.getItem('coyote_nickname');
       if (saved) els.nickname.value = saved;
