@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>土狼在笑你 · 发牌</title>
+  <style>
+    :root {
+      --bg: #1a1410;
+      --panel: #2a2118;
+      --ink: #f3e6d0;
+      --muted: #b8a48a;
+      --accent: #d4783a;
+      --accent-2: #c44b3c;
+      --line: rgba(243, 230, 208, 0.18);
+      --ok: #6aa84f;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(ellipse at top, #3a2a1c 0%, transparent 55%),
+        linear-gradient(160deg, #1a1410, #0f0c09 70%);
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      width: min(520px, 100%);
+      margin: 0 auto;
+      padding: 24px 18px 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.65rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .sub {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .panel {
+      background: color-mix(in srgb, var(--panel) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .help {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .help strong { color: var(--ink); font-weight: 600; }
+    .help .sec { margin-top: 10px; }
+    .help .sec:first-child { margin-top: 0; }
+
+    #countdownScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 22;
+      background:
+        radial-gradient(circle at 30% 20%, #4a321f, transparent 45%),
+        radial-gradient(circle at 80% 80%, #3a1d16, transparent 40%),
+        #120d0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #countdownScreen .cd-title {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    #countdownNum {
+      font-size: clamp(5rem, 28vw, 10rem);
+      font-weight: 800;
+      line-height: 1;
+      color: #ffd29a;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    #countdownScreen .cd-hint {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #140f0c;
+      color: var(--ink);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button, .link-btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #1a1410;
+      background: linear-gradient(135deg, var(--accent), #e8a05a);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    button:not(:disabled):active { transform: scale(0.98); }
+
+    .status {
+      margin-top: 14px;
+      min-height: 1.2em;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .status.error { color: #ff8d7a; }
+    .status.ok { color: #9ad37a; }
+
+    .hidden { display: none !important; }
+
+    .room-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .room-head strong {
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .pill.host {
+      color: #1a1410;
+      background: var(--accent);
+      border-color: transparent;
+    }
+
+    .players {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .players li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #140f0c;
+      border: 1px solid var(--line);
+    }
+
+    .players .you {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    #cardScreen, #revealScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background:
+        radial-gradient(circle at 30% 20%, #4a321f, transparent 45%),
+        radial-gradient(circle at 80% 80%, #3a1d16, transparent 40%),
+        #120d0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #revealScreen {
+      z-index: 25;
+      justify-content: flex-start;
+      overflow: auto;
+      padding: 28px 16px 100px;
+    }
+
+    #cardScreen .hint {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    #cardValue {
+      font-size: clamp(4.5rem, 22vw, 9rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      word-break: break-all;
+      max-width: 92vw;
+    }
+
+    #cardValue.special {
+      font-size: clamp(3rem, 14vw, 6rem);
+      color: #ffd29a;
+    }
+
+    #cardHelp {
+      margin-top: 16px;
+      max-width: 28rem;
+      color: #ffd29a;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      padding: 0 12px;
+    }
+
+    #cardScreen .meta {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    #cardScreen .actions, #revealScreen .actions {
+      position: fixed;
+      bottom: 28px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+      flex-wrap: wrap;
+    }
+
+    .reveal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+
+    .reveal-total {
+      font-size: clamp(2.4rem, 12vw, 3.6rem);
+      font-weight: 800;
+      color: #ffd29a;
+      margin: 8px 0 18px;
+    }
+
+    .reveal-list {
+      width: min(440px, 100%);
+      text-align: left;
+      display: grid;
+      gap: 8px;
+      margin: 0 auto 16px;
+    }
+
+    .reveal-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #1a1410;
+      border: 1px solid var(--line);
+    }
+
+    .reveal-item .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .reveal-item .note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .reveal-steps {
+      width: min(440px, 100%);
+      margin: 0 auto;
+      text-align: left;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    @media (orientation: landscape) and (max-height: 500px) {
+      #cardValue {
+        font-size: clamp(3.5rem, 18vh, 7rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>土狼在笑你</h1>
+    <p class="sub">输入房间号进房，房主发牌；每人只显示自己的牌。喊完后房主可「亮牌结算」。</p>
+
+    <section id="httpsHint" class="panel hidden" style="margin-bottom:16px;border-color:#d4783a;">
+      <p class="sub" style="margin:0 0 12px;">当前是 HTTPS 博客页，浏览器会拦截不安全的 WebSocket。请改用服务器页面联机：</p>
+      <div class="btn-row">
+        <a class="link-btn" href="http://120.48.19.171:3001/">打开联机发牌页</a>
+      </div>
+    </section>
+
+    <section id="lobby" class="panel">
+      <div class="help">
+        <div class="sec">
+          <strong>牌组一览（共 30 张）</strong><br>
+          <strong>1 / 2 / 3 / 4 / 5</strong>：各 3 张<br>
+          <strong>-5</strong>：2 张<br>
+          <strong>6 / 7 / 8 / 9 / 10 / 15 / 20 / -10</strong>：各 1 张<br>
+          <strong>0</strong>：1 张（数字 0）
+        </div>
+        <div class="sec">
+          <strong>特殊牌（各 1 张）</strong><br>
+          <strong>MAX0</strong>：结算时，场上最大数字变为 0<br>
+          <strong>MAX-</strong>：结算时，场上最大数字变为负数<br>
+          <strong>???</strong>：亮牌结算时再抽一张（尽量不与场上已有牌面重复）<br>
+          <strong>x2</strong>：加总后总分再 ×2
+        </div>
+        <div class="sec">
+          发牌后有 <strong>3 秒</strong>倒计时，请先把手机转过去再看牌。
+        </div>
+      </div>
+
+      <label for="nickname">昵称</label>
+      <input id="nickname" maxlength="12" placeholder="例如：小狼" autocomplete="nickname">
+
+      <label for="roomId">房间号</label>
+      <input id="roomId" maxlength="12" placeholder="例如：8888" autocomplete="off">
+
+      <div class="btn-row">
+        <button id="joinBtn" type="button">进入房间</button>
+      </div>
+      <div id="lobbyStatus" class="status"></div>
+    </section>
+
+    <section id="room" class="panel hidden">
+      <div class="room-head">
+        <div>
+          <div class="pill" id="roomLabel">房间</div>
+          <strong id="roomCode"></strong>
+        </div>
+        <span class="pill" id="hostBadge"></span>
+      </div>
+
+      <ul class="players" id="playerList"></ul>
+
+      <div class="btn-row">
+        <button id="dealBtn" type="button" class="hidden">发牌</button>
+        <button id="revealBtn" type="button" class="hidden">亮牌结算</button>
+        <button id="showCardBtn" type="button" class="secondary hidden">查看我的牌</button>
+        <button id="showRevealBtn" type="button" class="secondary hidden">查看结算</button>
+        <button id="leaveBtn" type="button" class="secondary">离开房间</button>
+      </div>
+      <div id="roomStatus" class="status"></div>
+    </section>
+  </div>
+
+  <div id="countdownScreen" class="hidden">
+    <div class="cd-title">牌已发出</div>
+    <div id="countdownNum">3</div>
+    <div class="cd-hint">请把手机转过去 · 倒计时结束后再亮牌</div>
+  </div>
+
+  <div id="cardScreen" class="hidden">
+    <div class="hint">把手机举给别人看 · 自己别偷看</div>
+    <div id="cardValue">?</div>
+    <div id="cardHelp"></div>
+    <div class="meta" id="cardMeta"></div>
+    <div class="actions">
+      <button id="hideCardBtn" type="button" class="secondary">返回房间</button>
+      <button id="redealBtn" type="button" class="hidden">再来一局</button>
+      <button id="revealFromCardBtn" type="button" class="hidden">亮牌结算</button>
+    </div>
+  </div>
+
+  <div id="revealScreen" class="hidden">
+    <div class="reveal-title">本局结算</div>
+    <div class="reveal-total" id="revealTotal">0</div>
+    <div class="reveal-list" id="revealList"></div>
+    <div class="reveal-steps" id="revealSteps"></div>
+    <div class="actions">
+      <button id="hideRevealBtn" type="button" class="secondary">关闭</button>
+      <button id="redealFromRevealBtn" type="button" class="hidden">再来一局</button>
+    </div>
+  </div>
+
+  <script>
+    const SERVER_HTTP = 'http://120.48.19.171:3001';
+    const WS_URL = (function () {
+      const host = location.hostname;
+      const localLike =
+        host === '120.48.19.171' ||
+        host === 'localhost' ||
+        host === '127.0.0.1';
+      if (location.protocol === 'http:' && localLike) {
+        return `ws://${location.host}`;
+      }
+      return 'ws://120.48.19.171:3001';
+    })();
+
+    const CARD_HELP = {
+      MAX0: '效果：结算时，场上最大的数字变为 0',
+      'MAX-': '效果：结算时，场上最大的数字变为负数',
+      '???': '效果：亮牌结算时再抽一张（尽量不与场上已有牌面重复）',
+      x2: '效果：结算加总后，总分再 ×2',
+      '0': '数字牌：0',
+    };
+
+    const els = {
+      lobby: document.getElementById('lobby'),
+      room: document.getElementById('room'),
+      nickname: document.getElementById('nickname'),
+      roomId: document.getElementById('roomId'),
+      joinBtn: document.getElementById('joinBtn'),
+      lobbyStatus: document.getElementById('lobbyStatus'),
+      roomCode: document.getElementById('roomCode'),
+      hostBadge: document.getElementById('hostBadge'),
+      playerList: document.getElementById('playerList'),
+      dealBtn: document.getElementById('dealBtn'),
+      revealBtn: document.getElementById('revealBtn'),
+      showCardBtn: document.getElementById('showCardBtn'),
+      showRevealBtn: document.getElementById('showRevealBtn'),
+      leaveBtn: document.getElementById('leaveBtn'),
+      roomStatus: document.getElementById('roomStatus'),
+      cardScreen: document.getElementById('cardScreen'),
+      cardValue: document.getElementById('cardValue'),
+      cardHelp: document.getElementById('cardHelp'),
+      cardMeta: document.getElementById('cardMeta'),
+      hideCardBtn: document.getElementById('hideCardBtn'),
+      redealBtn: document.getElementById('redealBtn'),
+      revealFromCardBtn: document.getElementById('revealFromCardBtn'),
+      revealScreen: document.getElementById('revealScreen'),
+      revealTotal: document.getElementById('revealTotal'),
+      revealList: document.getElementById('revealList'),
+      revealSteps: document.getElementById('revealSteps'),
+      hideRevealBtn: document.getElementById('hideRevealBtn'),
+      redealFromRevealBtn: document.getElementById('redealFromRevealBtn'),
+      countdownScreen: document.getElementById('countdownScreen'),
+      countdownNum: document.getElementById('countdownNum'),
+    };
+
+    const DEAL_REVEAL_DELAY_MS = 3000;
+
+    const state = {
+      ws: null,
+      playerId: null,
+      isHost: false,
+      myCard: null,
+      roomId: '',
+      nickname: '',
+      reveal: null,
+      dealTimer: null,
+      dealTickTimer: null,
+    };
+
+    function setStatus(el, text, type) {
+      el.textContent = text || '';
+      el.classList.remove('error', 'ok');
+      if (type) el.classList.add(type);
+    }
+
+    function isSpecialCard(card) {
+      return ['MAX0', 'MAX-', '???', 'x2'].includes(card);
+    }
+
+    function renderCard(card) {
+      els.cardValue.textContent = card;
+      els.cardValue.classList.toggle('special', isSpecialCard(card) || card === '0');
+      els.cardHelp.textContent = CARD_HELP[card] || (card ? `数字牌：${card}` : '');
+      els.cardMeta.textContent = `房间 ${state.roomId} · ${state.nickname}`;
+    }
+
+    function clearDealDelay() {
+      if (state.dealTimer) {
+        clearTimeout(state.dealTimer);
+        state.dealTimer = null;
+      }
+      if (state.dealTickTimer) {
+        clearInterval(state.dealTickTimer);
+        state.dealTickTimer = null;
+      }
+      if (els.countdownScreen) {
+        els.countdownScreen.classList.add('hidden');
+      }
+    }
+
+    function showCardScreen(show) {
+      els.cardScreen.classList.toggle('hidden', !show);
+    }
+
+    function showRevealScreen(show) {
+      els.revealScreen.classList.toggle('hidden', !show);
+    }
+
+    /** 发牌后先倒计时，给转身时间，再显示自己的牌 */
+    function scheduleCardRevealAfterDeal() {
+      clearDealDelay();
+      showRevealScreen(false);
+      showCardScreen(false);
+
+      let left = Math.ceil(DEAL_REVEAL_DELAY_MS / 1000);
+      els.countdownNum.textContent = String(left);
+      els.countdownScreen.classList.remove('hidden');
+      setStatus(els.roomStatus, `牌已发出，${left} 秒后亮牌，请先转过手机`, 'ok');
+
+      state.dealTickTimer = setInterval(() => {
+        left -= 1;
+        if (left <= 0) {
+          clearInterval(state.dealTickTimer);
+          state.dealTickTimer = null;
+          return;
+        }
+        els.countdownNum.textContent = String(left);
+        setStatus(els.roomStatus, `牌已发出，${left} 秒后亮牌，请先转过手机`, 'ok');
+      }, 1000);
+
+      state.dealTimer = setTimeout(() => {
+        state.dealTimer = null;
+        if (state.dealTickTimer) {
+          clearInterval(state.dealTickTimer);
+          state.dealTickTimer = null;
+        }
+        els.countdownScreen.classList.add('hidden');
+        if (state.myCard) {
+          renderCard(state.myCard);
+          showCardScreen(true);
+          setStatus(els.roomStatus, '已亮牌；喊完后房主可亮牌结算', 'ok');
+        }
+      }, DEAL_REVEAL_DELAY_MS);
+    }
+
+    function renderReveal(reveal) {
+      if (!reveal) return;
+      els.revealTotal.textContent = `总分 ${reveal.total}`;
+      els.revealList.innerHTML = '';
+      (reveal.entries || []).forEach((e) => {
+        const div = document.createElement('div');
+        div.className = 'reveal-item';
+        const face =
+          e.card === '???' && e.effective && e.effective !== e.card
+            ? `${e.card} → ${e.effective}`
+            : e.card;
+        const score =
+          e.scorePart == null ? '' : `（计 ${e.scorePart}）`;
+        div.innerHTML =
+          `<div class="row"><span>${e.nickname}</span><span>${face}${score}</span></div>` +
+          (e.note ? `<div class="note">${e.note}</div>` : '');
+        els.revealList.appendChild(div);
+      });
+      els.revealSteps.innerHTML = (reveal.steps || [])
+        .map((s) => `· ${s}`)
+        .join('<br>');
+    }
+
+    function renderPlayers(players) {
+      els.playerList.innerHTML = '';
+      players.forEach((p) => {
+        const li = document.createElement('li');
+        const name = document.createElement('span');
+        name.textContent = p.nickname + (p.isHost ? '（房主）' : '');
+        li.appendChild(name);
+        if (p.id === state.playerId) {
+          const you = document.createElement('span');
+          you.className = 'you';
+          you.textContent = '我';
+          li.appendChild(you);
+        }
+        els.playerList.appendChild(li);
+      });
+    }
+
+    function applyState(msg) {
+      state.playerId = msg.playerId || state.playerId;
+      state.isHost = !!msg.isHost;
+      if (Object.prototype.hasOwnProperty.call(msg, 'myCard')) {
+        state.myCard = msg.myCard;
+      }
+      if (Object.prototype.hasOwnProperty.call(msg, 'reveal')) {
+        state.reveal = msg.reveal;
+      }
+      state.roomId = msg.roomId || state.roomId;
+
+      els.lobby.classList.add('hidden');
+      els.room.classList.remove('hidden');
+      els.roomCode.textContent = state.roomId;
+      els.hostBadge.textContent = state.isHost ? '你是房主' : '等待房主操作';
+      els.hostBadge.classList.toggle('host', state.isHost);
+
+      renderPlayers(msg.players || []);
+
+      const hasCard = !!state.myCard;
+      els.dealBtn.classList.toggle('hidden', !state.isHost);
+      els.revealBtn.classList.toggle('hidden', !state.isHost || !hasCard);
+      els.redealBtn.classList.toggle('hidden', !state.isHost);
+      els.revealFromCardBtn.classList.toggle('hidden', !state.isHost || !hasCard);
+      els.redealFromRevealBtn.classList.toggle('hidden', !state.isHost);
+      els.dealBtn.textContent = hasCard ? '再来一局' : '发牌';
+      els.dealBtn.disabled = (msg.players || []).length < 1;
+      els.showCardBtn.classList.toggle('hidden', !hasCard);
+      els.showRevealBtn.classList.toggle('hidden', !state.reveal);
+
+      if (hasCard) {
+        renderCard(state.myCard);
+        setStatus(
+          els.roomStatus,
+          state.reveal ? '已结算，可查看结果或再来一局' : '已发牌；喊完后房主可亮牌结算',
+          'ok'
+        );
+      } else {
+        setStatus(els.roomStatus, `当前 ${(msg.players || []).length} 人在房间`, 'ok');
+      }
+
+      if (state.reveal) {
+        renderReveal(state.reveal);
+      }
+    }
+
+    function send(type, payload) {
+      if (!state.ws || state.ws.readyState !== WebSocket.OPEN) return;
+      state.ws.send(JSON.stringify({ type, ...payload }));
+    }
+
+    function connectAndJoin() {
+      const nickname = els.nickname.value.trim();
+      const roomId = els.roomId.value.trim().toUpperCase();
+
+      if (!nickname) {
+        setStatus(els.lobbyStatus, '请填写昵称', 'error');
+        return;
+      }
+      if (!roomId) {
+        setStatus(els.lobbyStatus, '请填写房间号', 'error');
+        return;
+      }
+
+      state.nickname = nickname;
+      state.roomId = roomId;
+      state.myCard = null;
+      state.reveal = null;
+      els.joinBtn.disabled = true;
+      setStatus(els.lobbyStatus, '正在连接服务器…');
+
+      if (state.ws) {
+        try { state.ws.close(); } catch (_) {}
+      }
+
+      const ws = new WebSocket(WS_URL);
+      state.ws = ws;
+
+      ws.onopen = () => {
+        setStatus(els.lobbyStatus, '已连接，正在进房…', 'ok');
+        send('join', { roomId, nickname });
+      };
+
+      ws.onmessage = (ev) => {
+        let msg;
+        try {
+          msg = JSON.parse(ev.data);
+        } catch (_) {
+          return;
+        }
+
+        if (msg.type === 'error') {
+          setStatus(els.lobbyStatus, msg.message || '出错了', 'error');
+          setStatus(els.roomStatus, msg.message || '出错了', 'error');
+          els.joinBtn.disabled = false;
+          return;
+        }
+
+        if (msg.type === 'state') {
+          applyState(msg);
+          els.joinBtn.disabled = false;
+          if (msg.justDealt && state.myCard) {
+            scheduleCardRevealAfterDeal();
+          }
+          if (msg.justRevealed && state.reveal) {
+            clearDealDelay();
+            showCardScreen(false);
+            showRevealScreen(true);
+          }
+        }
+      };
+
+      ws.onerror = () => {
+        setStatus(els.lobbyStatus, '连接失败，请确认后端已启动且安全组开放 3001', 'error');
+        els.joinBtn.disabled = false;
+      };
+
+      ws.onclose = () => {
+        if (!els.room.classList.contains('hidden')) {
+          setStatus(els.roomStatus, '连接已断开，请重新进房', 'error');
+        }
+        els.joinBtn.disabled = false;
+      };
+    }
+
+    function leaveRoom() {
+      clearDealDelay();
+      send('leave', {});
+      if (state.ws) {
+        try { state.ws.close(); } catch (_) {}
+      }
+      state.ws = null;
+      state.playerId = null;
+      state.isHost = false;
+      state.myCard = null;
+      state.reveal = null;
+      showCardScreen(false);
+      showRevealScreen(false);
+      els.room.classList.add('hidden');
+      els.lobby.classList.remove('hidden');
+      setStatus(els.lobbyStatus, '已离开房间');
+    }
+
+    els.joinBtn.addEventListener('click', connectAndJoin);
+    els.dealBtn.addEventListener('click', () => send('start', {}));
+    els.redealBtn.addEventListener('click', () => send('start', {}));
+    els.redealFromRevealBtn.addEventListener('click', () => {
+      showRevealScreen(false);
+      send('start', {});
+    });
+    els.revealBtn.addEventListener('click', () => send('reveal', {}));
+    els.revealFromCardBtn.addEventListener('click', () => send('reveal', {}));
+    els.showCardBtn.addEventListener('click', () => {
+      if (state.myCard) {
+        renderCard(state.myCard);
+        showCardScreen(true);
+      }
+    });
+    els.showRevealBtn.addEventListener('click', () => {
+      if (state.reveal) {
+        renderReveal(state.reveal);
+        showRevealScreen(true);
+      }
+    });
+    els.hideCardBtn.addEventListener('click', () => showCardScreen(false));
+    els.hideRevealBtn.addEventListener('click', () => showRevealScreen(false));
+    els.leaveBtn.addEventListener('click', leaveRoom);
+
+    els.roomId.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') connectAndJoin();
+    });
+    els.nickname.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') connectAndJoin();
+    });
+
+    if (location.protocol === 'https:') {
+      document.getElementById('httpsHint').classList.remove('hidden');
+      els.lobby.classList.add('hidden');
+      setStatus(
+        els.lobbyStatus,
+        '请点击上方按钮，使用 http://120.48.19.171:3001/ 联机',
+        'error'
+      );
+    }
+
+    try {
+      const saved = localStorage.getItem('coyote_nickname');
+      if (saved) els.nickname.value = saved;
+      els.nickname.addEventListener('change', () => {
+        localStorage.setItem('coyote_nickname', els.nickname.value.trim());
+      });
+    } catch (_) {}
+  </script>
+</body>
+</html>

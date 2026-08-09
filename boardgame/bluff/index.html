@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字冷知识问答</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .question-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            min-height: 100px;
+        }
+        .answer-box {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            min-height: 50px;
+            display: none;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #showQuestion {
+            background-color: #007bff;
+            color: white;
+        }
+        #showAnswer {
+            background-color: #28a745;
+            color: white;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>数字冷知识问答</h1>
+        <div class="question-box" id="questionBox">
+            点击"显示问题"按钮开始游戏！
+        </div>
+        <div class="answer-box" id="answerBox">
+        </div>
+        <div class="button-group">
+            <button id="showQuestion">显示问题</button>
+            <button id="showAnswer" disabled>显示答案</button>
+        </div>
+    </div>
+
+    <script>
+        const triviaData = [
+            {
+                question: "人类大脑平均每天会产生多少个想法？",
+                answer: "60000"
+            },
+            {
+                question: "一个成年人平均每天眨眼多少次？",
+                answer: "15000"
+            },
+            {
+                question: "地球表面被水覆盖的百分比是多少？",
+                answer: "71"
+            },
+            {
+                question: "人类一生中平均会走多少步？",
+                answer: "216262500"
+            },
+            {
+                question: "一个成年人平均每天呼吸多少次？",
+                answer: "23000"
+            },
+            {
+                question: "人体内有多少块骨头？",
+                answer: "206"
+            },
+            {
+                question: "太阳表面的温度（摄氏度）大约是多少？",
+                answer: "5500"
+            },
+            {
+                question: "地球到月球的平均距离（公里）是多少？",
+                answer: "384400"
+            },
+            {
+                question: "人类大脑平均重量（克）是多少？",
+                answer: "1400"
+            },
+            {
+                question: "一个成年人平均每天心跳多少次？",
+                answer: "100000"
+            }
+        ];
+
+        let currentQuestion = null;
+        const questionBox = document.getElementById('questionBox');
+        const answerBox = document.getElementById('answerBox');
+        const showQuestionBtn = document.getElementById('showQuestion');
+        const showAnswerBtn = document.getElementById('showAnswer');
+
+        function getRandomQuestion() {
+            const randomIndex = Math.floor(Math.random() * triviaData.length);
+            return triviaData[randomIndex];
+        }
+
+        showQuestionBtn.addEventListener('click', () => {
+            currentQuestion = getRandomQuestion();
+            questionBox.textContent = currentQuestion.question;
+            answerBox.style.display = 'none';
+            answerBox.textContent = '';
+            showAnswerBtn.disabled = false;
+        });
+
+        showAnswerBtn.addEventListener('click', () => {
+            if (currentQuestion) {
+                answerBox.textContent = `答案：${currentQuestion.answer}`;
+                answerBox.style.display = 'block';
+                showAnswerBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html> 
