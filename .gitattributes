@@ -1,2 +1,24 @@
-# Hexo 生成的 HTML 多为 LF；与 Windows 全局 autocrlf 组合时易刷屏警告
+# Autodetect text files; normalize to LF in the GitHub Pages repo
 * text=auto eol=lf
+
+# Keep Windows batch files usable when checked out on Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tgz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.xls binary
+*.xlsx binary
