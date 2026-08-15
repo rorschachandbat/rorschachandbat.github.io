@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#141210" />
+  <meta name="description" content="独家专辑：随机抽取封面卡" />
+  <title>独家专辑 · Disc Cover</title>
+  <style>
+    :root {
+      --bg: #141210;
+      --bg-2: #1c1915;
+      --panel: rgba(36, 32, 27, 0.88);
+      --ink: #f4ead8;
+      --muted: #b7a790;
+      --gold: #d4b45a;
+      --gold-deep: #b58d2e;
+      --rose: #c45c4a;
+      --line: rgba(244, 234, 216, 0.12);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    }
+
+    body {
+      min-height: 100dvh;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 180, 90, 0.16), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(196, 92, 74, 0.12), transparent 50%),
+        linear-gradient(180deg, #1a1612 0%, #12100e 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 48px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .vinyl {
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background:
+        repeating-radial-gradient(circle at 50% 50%,
+          #1a1714 0 3px,
+          #0d0c0b 3px 6px);
+      box-shadow: inset 0 0 0 7px #111, 0 0 0 1px rgba(212, 180, 90, 0.35);
+      position: relative;
+    }
+
+    .vinyl::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #f0d27a, var(--gold-deep) 45%, #6d4e16);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", Georgia, serif;
+      font-size: clamp(1.35rem, 4vw, 1.85rem);
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-text small {
+      display: block;
+      margin-top: 4px;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+    }
+
+    .deck-meta {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+    }
+
+    .count-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .count-block > span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+
+    .stepper {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #161310;
+    }
+
+    .stepper button {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      background: transparent;
+      color: var(--gold);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .stepper button:active { background: rgba(212, 180, 90, 0.12); }
+
+    .stepper input {
+      width: 48px;
+      height: 42px;
+      border: 0;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      -moz-appearance: textfield;
+    }
+
+    .stepper input::-webkit-outer-spin-button,
+    .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+    .draw-btn {
+      margin-left: auto;
+      min-height: 46px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #e3c36d, var(--gold-deep));
+      color: #2a1d08;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(181, 141, 46, 0.28);
+    }
+
+    .draw-btn:active { transform: translateY(1px); }
+
+    .hint {
+      margin: 10px 2px 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .stage-wrap {
+      margin-top: 22px;
+      min-height: 42vh;
+    }
+
+    .empty {
+      display: grid;
+      place-items: center;
+      gap: 14px;
+      min-height: 42vh;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty .vinyl {
+      width: 92px;
+      height: 92px;
+      animation: spin 8s linear infinite;
+    }
+
+    .empty .vinyl::after { inset: 32px; }
+
+    .empty p {
+      margin: 0;
+      max-width: 280px;
+      line-height: 1.7;
+      font-size: 0.9rem;
+    }
+
+    .stage {
+      display: grid;
+      gap: clamp(10px, 2vw, 18px);
+      justify-content: center;
+      align-items: start;
+    }
+
+    .stage.is-1 { grid-template-columns: minmax(0, 420px); }
+    .stage.is-2,
+    .stage.is-3,
+    .stage.is-4,
+    .stage.is-many { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    @media (min-width: 860px) {
+      .stage.is-1 { grid-template-columns: minmax(0, 460px); }
+      .stage.is-2 { grid-template-columns: repeat(2, minmax(0, 380px)); }
+      .stage.is-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .stage.is-4 { grid-template-columns: repeat(2, minmax(0, 420px)); }
+      .stage.is-many { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .sleeve {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      width: 100%;
+      background: #0e0c0a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(244, 234, 216, 0.08);
+      cursor: zoom-in;
+      animation: rise 0.45s ease both;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sleeve:nth-child(1) { animation-delay: 0.02s; }
+    .sleeve:nth-child(2) { animation-delay: 0.08s; }
+    .sleeve:nth-child(3) { animation-delay: 0.14s; }
+    .sleeve:nth-child(4) { animation-delay: 0.2s; }
+    .sleeve:nth-child(5) { animation-delay: 0.26s; }
+    .sleeve:nth-child(6) { animation-delay: 0.32s; }
+
+    .frame {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #1a1714, #0c0b0a);
+    }
+
+    .frame img {
+      width: 100%;
+      height: auto;
+      max-height: min(68vh, 640px);
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .stage.is-3 .frame img,
+    .stage.is-4 .frame img,
+    .stage.is-many .frame img {
+      max-height: min(46vh, 520px);
+    }
+
+    .caption {
+      padding: 8px 10px 10px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+      background: #151210;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(8, 7, 6, 0.86);
+      cursor: zoom-out;
+    }
+
+    .lightbox.is-open { display: grid; }
+
+    .lightbox img {
+      max-width: min(92vw, 720px);
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 520px) {
+      header { align-items: flex-start; }
+      .deck-meta { white-space: normal; text-align: right; }
+      .draw-btn {
+        width: 100%;
+        margin-left: 0;
+        letter-spacing: 0.28em;
+      }
+      .controls { justify-content: space-between; }
+      .stage.is-1 { grid-template-columns: minmax(0, 1fr); }
+      .stage.is-4 .frame img,
+      .stage.is-many .frame img { max-height: 42vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .empty .vinyl, .sleeve { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="vinyl" aria-hidden="true"></div>
+        <div class="brand-text">
+          <strong>独家专辑</strong>
+          <small>DISC COVER</small>
+        </div>
+      </div>
+      <div class="deck-meta" id="deckMeta">封面牌库加载中</div>
+    </header>
+
+    <section class="panel" aria-label="抽卡设置">
+      <div class="controls">
+        <label class="count-block" for="countInput">
+          <span>抽取数量</span>
+          <div class="stepper">
+            <button type="button" id="minusBtn" aria-label="减少数量">−</button>
+            <input id="countInput" type="number" min="1" max="12" value="4" inputmode="numeric" />
+            <button type="button" id="plusBtn" aria-label="增加数量">+</button>
+          </div>
+        </label>
+        <button class="draw-btn" id="drawBtn" type="button">抽取封面</button>
+      </div>
+      <p class="hint">默认抽出 4 张。同一轮不会重复，图片会按卡片比例完整显示。</p>
+    </section>
+
+    <div class="stage-wrap">
+      <div class="empty" id="emptyState">
+        <div class="vinyl" aria-hidden="true"></div>
+        <p>选好数量，抽出今晚的专辑封面。</p>
+      </div>
+      <div class="stage" id="stage" hidden></div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="查看大图">
+    <img id="lightboxImg" alt="封面大图" />
+  </div>
+
+  <script>
+    const CARD_TOTAL = 1042;
+    const MAX_COUNT = 12;
+    const CARD_DIR = "cards/";
+
+    const countInput = document.getElementById("countInput");
+    const minusBtn = document.getElementById("minusBtn");
+    const plusBtn = document.getElementById("plusBtn");
+    const drawBtn = document.getElementById("drawBtn");
+    const stage = document.getElementById("stage");
+    const emptyState = document.getElementById("emptyState");
+    const deckMeta = document.getElementById("deckMeta");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    deckMeta.textContent = "牌库 " + CARD_TOTAL + " 张";
+    countInput.max = String(Math.min(MAX_COUNT, CARD_TOTAL));
+
+    function clampCount(raw) {
+      const n = Number.parseInt(String(raw), 10);
+      if (Number.isNaN(n)) return 4;
+      return Math.min(Math.max(n, 1), Math.min(MAX_COUNT, CARD_TOTAL));
+    }
+
+    function readCount() {
+      const n = clampCount(countInput.value);
+      countInput.value = String(n);
+      return n;
+    }
+
+    function sampleCards(count) {
+      const pool = Array.from({ length: CARD_TOTAL }, function (_, i) { return i + 1; });
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = pool[i];
+        pool[i] = pool[j];
+        pool[j] = tmp;
+      }
+      return pool.slice(0, count);
+    }
+
+    function stageClass(count) {
+      if (count === 1) return "stage is-1";
+      if (count === 2) return "stage is-2";
+      if (count === 3) return "stage is-3";
+      if (count === 4) return "stage is-4";
+      return "stage is-many";
+    }
+
+    function render(ids) {
+      emptyState.hidden = true;
+      stage.hidden = false;
+      stage.className = stageClass(ids.length);
+      stage.replaceChildren();
+
+      ids.forEach(function (id) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sleeve";
+        btn.setAttribute("aria-label", "查看封面 " + id);
+
+        const frame = document.createElement("div");
+        frame.className = "frame";
+
+        const img = document.createElement("img");
+        img.src = CARD_DIR + id + ".jpg";
+        img.alt = "封面 " + id;
+        img.loading = "eager";
+        img.decoding = "async";
+
+        const caption = document.createElement("div");
+        caption.className = "caption";
+        caption.textContent = "No. " + String(id).padStart(4, "0");
+
+        frame.appendChild(img);
+        btn.appendChild(frame);
+        btn.appendChild(caption);
+        btn.addEventListener("click", function () {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.add("is-open");
+        });
+        stage.appendChild(btn);
+      });
+
+      drawBtn.textContent = "再抽一次";
+    }
+
+    function draw() {
+      render(sampleCards(readCount()));
+    }
+
+    minusBtn.addEventListener("click", function () {
+      countInput.value = String(clampCount(Number(countInput.value) - 1));
+    });
+    plusBtn.addEventListener("click", function () {
+      countInput.value = String(clampCount(Number(countInput.value) + 1));
+    });
+    countInput.addEventListener("change", readCount);
+    drawBtn.addEventListener("click", draw);
+
+    lightbox.addEventListener("click", function () {
+      lightbox.classList.remove("is-open");
+      lightboxImg.removeAttribute("src");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        lightbox.classList.remove("is-open");
+        lightboxImg.removeAttribute("src");
+      }
+    });
+  </script>
+</body>
+</html>
