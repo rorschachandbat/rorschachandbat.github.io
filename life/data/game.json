@@ -1,7 +1,48 @@
 {
   "version": 1,
-  "points": 0,
+  "points": 1,
   "goals": [],
   "rewards": [],
-  "ledger": []
+  "ledger": [
+    {
+      "id": "id_msw4knnskih4cm",
+      "type": "earn",
+      "amount": 1,
+      "label": "完成：跑步",
+      "refId": "id_msw4cia97jfh0s",
+      "at": "2026-08-16T18:15:15.400Z"
+    },
+    {
+      "id": "id_msw4ibtopvnvyf",
+      "type": "spend",
+      "amount": -1,
+      "label": "撤销：跑步",
+      "refId": "id_msw4cia97jfh0s",
+      "at": "2026-08-16T18:13:26.748Z"
+    },
+    {
+      "id": "id_msw4ib8rtnhy0e",
+      "type": "earn",
+      "amount": 1,
+      "label": "完成：跑步",
+      "refId": "id_msw4cia97jfh0s",
+      "at": "2026-08-16T18:13:25.995Z"
+    },
+    {
+      "id": "id_msw4ia4sido4fr",
+      "type": "spend",
+      "amount": -1,
+      "label": "撤销：跑步",
+      "refId": "id_msw4cia97jfh0s",
+      "at": "2026-08-16T18:13:24.556Z"
+    },
+    {
+      "id": "id_msw4cmqfm01ugt",
+      "type": "earn",
+      "amount": 1,
+      "label": "完成：跑步",
+      "refId": "id_msw4cia97jfh0s",
+      "at": "2026-08-16T18:09:00.951Z"
+    }
+  ]
 }
