@@ -1,0 +1,178 @@
+/* 桌游等 skip_render 页用的顶栏，前缀隔离，避免冲掉游戏自己的样式 */
+.blog-topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  height: 56px;
+  background: #2f4154;
+  color: #fff;
+  font-family: "Lato", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.blog-topnav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.blog-topnav__inner {
+  height: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.blog-topnav__brand {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.blog-topnav__toggle {
+  display: none;
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 8px;
+}
+
+.blog-topnav__toggle span {
+  display: block;
+  height: 2px;
+  margin: 6px 0;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.blog-topnav__menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.blog-topnav__item {
+  position: relative;
+}
+
+.blog-topnav__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  opacity: 0.92;
+  white-space: nowrap;
+}
+
+.blog-topnav__link:hover,
+.blog-topnav__link.is-on {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.blog-topnav__link i {
+  font-size: 15px;
+}
+
+.blog-topnav__drop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 168px;
+  padding: 8px 0;
+  background: #2f4154;
+  border-radius: 6px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.blog-topnav__item.is-open > .blog-topnav__drop,
+.blog-topnav__item:hover > .blog-topnav__drop {
+  display: block;
+}
+
+.blog-topnav__drop a {
+  display: block;
+  padding: 8px 16px;
+  opacity: 0.92;
+}
+
+.blog-topnav__drop a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html.blog-topnav-on {
+  scroll-padding-top: 56px;
+}
+
+body.blog-topnav-on {
+  padding-top: 56px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 980px) {
+  .blog-topnav {
+    height: auto;
+  }
+
+  .blog-topnav__toggle {
+    display: block;
+  }
+
+  .blog-topnav__inner {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .blog-topnav__menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 6px 0 10px;
+  }
+
+  .blog-topnav.is-open .blog-topnav__menu {
+    display: flex;
+  }
+
+  .blog-topnav__drop {
+    position: static;
+    display: none;
+    box-shadow: none;
+    padding: 0 0 6px 18px;
+    background: transparent;
+  }
+
+  .blog-topnav__item.is-open > .blog-topnav__drop {
+    display: block;
+  }
+
+  .blog-topnav__item:hover > .blog-topnav__drop {
+    display: none;
+  }
+
+  .blog-topnav__item.is-open:hover > .blog-topnav__drop {
+    display: block;
+  }
+}
