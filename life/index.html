@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>自我记录 · Life OS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">R</div>
+        <div>
+          <h1>自我记录</h1>
+          <p class="sub" id="modeHint">现实世界游戏化 · 杂想日记</p>
+        </div>
+      </div>
+      <div class="hud" id="hud">
+        <div class="xp">
+          <span class="xp-label">点数</span>
+          <strong id="pointsValue">0</strong>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button type="button" class="tab is-on" data-tab="game">现实游戏化</button>
+        <button type="button" class="tab" data-tab="notes">杂想日记</button>
+      </nav>
+    </header>
+
+    <main id="viewGame" class="view">
+      <section class="toolbar">
+        <div class="period-bar" id="periodBar">
+          <button type="button" class="chip is-on" data-period="day">日</button>
+          <button type="button" class="chip" data-period="week">周</button>
+          <button type="button" class="chip" data-period="month">月</button>
+          <button type="button" class="chip" data-period="year">年</button>
+          <button type="button" class="chip" data-period="once">长期</button>
+        </div>
+        <div class="toolbar-actions edit-only">
+          <button type="button" class="btn" id="btnAddGoal">+ 目标</button>
+          <button type="button" class="btn" id="btnAddReward">+ 奖励</button>
+          <button type="button" class="btn ghost" id="btnAdjust">调整点数</button>
+        </div>
+      </section>
+
+      <p class="period-caption" id="periodCaption"></p>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-head">
+            <h2 id="goalHeading">日目标</h2>
+            <span class="muted" id="goalProgress">0/0</span>
+          </div>
+          <div id="goalList" class="cards"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>奖励商店</h2>
+            <span class="muted">消耗点数兑换</span>
+          </div>
+          <div id="rewardList" class="cards"></div>
+        </section>
+      </div>
+
+      <section class="panel ledger-panel">
+        <div class="panel-head">
+          <h2>点数流水</h2>
+        </div>
+        <div id="ledgerList" class="ledger"></div>
+      </section>
+    </main>
+
+    <main id="viewNotes" class="view is-hidden">
+      <section class="composer panel edit-only">
+        <div class="composer-meta">
+          <span id="composerTime"></span>
+          <label class="check">
+            <input type="checkbox" id="notePublic" checked>
+            公开到博客
+          </label>
+        </div>
+        <input type="text" id="noteTitle" class="title-input" placeholder="可选标题，例如：今日日记">
+        <textarea id="noteInput" placeholder="写下此刻的想法。支持 Markdown，可直接粘贴图片。Ctrl + Enter 记录。"></textarea>
+        <div class="composer-bar">
+          <div class="hint">Markdown · 粘贴/拖入图片会自动插入</div>
+          <div class="composer-actions">
+            <button type="button" class="btn ghost" id="btnPreview">预览</button>
+            <button type="button" class="btn primary" id="btnSaveNote">记录</button>
+          </div>
+        </div>
+        <div id="composerPreview" class="md preview-box is-hidden"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>时间线</h2>
+          <input type="search" id="noteSearch" placeholder="搜索杂想…" class="search">
+        </div>
+        <div id="noteList" class="timeline"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal is-hidden" role="dialog" aria-modal="true">
+    <form id="modalForm" class="modal-card">
+      <h3 id="modalTitle">编辑</h3>
+      <div id="modalFields"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="modalCancel">取消</button>
+        <button type="submit" class="btn primary">保存</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast is-hidden"></div>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
